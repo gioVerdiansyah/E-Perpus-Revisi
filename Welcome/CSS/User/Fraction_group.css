@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  position: relative;
+}
+.popup #pop-up,
+.popup #peminjaman {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100%;
+  overflow-y: scroll;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.popup,
+.popup.fade-out {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+.popup,
+.popup.show {
+  opacity: 1;
+}
+.popup #pop-up .content,
+.popup #peminjaman .content {
+  width: 75%;
+  height: max-content;
+  background-color: white;
+  border-radius: 3px;
+}
+.popup #peminjaman .content{
+  width: 55%;
+}
+.popup #pop-up .content .title,
+.popup #peminjaman .content .title {
+  position: relative;
+  height: max-content;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 10px 20px;
+  border-top-left-radius: 3px;
+}
+.popup #pop-up .content .title h1,
+.popup #peminjaman .content .title h1 {
+  font-size: medium;
+  color: rgb(122, 110, 240);
+}
+.popup #peminjaman .content .title h1{
+  color: rgb(255,159,67);
+}
+.popup #pop-up .content .title button,
+.popup #peminjaman .content .title button {
+  padding: 8px;
+  height: max-content;
+  border: none;
+  border-radius: 3px;
+  background-color: white;
+  color: rgb(122, 110, 240);
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.popup #peminjaman .content .title button{
+  color: rgb(255,159,67);
+}
+.popup #pop-up .content .title button:hover,
+.popup #peminjaman .content .title button:hover {
+  background-color: rgb(248, 248, 248);
+}
+.popup #pop-up .content .data,
+.popup #peminjaman .content .data {
+  padding: 15px;
+}
+.popup #peminjaman .content .data form ul{
+  display: flex;
+  flex-direction: column;
+}
+.popup #peminjaman .content .data form ul li{
+  display: flex;
+  flex-direction: column;
+}
+.popup #peminjaman .content .data form ul div input{
+  padding: 5px;
+  outline-color: rgb(122, 110, 240);
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+.popup #peminjaman .content .data form ul div input[type="date"]{
+  background-color: rgb(239,239,239);
+}
+.popup #peminjaman .content .data form ul li.send{
+  width: 100%;
+  display: flex;
+ align-items: flex-end;
+ margin-top: 10px;
+}
+.popup #peminjaman .content .data form ul li:last-child button{
+  cursor: pointer;
+  width: max-content;
+  padding: 8px 10px;
+  color: white;
+  background-color: rgb(255,159,67);
+  border: none;
+  border-radius: 5px;
+  transition: .3s;
+}
+.popup #peminjaman .content .data form ul li:last-child button:hover{
+  background-color: rgb(196, 113, 37);
+}
+.popup #peminjaman .content .data form ul div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.popup #peminjaman .content .data form ul div li{
+  margin: 0 10px;
+}.popup #peminjaman .content .data form ul div li:first-child,
+.popup #peminjaman .content .data form ul div li:last-child{
+  width: 40%;
+}
+.popup #pop-up .content .data table {
+  padding: 10px 5px;
+}
+.popup #pop-up .content .data table tbody tr td {
+  padding: 5px 0;
+  overflow-wrap: anywhere;
+}
+.popup #pop-up .content .data p.sinopsis {
+  margin: 10px 0;
+}
+.popup #pop-up .content .data p:last-child {
+  margin: 0;
+}

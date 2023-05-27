@@ -1,0 +1,335 @@
+main .content-wrapper .content .download {
+  background-color: rgb(255, 159, 67);
+  box-shadow: 1px 0px 5px rgb(0, 0, 0, 0.3);
+  padding: 5px 20px;
+  border-radius: 5px;
+  width: max-content;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+main .content-wrapper .content .download button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.content-wrapper .content .download button,
+.content-wrapper .content .download button i {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.content-wrapper .content .download h3 i {
+  margin-right: 10px;
+}
+
+.content-wrapper .content .download:hover {
+  background-color: rgb(233, 127, 28);
+}
+
+.content-wrapper .content .card-wrapper {
+  max-width: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+.content-wrapper .content .card-wrapper a {
+  width: max-content;
+}
+.content-wrapper .content .card-wrapper button.tambah {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  background-color: rgb(40,199,111);
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.content-wrapper .content .card-wrapper #opsi {
+  width: max-content;
+  padding: 3px;
+  background-color: rgb(115, 103, 240);
+  color: white;
+  border-radius: 5px;
+}
+.content-wrapper .content .card-wrapper button.tambah i {
+  margin-right: 5px;
+}
+.content-wrapper .content .card-wrapper button.tambah:hover {
+  background-color: rgb(81, 211, 81);
+}
+.content-wrapper .content .card-wrapper .data-wrapper .data-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 10px 0;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-entries {
+  display: flex;
+  align-items: center;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-entries
+  select {
+  margin: 0 5px;
+  border-radius: 5px;
+  padding: 3px;
+  border: 1px solid grey;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-search
+  input {
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+/* isi data */
+.content-wrapper .content .card-wrapper .isi-data table {
+  text-align: center;
+  border-collapse: collapse;
+}
+.content-wrapper .content .card-wrapper .isi-data table thead tr th {
+  background-color: rgb(197, 197, 197);
+  color: rgb(43, 43, 43);
+  padding: 10px 5px;
+  border-bottom: 2px solid grey;
+}
+.content-wrapper .content .card-wrapper .isi-data table tbody tr td {
+  padding: 20px 0;
+}
+.content-wrapper .content .card-wrapper .isi-data table tbody tr a {
+  text-decoration: underline;
+  transition: all 0.3s;
+}
+.content-wrapper .content .card-wrapper .isi-data table tbody tr a:hover {
+  color: rgb(93, 81, 226);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr:nth-child(even) {
+  background-color: rgba(197, 197, 197, 0.678);
+}
+.content-wrapper .content .card-wrapper .isi-data table tbody tr td.limit {
+  width: 16%;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-pen-to-square,
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-delete-left {
+  color: white;
+  font-size: small;
+  padding: 8px;
+  border-radius: 5px;
+  transform: translateY(3px);
+  transition: all 0.3s;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-pen-to-square {
+  background-color: rgb(115, 103, 240);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-delete-left {
+  background-color: rgb(234, 84, 85);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-pen-to-square:hover {
+  background-color: rgb(93, 81, 226);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  i.fa-delete-left:hover {
+  background-color: rgb(228, 53, 53);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button {
+  width: max-content;
+  margin-top: 10px !important;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(115, 103, 240);
+  margin: 0 auto;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button:hover {
+  background-color: rgb(66, 55, 187);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button.member {
+  width: max-content;
+  margin: 0 !important;
+  padding: 0;
+  border-radius: 0;
+  background-color: rgba(114, 103, 240, 0) !important;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button
+  i.fa-chart-simple {
+  margin-right: 5px;
+  transform: rotate(90deg);
+}
+
+.content-wrapper .content .card-wrapper .isi-data .description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.content-wrapper .content .card-wrapper .isi-data .description .pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(197, 197, 197, 0.678);
+  color: #ffffff;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .description
+  .pagination
+  p.amount-of-data {
+  background-color: rgb(115, 103, 240);
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .description
+  .pagination
+  button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #515151;
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .description
+  .pagination
+  button
+  i.fa-angle-left {
+  transform: translate(3px, 1px);
+}
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .description
+  .pagination
+  button
+  i.fa-angle-right {
+  transform: translate(-3px, 1px);
+}

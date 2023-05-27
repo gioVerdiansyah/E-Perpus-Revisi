@@ -1,0 +1,128 @@
+* {
+  color: white;
+}
+:root {
+  --grey: rgb(32, 33, 35);
+  --light: rgb(68, 70, 84);
+  --white: #fff;
+}
+
+body {
+  background-color: var(--grey);
+  color: white;
+}
+.side-bar .icon .kotak {
+  background-color: var(--white);
+}
+.side-bar ul li:hover {
+  background-color: var(--light);
+}
+
+/*! master data */
+.side-bar ul li.dropdown .master-data:hover {
+  background-color: var(--light);
+}
+
+/* event master data */
+.side-bar ul li.dropdown .addBg {
+  background-color: var(--light);
+}
+
+/* reset hover */
+.side-bar ul li.dropdown .list-master-data li:hover {
+  background-color: var(--grey);
+}
+.side-bar ul li.dropdown:hover {
+  background: var(--grey);
+}
+
+/* content */
+main {
+  background-color: var(--light);
+}
+
+main .content-wrapper .heading {
+  background-color: var(--grey);
+}
+
+.content-wrapper .heading .profile .dropdown-profile {
+  background-color: var(--grey);
+}
+
+main .content-wrapper .heading .profile .profile-user {
+  background-color: var(--white);
+}
+main .content-wrapper .content .card-wrapper .card1,
+main .content-wrapper .content .card-wrapper .card2 {
+  background-color: var(--grey);
+}
+
+/* footer */
+main footer h2 a {
+  color: rgb(185, 111, 255);
+  transition: all 0.3s;
+}
+
+/* ! Penulis */
+main .content-wrapper .content .card-wrapper.penulis {
+  background-color: var(--grey);
+}
+main
+  .content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-entries
+  select {
+  border: 1px solid #e2e2e2;
+}
+main .content-wrapper .content .card-wrapper button.tambah,
+main .content-wrapper .content .card-wrapper button.tambah i {
+  color: var(--grey);
+}
+main
+  .content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-search
+  input {
+  border: 1px solid #7b7b7b;
+}
+main .content-wrapper .content .card-wrapper table thead tr th {
+  background-color: var(--light) !important;
+  color: #e2e2e2 !important;
+}
+main
+  .content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-entries
+  select {
+  background-color: var(--light);
+  border: 1px solid var(--white);
+}
+main
+  .content-wrapper
+  .content
+  .card-wrapper
+  .data-wrapper
+  .data-indicator
+  .data-search
+  input {
+  background-color: var(--light);
+  border: 1px solid var(--white);
+}
+main .content-wrapper .content .card-wrapper table tbody tr:nth-child(even) {
+  background-color: var(--light) !important;
+}
+main .content-wrapper .content .card-wrapper .description .pagination {
+  background-color: var(--light) !important;
+}
+main .content-wrapper .content .card-wrapper .description .pagination button {
+  color: var(--white) !important;
+}

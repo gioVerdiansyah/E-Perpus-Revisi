@@ -1,0 +1,77 @@
+main .content .card-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+main .content .card-wrapper .card1,
+main .content-wrapper .card2 {
+  width: max-content;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+main .content .card-wrapper .card1 .col1 {
+  margin-bottom: 15px;
+}
+
+main .content .card-wrapper .card1 .col2 h1 {
+  color: blueviolet;
+}
+main .content .card-wrapper .card1 .col2 button {
+  background-color: blueviolet;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+main .content .card-wrapper .card1 .col2 button:hover {
+  background-color: rgb(107, 28, 180);
+}
+main .content-wrapper .card2 {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main .content-wrapper .card2 .title {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+main .content-wrapper .card2 .content-data ul {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+}
+main .content-wrapper .card2 .content-data ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+main .content-wrapper .card2 .content-data ul li .icon i {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+main .content-wrapper .card2 .content-data ul li .icon i.fa-book-open-reader {
+  background-color: rgba(137, 43, 226, 0.3);
+  color: blueviolet;
+}
+main .content-wrapper .card2 .content-data ul li .icon i.fa-user {
+  background-color: rgba(144, 238, 144, 0.5);
+  color: rgb(40,199,111);
+}
+main .content-wrapper .card2 .content-data ul li .icon i.fa-cubes {
+  background-color: rgba(255, 166, 0, 0.5);
+  color: orange;
+}

@@ -1,0 +1,90 @@
+* {
+  color: white;
+}
+:root {
+  --grey: rgb(32, 33, 35);
+  --light: rgb(68, 70, 84);
+  --white: #fff;
+}
+body {
+  background-color: var(--light);
+}
+nav {
+  background-color: var(--grey);
+}
+header {
+  background-color: var(--grey);
+}
+main {
+  background-color: var(--grey) !important;
+}
+main .about-E-perpus ul {
+  background-color: var(--grey);
+}
+main .about-E-perpus ul {
+  background-color: var(--grey) !important;
+}
+main .list-creator ul {
+  background-color: var(--grey) !important;
+}
+nav ul li div.dropdown-logout {
+  background-color: var(--grey) !important;
+}
+nav ul li div.dropdown-logout a {
+  color: var(--white);
+}
+/* book */
+main .title {
+  background-color: var(--grey) !important;
+}
+main .data-wrapper .data-indicator .data-entries select#selection {
+  background-color: var(--grey);
+}
+main .data-wrapper .data-indicator .data-search input {
+  background-color: var(--light);
+}
+.data-wrapper .isi-data .data table thead th {
+  background-color: var(--light) !important;
+  color: var(--white) !important;
+}
+.data-wrapper .isi-data .data table tbody tr:nth-child(even) {
+  background-color: var(--light) !important;
+}
+/* popup */
+.popup #pop-up .content {
+  background-color: var(--grey) !important;
+}
+.popup #pop-up .content .title {
+  background-color: var(--grey) !important;
+}
+.popup #pop-up .content .title button {
+  background-color: var(--grey) !important;
+}
+
+/* history */
+#data {
+  background-color: var(--grey) !important;
+}
+.isi-data .data #masuk h1,
+.isi-data .data #keluar h1,
+.isi-data .data #membaca h1 {
+  background-color: var(--light) !important;
+  color: var(--white) !important;
+}
+.isi-data .data #membaca h2 {
+  color: var(--white) !important;
+}
+.isi-data .data #masuk div:nth-child(even),
+.isi-data .data #keluar div:nth-child(even),
+.isi-data .data #membaca div:nth-child(even) {
+  background-color: var(--light) !important;
+}
+
+/* feedback */
+form ul li input,
+form ul li textarea {
+  background-color: var(--light) !important;
+}
+#alert {
+  background-color: rgb(81, 211, 81) !important;
+}

@@ -1,0 +1,190 @@
+main {
+  width: 90%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.2), -2px -1px 3px rgba(0, 0, 0, 0.2);
+}
+main .title {
+  margin: 10px 0 30px 0;
+}
+main .title,
+main .data-wrapper .data-indicator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+main .data-wrapper .data-indicator .data-entries {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+main .data-wrapper .data-indicator .data-entries select#selection {
+  margin: 0 5px;
+  padding: 3px;
+  border-radius: 5px;
+  outline: none;
+}
+main .data-wrapper .data-indicator .data-search {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+}
+main .data-wrapper .data-indicator .data-search label {
+  text-align: right;
+  margin-right: 10px;
+}
+main .data-wrapper .data-indicator .data-search input {
+  width: 90%;
+  padding: 3px 2px;
+  outline: none;
+}
+.data-wrapper .isi-data .data table {
+  border-collapse: collapse;
+}
+.data-wrapper .isi-data .data table thead th {
+  background-color: rgb(197, 197, 197);
+  color: rgb(43, 43, 43);
+  border-bottom: 2px solid;
+  padding: 10px 5px;
+}
+
+.data-wrapper .isi-data .data table tbody tr td:first-child,
+.data-wrapper .isi-data .data table tbody tr td:nth-child(2) {
+  text-align: center;
+}
+.data-wrapper .isi-data .data table tbody tr:nth-child(even) {
+  background-color: rgba(197, 197, 197, 0.678);
+}
+.data-wrapper .isi-data .data table tbody tr td {
+  padding: 20px 0;
+  overflow-wrap: anywhere;
+}
+.data-wrapper .isi-data .data table tbody tr td#detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.data-wrapper .isi-data .data table tbody tr td p {
+  margin: auto;
+  text-align: center;
+}
+.data-wrapper .isi-data .data table tbody tr td p.limit {
+  width: 70%;
+  text-align: left;
+}
+
+.data-wrapper .isi-data .data table tbody tr td#detail button {
+  width: max-content;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(115, 103, 240);
+  margin: 3px auto;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.data-wrapper .isi-data .data table tbody tr td#detail button:hover {
+  background-color: rgb(66, 55, 187);
+}
+.data-wrapper .isi-data .data table tbody tr td#detail i {
+  margin-right: 5px;
+  transform: rotate(90deg);
+}
+.data-wrapper .isi-data .description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+.data-wrapper .description .pagination {
+  width: max-content;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(197, 197, 197, 0.678);
+  color: #ffffff;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+.data-wrapper .isi-data .description .pagination p.amount-of-data {
+  background-color: rgb(115, 103, 240);
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+.data-wrapper .isi-data .description .pagination button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #515151;
+  transition: all 0.3s;
+}
+.data-wrapper .isi-data .description .pagination button:hover {
+  color: white;
+}
+.data-wrapper .isi-data .description .pagination button i.fa-angle-left {
+  transform: translate(3px, 1px);
+}
+.data-wrapper .isi-data .description .pagination button i.fa-angle-right {
+  transform: translate(-3px, 1px);
+}
+
+@media (max-width: 660px) {
+  main .title h2 {
+    font-size: larger;
+  }
+  main .title p {
+    font-size: small;
+  }
+
+  main .data-wrapper .data-indicator .data-entries select {
+    padding: 0 !important;
+  }
+  main .data-wrapper .data-indicator .data-search {
+    justify-content: flex-end;
+  }
+  main .data-wrapper .data-indicator .data-search input {
+    width: 50% !important;
+    border: none;
+    border-bottom: 1px solid grey;
+  }
+  main .data-wrapper .data-indicator .data-entries p,
+  main .data-wrapper .data-indicator .data-search label,
+  table thead th,
+  .data-wrapper .description p {
+    font-size: small;
+  }
+
+  table thead th:nth-child(3),
+  table thead th:nth-child(4),
+  table thead th:nth-child(5),
+  table thead th:nth-child(6),
+  table tbody td:nth-child(3),
+  table tbody td:nth-child(4),
+  table tbody td:nth-child(5),
+  table tbody td:nth-child(6) {
+    display: none !important;
+  }
+
+  .popup #pop-up .content {
+    width: 100% !important;
+  }
+}
+@media (max-width: 550px) {
+  .popup #pop-up .content .title button {
+    position: inherit !important;
+    box-shadow: none !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+}

@@ -1,0 +1,290 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+h1 img {
+  width: 30px;
+  aspect-ratio: 1/1;
+}
+
+.side-bar {
+  width: max-content;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 0 5px 5px 0;
+}
+
+.side-bar .icon {
+  width: max-content;
+  margin: 2px 0 15px 0px;
+  display: flex;
+}
+.side-bar .icon .kotak {
+  width: 30px;
+  background-color: black;
+  aspect-ratio: 1/1;
+  margin-right: 5px;
+}
+
+.side-bar ul li {
+  list-style-type: none;
+  /* margin: 20px 0; */
+  transition: all 0.3s;
+}
+.side-bar ul li h2,
+.side-bar ul li ul#list-master-data li h3 {
+  cursor: pointer;
+}
+.side-bar ul li a h2 {
+  display: flex;
+  align-items: center;
+}
+.side-bar ul li.active {
+  background-color: blueviolet;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+.side-bar ul li.dropdown ul li h3.active {
+  background-color: blueviolet;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+
+  padding: 3px;
+  border-radius: 3px;
+  color: white;
+}
+.side-bar ul li.active h2,
+.side-bar ul li.dropdown ul li.active h3,
+.side-bar ul li.active h2 i,
+.side-bar ul li.dropdown ul li.active h3 i {
+  color: white;
+}
+.side-bar ul li.dashboard a h2,
+.side-bar ul li.dashboard a h2 i {
+  color: white;
+}
+.side-bar ul li,
+.side-bar ul li.dropdown {
+  border-radius: 5px;
+  padding: 12px 0 12px 5px;
+}
+.side-bar ul li:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+.side-bar ul li i {
+  margin-right: 10px;
+}
+
+/*! master data */
+.side-bar ul li.dropdown {
+  padding: 0 !important;
+}
+.side-bar ul li.dropdown .master-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 30px 10px 5px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+.side-bar ul li.dropdown .list-master-data li {
+  list-style-type: inherit;
+  margin: 0px 0 0px 15px;
+  padding: 3px;
+  margin-top: 5px;
+  transition: all 0.3s;
+}
+.side-bar ul li.dropdown .list-master-data li::marker {
+  font-size: xx-large;
+}
+.side-bar ul li.dropdown .master-data:hover {
+  background-color: rgb(233, 233, 233);
+}
+.side-bar ul li.dropdown .master-data h2 {
+  white-space: nowrap;
+}
+.side-bar ul li.dropdown .master-data h2 .notif {
+  background-color: rgba(255, 0, 0, 0.116);
+  color: red;
+  border-radius: 50%;
+  padding: 0 7px;
+  margin: 0 5px;
+}
+.dropdown-icon {
+  transform: translateY(3px) translateX(35px);
+  transition: all 0.3s;
+}
+.side-bar ul li.dropdown .list-master-data li h3 {
+  width: max-content;
+  height: max-content;
+  margin: 0;
+}
+
+/* event master data */
+.side-bar ul li.dropdown .addBg {
+  background-color: rgb(233, 233, 233);
+}
+.side-bar ul li.dropdown .list-master-data {
+  display: none;
+  flex-direction: column;
+}
+.side-bar ul li.dropdown .list-master-data-onclick {
+  display: inherit;
+}
+.dropdown-icon-onclick {
+  transform-origin: 8px 9px;
+  transform: translateY(3px) translateX(35px) rotate(180deg);
+}
+.side-bar ul .dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.side-bar ul .dropdown .list-master-data {
+  margin-left: 20px;
+}
+
+/* reset hover */
+.side-bar ul li.dropdown .list-master-data li:hover,
+.side-bar ul li.dropdown .list-master-data li:hover h3 {
+  background-color: white;
+  color: #000;
+}
+.side-bar ul li.dropdown:hover {
+  background: #ffffff;
+}
+
+/* content */
+main {
+  width: 100%;
+  height: 100vh;
+  background-color: #f3f3f3;
+  padding: 30px 30px 5px 30px;
+  position: relative;
+}
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  position: relative;
+}
+.content-wrapper .heading .action {
+  display: flex;
+  align-items: center;
+}
+.content-wrapper .heading .action button {
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  margin: 0 10px;
+  cursor: pointer;
+}
+.content-wrapper .heading .action button span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 5px 0;
+  background-color: grey;
+  transition: all 0.3s;
+}
+
+.content-wrapper .heading .action button i {
+  font-size: large;
+}
+.content-wrapper .heading .action #darkmode i {
+  font-size: x-large;
+  transform: rotate(-25deg);
+}
+
+.content-wrapper .heading .profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.content-wrapper .heading .profile img {
+  width: 33px;
+  height: 33px;
+  margin-left: 5px;
+}
+.content-wrapper .heading .profile .text h2 {
+  font-size: large;
+}
+.content-wrapper .heading .profile .text h3 {
+  font-size: small;
+  text-align: end;
+}
+.content-wrapper .heading .profile .dropdown-profile {
+  display: none;
+  background-color: #ffffff;
+  padding: 3px;
+  border-radius: 0 0 5px 5px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transform: translateY(-5px);
+}
+.content-wrapper .heading .profile .dropdown-profile ul li,
+.content-wrapper .heading .profile .dropdown-profile ul li a {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.content-wrapper .content .title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: unset;
+  margin: 25px 0;
+}
+.content-wrapper .content .title hr {
+  transform: rotate(90deg);
+  width: 25px;
+}
+.content-wrapper .content .title h2 img {
+  width: 25px;
+  height: 25px;
+  transform: translateY(5px);
+}
+.content-wrapper .content .title h2 {
+  color: blueviolet;
+}
+
+/* footer */
+main footer {
+  font-size: xx-small;
+  margin-top: 10px;
+}
+main footer h2 a {
+  color: blueviolet;
+  transition: all 0.3s;
+}
+main footer h2 a:hover {
+  text-decoration: underline;
+}

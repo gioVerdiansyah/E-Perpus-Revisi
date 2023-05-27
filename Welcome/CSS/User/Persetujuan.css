@@ -1,0 +1,76 @@
+.data-wrapper .isi-data .data table tbody tr td p.persetujuan{
+  width: 80%;
+  text-align: center;
+}.data-wrapper .isi-data .data table tbody tr td p.h{
+  cursor: pointer;
+  transition: all .3s;
+}
+.data-wrapper .isi-data .data table tbody tr td p.h:hover{
+  background-color: rgb(40,199,111);
+  color: white;
+}
+.data-wrapper .isi-data .data table tbody tr td p.o{
+  color: rgb(255, 159, 67);
+  border: 1px solid rgb(255, 159, 67);
+  border-radius: 3px;
+  padding: 5px 3px;
+}.data-wrapper .isi-data .data table tbody tr td p.g{
+  color: rgb(40,199,111);
+  border: 1px solid rgb(40,199,111);
+  border-radius: 3px;
+  padding: 5px 3px;
+}
+.data-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td:last-child{
+    display: flex;
+    justify-content: center;
+  }
+.data-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button.delete {
+    cursor: pointer;
+    background-color: rgb(234, 84, 85);
+    color: white;
+    font-size: small;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    transform: translateY(3px);
+    transition: all 0.3s;
+}
+.data-wrapper
+  .isi-data
+  table
+  tbody
+  tr
+  td
+  button.delete:hover {
+  background-color: rgb(228, 53, 53);
+}
+
+@media (max-width: 660px) {
+  main .title p {
+    display: none;
+  }
+
+  table thead th:nth-child(3),
+  table thead th:nth-child(4),
+  table thead th:nth-child(5),
+  table thead th:nth-child(6),
+  table tbody td:nth-child(3),
+  table tbody td:nth-child(4),
+  table tbody td:nth-child(5),
+  table tbody td:nth-child(6) {
+    display: none !important;
+  }
+}

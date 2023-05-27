@@ -1,0 +1,34 @@
+table {
+  text-align: center;
+  border-collapse: collapse;
+}
+table tr th {
+  background-color: rgb(197, 197, 197);
+  color: rgb(43, 43, 43);
+  padding: 10px 5px;
+  border-bottom: 2px solid grey;
+}
+table tr td {
+  padding: 20px 0;
+}
+table tr a {
+  text-decoration: underline;
+  transition: all 0.3s;
+}
+table tr a:hover {
+  color: rgb(93, 81, 226);
+}
+table tr:nth-child(even) {
+  background-color: rgba(197, 197, 197, 0.678);
+}
+table tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+table tr td.limit {
+  width: 16%;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+table tr td.center {
+  text-align: center !important;
+}

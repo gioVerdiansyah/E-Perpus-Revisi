@@ -1,0 +1,64 @@
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form {
+  width: 50%;
+}
+form ul {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+form ul li:last-child {
+  align-self: flex-end;
+}
+form ul li textarea {
+  width: 100%;
+}
+form ul .first,
+form ul .second {
+  display: flex;
+  flex-direction: row;
+}
+form ul .first div {
+  width: 100%;
+}
+form ul .first div:first-child,
+form ul .second li:first-child {
+  margin-right: 10px;
+}
+form ul .first div:last-child,
+form ul .second li:last-child {
+  margin-left: 10px;
+}
+form ul .first div li input {
+  width: 100%;
+}
+
+form ul .second li {
+  width: 100%;
+}
+form ul .second li input {
+  width: 100%;
+}
+form ul li:last-child button {
+  border: none;
+  color: white;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+form ul li:last-child button:first-child {
+  background-color: rgb(40,199,111);
+}
+form ul li:last-child button:first-child:hover {
+  background-color: rgb(81, 211, 81);
+}
+form ul li:last-child button:last-child {
+  background-color: rgb(234, 84, 85);
+}
+form ul li:last-child button:last-child:hover {
+  background-color: rgb(228, 53, 53);
+}
