@@ -6,10 +6,10 @@ body {
 .popup #peminjaman {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   overflow-y: scroll;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;

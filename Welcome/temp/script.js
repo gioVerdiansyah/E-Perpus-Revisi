@@ -1,88 +1,71 @@
-var Alert = undefined;
+// Animasi
+function muncul(selector){
+  selector.attr('id', 'add');
+  setTimeout(() => {
+    selector.removeAttr('id')
+  }, 500);
+}
 
-(function(Alert) {
-  var alert, success, warning, _container;
-  warning = function(message, title, options) {
-    return alert("warning", message, title, "fa-solid fa-triangle-exclamation", options);
-  };
+function tutup(selector){
+  selector.attr('id', 'close');
+  setTimeout(() => {
+    selector.parent().remove();
+    selector.removeAttr('id')
+    selector.removeClass('shake');
+  }, 500);
+}
 
-  success = function(message, title, options) {
-    return alert("success", message, title, "fa-solid fa-circle-check", options);
-  };
-  alert = function(type, message, title, icon, options) {
-    var alertElem, messageElem, titleElem, iconElem, innerElem, _container;
-    if (typeof options === "undefined") {
-      options = {};
-    }
-    options = $.extend({}, Alert.defaults, options);
-    if (!_container) {
-      _container = $("#alerts");
-      if (_container.length === 0) {
-        _container = $("<ul>").attr("id", "alerts").appendTo($("body"));
-      }
-    }
-    if (options.width) {
-      _container.css({
-        width: options.width
-      });
-    }
-    alertElem = $("<li>").addClass("alert").addClass("alert-" + type);
-    setTimeout(function() {
-      alertElem.addClass('open');
-    }, 1);
-    if (icon) {
-      iconElem = $("<i>").addClass(icon);
-      alertElem.append(iconElem);
-    }
-    innerElem = $("<div>").addClass("alert-block");
-    //innerElem = $("<i>").addClass("fa fa-times");
-    alertElem.append(innerElem);
-    if (title) {
-      titleElem = $("<div>").addClass("alert-title").append(title);
-      innerElem.append(titleElem);
-      
-    }
-    if (message) {
-      messageElem = $("<div>").addClass("alert-message").append(message);
-      //innerElem.append("<i class="fa fa-times"></i>");
-      innerElem.append(messageElem);
-      //innerElem.append("<em>Click to Dismiss</em>");
-//      innerElemc = $("<i>").addClass("fa fa-times");
+function shake(selector){
+  $($('#pop-up')).on('click', function(event) {
+    if (!$(event.target).closest('.alert').length) {
+      selector.addClass('shake');
 
+    setTimeout(() => {
+      selector.removeClass('shake');
+    }, 600);
     }
-    if (options.displayDuration > 0) {
-      setTimeout((function() {
-        leave();
-      }), options.displayDuration);
-    } else {
-      innerElem.append("<em>Click to Dismiss</em>");
-    }
-    alertElem.on("click", function() {
-      leave();
-    });
+  });
+}
 
-    function leave() {
-      alertElem.removeClass('open');
-      alertElem.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
-        return alertElem.remove();
-      });
-    }
-    return _container.prepend(alertElem);
-  };
-  Alert.defaults = {
-    width: "",
-    icon: "",
-    displayDuration: 3000,
-    pos: ""
-  };
-  Alert.warning = warning;
-  Alert.success = success;
-  return _container = void 0;
+class Peringatan{
+  static konfirmasi(pesan, callback){
+    let div = 
+    $('<div>').attr('id', 'pop-up')
+    .append($('<div>').addClass('alert')
+    .append($('<h1>').append('<i class="fa-solid fa-triangle-exclamation"></i>'))
+    .append($('<h2>').text("Warning!"))
+    .append($('<p>').text(pesan))
+    .append($('<ul>')
+      .append($('<li>')
+        .append($('<button>').text('Cancel').click(function(){
+          tutup($('.alert'));
+          callback(false);
+        }))
+      )
+      .append($('<li>')
+        .append($('<button>').text('Yes').click(function (){
+          callback(true);
+        }))
+      )
+    )
+  )
+  $('.popup').append(div);
+  muncul($('.alert'));
+  shake($('.alert'));
+  }
 
-})(Alert || (Alert = {}));
+  static sukses(pesan){
+    let div = $('<div>').attr('id', 'pop-up')
+    .append($('<div>').addClass('alert sukses')
+    .append($('<h1>').append('<i class="fa-solid fa-circle-check"></i>'))
+    .append($('<h2>').text("Success!"))
+    .append($('<p>').text(pesan)))
 
-this.Alert = Alert;
+    $('.popup').append(div);
+    muncul($('.alert'));
 
-$('#test').on('click', function() {
-  Alert.info('Message');
-});
+    setTimeout(() => {
+      tutup($('.alert'));
+    }, 1500);
+  }
+}

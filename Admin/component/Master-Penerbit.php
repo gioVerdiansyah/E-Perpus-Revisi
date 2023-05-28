@@ -9,26 +9,24 @@ if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !iss
 
 $pagenation = new Pagenation(10, "buku", 1);
 
-$write = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
+$penerbit = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
 
 ?>
 <style>
-    .side-bar {
-        height: 100% !important;
-        box-shadow: none !important;
-    }
+.side-bar {
+    height: 100% !important;
+    box-shadow: none !important;
+}
 
-    main {
-        height: max-content !important;
-    }
+main {
+    height: max-content !important;
+}
 
-    .isi-data .data table tbody tr td.center {
-        text-align: center !important;
-    }
+.isi-data .data table tbody tr td.center {
+    text-align: center !important;
+}
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
-<script src="JS/jquery-3.6.3.min.js"></script>
-<script src="JS/script.js"></script>
 <div class="title">
     <h1>Penerbit</h1>
     <hr>
@@ -71,28 +69,28 @@ $write = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenati
                     <tbody width="100%" cellspacing="10">
                         <?php
                         $id = 1;
-                        foreach ($write as $writer):
+                        foreach ($penerbit as $penerbitnya):
                             ?>
-                            <tr cellspacing="10">
-                                <td>
-                                    <p>
-                                        <?= $id ?>
-                                    </p>
-                                </td>
-                                <td class="limit">
-                                    <p>
-                                        <?= $writer['penerbit'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $writer['id'] ?>');
+                        <tr cellspacing="10">
+                            <td>
+                                <p>
+                                    <?= $id ?>
+                                </p>
+                            </td>
+                            <td class="limit">
+                                <p>
+                                    <?= $penerbitnya['penerbit'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <button onclick="
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $penerbitnya['id'] ?> #pop-up');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php $id++; endforeach ?>
+                                </button>
+                            </td>
+                        </tr>
+                        <?php $id++; endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -103,12 +101,12 @@ $write = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenati
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                        <button onclick="
+                    <button onclick="
                     $('.isi-data').load('component/result/penerbit.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
                     )">
-                            Next
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
+                        Next
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
                     <?php endif ?>
                 </div>
             </div>

@@ -89,85 +89,83 @@ if (isset($_POST['id'])) {
                     $num = 1;
                     foreach ($result as $peminjam):
                         ?>
-                    <tr>
-                        <td>
-                            <p>
-                                <?= $num ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p class="limit">
-                                <?= $peminjam["bukunya"] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= $peminjam["jumlah_pinjam"] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= getDay($peminjam["tanggal_pinjam"], true) ?>
-                                <?= $peminjam["tanggal_pinjam"] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
-                                <?= $peminjam["tanggal_pengembalian"] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <?php if ($peminjam["status"]) { ?>
-                            <p class="persetujuan g">
-                                <i class="fa-solid fa-check"></i> Disetujui
-                            </p>
-                            <?php } else { ?>
-                            <p class="persetujuan o">
-                                <i class="fa-regular fa-clock"></i> Belum
-                            </p>
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <?php if ($peminjam["status"]) { ?>
-                            <p class="persetujuan g h">
-                                <i class="fa-solid fa-floppy-disk"></i> Unduh
-                            </p>
-                            <?php } else { ?>
-                            <p class="persetujuan o">
-                                <i class="fa-regular fa-clock"></i> Belum Ada
-                            </p>
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <?php if ($peminjam["status"]) { ?>
-                            <button class="delete" onclick="
-                                    let isDelete = confirm('Apakah anda yakin ingin mengahpus data peminjaman yang telah disetujui?');
-                                    if(!isDelete){
-                                        return;
-                                    }
-                                    $.post('component/Peminjaman.php', { 
-                                        id: '<?= $peminjam['id'] ?>'
-                                     });
-                                     Alert.success('Data peminjaman berhasil dihapus!','Success',{displayDuration: 4000, pos: 'top'});
-
-                                     $('#isi-data').load('component/Peminjaman.php #isi-data')
+                        <tr>
+                            <td>
+                                <p>
+                                    <?= $num ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p class="limit">
+                                    <?= $peminjam["bukunya"] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= $peminjam["jumlah_pinjam"] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= getDay($peminjam["tanggal_pinjam"], true) ?>
+                                    <?= $peminjam["tanggal_pinjam"] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
+                                    <?= $peminjam["tanggal_pengembalian"] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <?php if ($peminjam["status"]) { ?>
+                                    <p class="persetujuan g">
+                                        <i class="fa-solid fa-check"></i> Disetujui
+                                    </p>
+                                <?php } else { ?>
+                                    <p class="persetujuan o">
+                                        <i class="fa-regular fa-clock"></i> Belum
+                                    </p>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if ($peminjam["status"]) { ?>
+                                    <p class="persetujuan g h">
+                                        <i class="fa-solid fa-floppy-disk"></i> Unduh
+                                    </p>
+                                <?php } else { ?>
+                                    <p class="persetujuan o">
+                                        <i class="fa-regular fa-clock"></i> Belum Ada
+                                    </p>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if ($peminjam["status"]) { ?>
+                                    <button class="delete" onclick="
+                                    Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
+                                        if(isTrue){
+                                            $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+                                            Peringatan.sukses('Data peminjaman berhasil di HAPUS')
+                                            $('#isi-data').load('component/Peminjaman.php #isi-data')
+                                        }
+                                    });
                                 "><i class="fa-solid fa-delete-left"></i>
-                            </button>
-                            <?php } else { ?>
-                            <button class="delete" onclick="
-                                    $.post('component/Peminjaman.php', { 
-                                        id: '<?= $peminjam['id'] ?>'
-                                     });
-                                     Alert.success('Data peminjaman berhasil dihapus!','Success',{displayDuration: 4000, pos: 'top'});
-
-                                     $('#isi-data').load('component/Peminjaman.php #isi-data')
+                                    </button>
+                                <?php } else { ?>
+                                    <button class="delete" onclick="
+                                    Peringatan.konfirmasi('Apakah anda yakin ingin membatalkan meminjam buku <?= $peminjam['bukunya'] ?>?', function(isTrue){
+                                        if(isTrue){
+                                            $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+                                            Peringatan.sukses('Data peminjaman berhasil di CANCEL')
+                                            $('#isi-data').load('component/Peminjaman.php #isi-data')
+                                        }
+                                    });
                                 "><i class="fa-solid fa-delete-left"></i>
-                            </button>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                    <?php $num++; endforeach;
+                                    </button>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <?php $num++; endforeach;
                     ?>
                 </tbody>
             </table>
@@ -180,13 +178,13 @@ if (isset($_POST['id'])) {
             <div class="pagination">
                 <p class="amount-of-data">1</p>
                 <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                <button onclick="
+                    <button onclick="
                     $('.isi-data').load(
                         'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'
                     )">
-                    Next
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
+                        Next
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
                 <?php endif ?>
             </div>
         </div>

@@ -18,6 +18,8 @@ $username = '';
 // cek COOKIE dan username
 if ($key === hash("sha512", $row["username"])) {
     $username = $row["username"];
+} else {
+    header("Location: ../logout-user.php");
 }
 ?>
 
@@ -34,8 +36,9 @@ if ($key === hash("sha512", $row["username"])) {
     <script src="../Admin/JS/jquery-3.6.3.min.js"></script>
     <script src="JS/script.js"></script>
     <link rel="stylesheet" id="css" href="CSS/User/index.css" />
-    <link rel="stylesheet" href="CSS/alert.css">
+    <link rel="stylesheet" href="../Admin/CSS/alert.css">
     <link rel="stylesheet" id="dm" />
+    <script src="../Admin/JS/alert.js"></script>
 </head>
 
 <body>

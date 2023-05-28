@@ -41,6 +41,7 @@ if (isset($_POST['send'])) {
 
 <link rel="stylesheet" href="CSS/User/Buku.css">
 <link rel="stylesheet" href="CSS/User/Fraction_group.css" />
+<link rel="stylesheet" href="../Admin/CSS/alert.css">
 <div class="title">
     <h2>Cari Buku</h2>
     <p>Data di update secara otomatis</p>
@@ -138,9 +139,11 @@ if (isset($_POST['send'])) {
 
                                 <!-- detail -->
                                 <button onclick="
-                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up');
-                                $('.popup').removeAttr('hidden');
-                                ">
+                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up',()=>{
+                                    $('#pop-up').fadeIn(500);
+                                    $('.popup').removeAttr('hidden');
+                                });
+                                " id="detail">
                                     <i class="fa-solid fa-chart-simple"></i>Detail
                                 </button>
                             </td>

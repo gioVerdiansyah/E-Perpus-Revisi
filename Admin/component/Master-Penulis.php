@@ -27,8 +27,6 @@ $write = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenati
     }
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
-<script src="JS/jquery-3.6.3.min.js"></script>
-<script src="JS/script.js"></script>
 <div class="title">
     <h1>Penulis</h1>
     <hr>
@@ -86,7 +84,7 @@ $write = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenati
                                 </td>
                                 <td>
                                     <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $writer['id'] ?>');
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $writer['id'] ?> #pop-up');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
                                     </button>

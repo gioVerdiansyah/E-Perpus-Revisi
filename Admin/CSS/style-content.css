@@ -250,7 +250,7 @@ main .content-wrapper .content .download button {
   tbody
   tr
   td
-  button.member {
+  button.delete {
   width: max-content;
   margin: 0 !important;
   padding: 0;
@@ -332,4 +332,32 @@ main .content-wrapper .content .download button {
   button
   i.fa-angle-right {
   transform: translate(-3px, 1px);
+}
+
+
+/* persetujuan */
+.card-wrapper .isi-data .data table tbody tr td button.o{
+  margin: 0 !important;
+  width: auto !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: rgb(255, 159, 67) !important;
+  border: 1px solid rgb(255, 159, 67) !important;
+  padding: 5px 3px !important;
+}
+.card-wrapper .isi-data .data table tbody tr td button.o i{
+  color: rgb(255, 159, 67);
+}
+.card-wrapper .isi-data .data table tbody tr td button.o:hover,
+.card-wrapper .isi-data .data table tbody tr td button.o:hover i{
+  color: white !important;
+  background-color: rgb(255, 159, 67) !important;
+}
+.card-wrapper .isi-data .data table tbody tr td p.g{
+  color: rgb(40,199,111) !important;
+  border: 1px solid rgb(40,199,111) !important;
+  border-radius: 3px !important;
+  padding: 5px 3px !important;
+}
+.card-wrapper .isi-data .data table tbody tr td p.g i{
+  color: rgb(40,199,111) !important;
 }

@@ -29,8 +29,6 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
 </style>
 
 <link rel="stylesheet" href="CSS/style-content.css">
-<script src="JS/jquery-3.6.3.min.js"></script>
-<script src="JS/script.js"></script>
 <div class="title">
     <h1>Buku</h1>
     <hr>
@@ -48,8 +46,7 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
                 <p>show</p>
                 <select id="selection" name="selection"
                     onchange="
-                    let value = $(this).val();
-                    $('#isi-data').load('component/result/index.php?lim=' + value + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())">
+                    $('#isi-data').load('component/result/index.php?lim=' + $(this).val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())">
                     <option value="10">10</option>
                     <option value="5">5</option>
                     <option value="2">2</option>
@@ -107,16 +104,16 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
                                     <a href="database/update.php?id=<?= $book['id'] ?>"><i
                                             class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <button class="member" onclick="
-                                    let isDelete = confirm('Apakah anda yakin ingin menghapus buku: <?= $book['judul_buku'] ?>?');
-                                    if(!isDelete){
-                                        return;
-                                    }
-                                    $.post('component/Master-Buku.php', { 
-                                        id: '<?= $book['id'] ?>'
-                                     });
-                                     alert('Data berhasil dihapus!');
-                                     $('#isi-data').load('component/result/index.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())
+                                    <button class="delete" onclick="
+                                    Peringatan.konfirmasi('Apakah anda yakin ingin menghapus buku <?= $book['judul_buku'] ?>?', function(isTrue){
+                                        if(isTrue){
+                                            $.post('component/Master-Buku.php', { 
+                                                id: '<?= $book['id'] ?>'
+                                            });
+                                            Peringatan.sukses('Buku <?= $book['judul_buku'] ?> berhasil di HAPUS');
+                                            $('#isi-data').load('component/result/index.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())
+                                        }
+                                    });
                                 "><i class="fa-solid fa-delete-left"></i>
                                     </button><br>
                                     <button onclick="

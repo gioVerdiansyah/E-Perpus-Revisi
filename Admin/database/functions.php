@@ -114,6 +114,15 @@ function updt($data)
     return mysqli_affected_rows($db);
 }
 
+function getStock($buku)
+{
+    global $db;
+    $stock = mysqli_query($db, "SELECT jumlah_buku FROM buku WHERE judul_buku = '$buku'");
+    $sisa_buku = mysqli_fetch_assoc($stock);
+
+    return $sisa_buku['jumlah_buku'];
+}
+
 function konversiNamaHari($namaHari)
 {
     $hari = [

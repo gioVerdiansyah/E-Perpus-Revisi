@@ -1,4 +1,7 @@
 <?php
+if ($_SERVER['REQUEST_URI'] == "/E-perpus/function.php") {
+    header("Location: index.php");
+}
 // koneksi ke databases
 $db = mysqli_connect(
     "localhost",

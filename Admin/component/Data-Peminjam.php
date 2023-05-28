@@ -7,34 +7,48 @@ if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !iss
     exit;
 }
 
-$idRead = (isset($_POST['rid'])) ? $_POST['rid'] : 0;
+// Menangani POST pinjam
+if (isset($_POST['jumlah_pinjam'])) {
+    $idP = $_POST['idP'];
+    $book_name = $_POST['bukunya'];
+    $buku_tersedia = mysqli_query($db, "SELECT jumlah_buku FROM buku WHERE judul_buku = '$book_name'");
+    $result = mysqli_fetch_assoc($buku_tersedia);
+    $number_buku_tersedia = $result['jumlah_buku'];
+    $jumlah_pinjam = $_POST['jumlah_pinjam'];
 
-if (isset($idRead)) {
-    mysqli_query($db, "DELETE FROM peminjam WHERE id = $idRead");
+    // calc
+    $jumlah = $number_buku_tersedia - $jumlah_pinjam;
+    // update value
+    mysqli_query($db, "UPDATE buku SET jumlah_buku = $jumlah WHERE judul_buku = '$book_name'");
+    mysqli_query($db, "UPDATE peminjam SET status = true WHERE id = $idP");
+}
+
+// Menangani POST delete
+if (isset($_POST['idbor'])) {
+    $idBor = $_POST['idbor'];
+    mysqli_query($db, "DELETE FROM peminjam WHERE id = $idBor");
 }
 
 $pagenation = new Pagenation(10, "peminjam", 1);
 
-$read = mysqli_query($db, "SELECT * FROM peminjam ORDER BY id DESC LIMIT 10");
+$borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false ORDER BY id DESC LIMIT 10");
 
 ?>
 <style>
-    .side-bar {
-        height: 100% !important;
-        box-shadow: none !important;
-    }
+.side-bar {
+    height: 100% !important;
+    box-shadow: none !important;
+}
 
-    main {
-        height: max-content !important;
-    }
+main {
+    height: max-content !important;
+}
 
-    .isi-data .data table tbody tr td.center {
-        text-align: center !important;
-    }
+.isi-data .data table tbody tr td.center {
+    text-align: center !important;
+}
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
-<script src="JS/jquery-3.6.3.min.js"></script>
-<script src="JS/script.js"></script>
 <div class="title">
     <h1>Peminjam</h1>
     <hr>
@@ -80,62 +94,80 @@ $read = mysqli_query($db, "SELECT * FROM peminjam ORDER BY id DESC LIMIT 10");
                         <th>PEMINJAM</th>
                         <th>PP PEMINJAM</th>
                         <th>JUDUL BUKU</th>
-                        <th>KATEGORI</th>
+                        <th>JUMLAH PINJAM</th>
                         <th>TGL PINJAM</th>
                         <th>TGL PENGEMBALIAN</th>
-                        <th>ACTION</th>
+                        <th>SETUJUI</th>
                     </thead>
                     <tbody width="100%" cellspacing="10">
                         <?php
                         $id = 1;
-                        foreach ($read as $reader):
+                        foreach ($borrower as $borrowers):
                             ?>
-                            <tr cellspacing="10">
-                                <td>
-                                    <p>
-                                        <?= $id ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <?= $reader['username'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <img src="../.temp/<?= $reader['pp_user'] ?>" alt="photo profile peminjam" height="70">
-                                </td>
-                                <td class="limit">
-                                    <p>
-                                        <?= $reader['bukunya'] ?>
-                                    </p>
-                                </td>
-                                <td class="limit center">
-                                    <p>
-                                        <?= $reader['kategori'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <?= $reader['tanggal_pinjam'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <?= $reader['tanggal_pengembalian'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <button class="member" onclick="
-                                    $.post('component/Data-peminjam.php', { 
-                                        rid: <?= $reader['id'] ?>
-                                     });
-                                     alert('Data berhasil dihapus!');
-                                     $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())
-                                "><i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php $id++; endforeach ?>
+                        <tr cellspacing="10">
+                            <td>
+                                <p>
+                                    <?= $id ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= $borrowers['username'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <img src="../.temp/<?= $borrowers['pp_user'] ?>" alt="photo profile peminjam"
+                                    height="70">
+                            </td>
+                            <td class="limit">
+                                <p>
+                                    <?= $borrowers['bukunya'] ?>
+                                    <strong title="Ini adalah jumlah stock buku">
+                                        (<?= getStock($borrowers['bukunya']) ?>)
+                                    </strong>
+                                </p>
+                            </td>
+                            <td class="limit center">
+                                <p>
+                                    <?= $borrowers['jumlah_pinjam'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= getDay($borrowers["tanggal_pinjam"], true) ?> <br>
+                                    <?= $borrowers['tanggal_pinjam'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= getDay($borrowers["tanggal_pengembalian"], false) ?> <br>
+                                    <?= $borrowers['tanggal_pengembalian'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <?php if (!$borrowers['status']) { ?>
+                                <button class="o" onclick="
+                                            Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue){
+                                                if(isTrue){
+                                                    Peringatan.sukses('Anda telah menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>');
+
+                                                    $.post('component/Data-Peminjam.php', {
+                                                        idP: <?= $borrowers['id'] ?>,
+                                                        bukunya: '<?= $borrowers['bukunya'] ?>',
+                                                        jumlah_pinjam: '<?= $borrowers['jumlah_pinjam'] ?>'
+                                                    });
+                                                    $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
+                                                }else{
+                                                    Peringatan.ditolak('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
+                                                }
+                                            });
+                                            ">
+                                    <i class="fa-regular fa-clock"></i> Menunggu
+                                </button>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <?php $id++; endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -146,12 +178,12 @@ $read = mysqli_query($db, "SELECT * FROM peminjam ORDER BY id DESC LIMIT 10");
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                        <button
-                            onclick="
+                    <button
+                        onclick="
                     $('#isi-data').load('component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
-                            Next
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
+                        Next
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
                     <?php endif ?>
                 </div>
             </div>

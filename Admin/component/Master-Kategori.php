@@ -13,22 +13,20 @@ $kategor = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagena
 
 ?>
 <style>
-.side-bar {
-    height: 100% !important;
-    box-shadow: none !important;
-}
+    .side-bar {
+        height: 100% !important;
+        box-shadow: none !important;
+    }
 
-main {
-    height: max-content !important;
-}
+    main {
+        height: max-content !important;
+    }
 
-.isi-data .data table tbody tr td.center {
-    text-align: center !important;
-}
+    .isi-data .data table tbody tr td.center {
+        text-align: center !important;
+    }
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
-<script src="JS/jquery-3.6.3.min.js"></script>
-<script src="JS/script.js"></script>
 <div class="title">
     <h1>Kategori</h1>
     <hr>
@@ -73,26 +71,26 @@ main {
                         $id = 1;
                         foreach ($kategor as $kategori):
                             ?>
-                        <tr cellspacing="10">
-                            <td>
-                                <p>
-                                    <?= $id ?>
-                                </p>
-                            </td>
-                            <td class="limit">
-                                <p>
-                                    <?= $kategori['kategori'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $kategori['id'] ?>');
+                            <tr cellspacing="10">
+                                <td>
+                                    <p>
+                                        <?= $id ?>
+                                    </p>
+                                </td>
+                                <td class="limit">
+                                    <p>
+                                        <?= $kategori['kategori'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button onclick="
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $kategori['id'] ?> #pop-up');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                                </button>
-                            </td>
-                        </tr>
-                        <?php $id++; endforeach ?>
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php $id++; endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -103,12 +101,12 @@ main {
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                    <button onclick="
+                        <button onclick="
                     $('.isi-data').load('component/result/kategori.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
                     )">
-                        Next
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                            Next
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     <?php endif ?>
                 </div>
             </div>

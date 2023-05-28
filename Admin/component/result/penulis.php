@@ -42,7 +42,7 @@ $write = mysqli_query($db, "SELECT * FROM buku WHERE penulis LIKE '%$key%' ORDER
                         </td>
                         <td>
                             <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $writer['id'] ?>');
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $writer['id'] ?> #pop-up');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
                             </button>

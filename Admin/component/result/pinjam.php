@@ -11,8 +11,7 @@ $page = new Pagenation($_GET['lim'], "peminjam", $_GET['page']);
 
 $keyword = $_GET["key"];
 
-$read = mysqli_query($db, "SELECT * FROM peminjam WHERE
-bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%' ORDER BY id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+$pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%') ORDER BY id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ?>
 <!-- isi data -->
 <script src="JS/jquery-3.6.3.min.js"></script>
@@ -24,62 +23,77 @@ bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$
                 <th>PEMINJAM</th>
                 <th>PP PEMINJAM</th>
                 <th>JUDUL BUKU</th>
-                <th>KATEGORI</th>
+                <th>JUMLAH PINJAM</th>
                 <th>TGL PINJAM</th>
                 <th>TGL PENGEMBALIAN</th>
-                <th>ACTION</th>
+                <th>SETUJUI</th>
             </thead>
             <tbody width="100%" cellspacing="10">
                 <?php
                 $id = 1;
-                foreach ($read as $pinjam):
+                foreach ($pinjam as $peminjam):
                     ?>
-                    <tr cellspacing="10">
-                        <td>
-                            <p>
-                                <?= $id ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= $pinjam['username'] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <img src="../.temp/<?= $pinjam['pp_user'] ?>" alt="photo profile peminjam" height="70">
-                        </td>
-                        <td class="limit">
-                            <p>
-                                <?= $pinjam['bukunya'] ?>
-                            </p>
-                        </td>
-                        <td class="limit center">
-                            <p>
-                                <?= $pinjam['kategori'] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= $pinjam['tanggal_pinjam'] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= $pinjam['tanggal_pengembalian'] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <button class="member" onclick="
-                                    $.post('component/Data-Peminjam.php', { 
-                                        rid: <?= $pinjam['id'] ?>
-                                     });
-                                     alert('Data berhasil dihapus!');
-                                     $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $page->halamanAktif() ?>&&key=' + $('#search').val())
-                                "><i class="fa-solid fa-delete-left"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <?php $id++; endforeach ?>
+                <tr cellspacing="10">
+                    <td>
+                        <p>
+                            <?= $id ?>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <?= $peminjam['username'] ?>
+                        </p>
+                    </td>
+                    <td>
+                        <img src="../.temp/<?= $peminjam['pp_user'] ?>" alt="photo profile peminjam" height="70">
+                    </td>
+                    <td class="limit">
+                        <p>
+                            <?= $peminjam['bukunya'] ?>
+                            <strong title="Ini adalah jumlah stock buku">
+                                (<?= getStock($peminjam['bukunya']) ?>)
+                            </strong>
+                        </p>
+                    </td>
+                    <td class="limit center">
+                        <p>
+                            <?= $peminjam['jumlah_pinjam'] ?>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <?= getDay($peminjam["tanggal_pinjam"], true) ?> <br>
+                            <?= $peminjam['tanggal_pinjam'] ?>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
+                            <?= $peminjam['tanggal_pengembalian'] ?>
+                        </p>
+                    </td>
+                    <td>
+                        <?php if (!$peminjam['status']) { ?>
+                        <button class="o" onclick="
+                                            Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $peminjam['username'] ?> meminjam buku <?= $peminjam['bukunya'] ?>?', function(isTrue){
+                                                if(isTrue){
+                                                    Peringatan.sukses('Anda telah menyetujui <?= $peminjam['username'] ?> meminjam buku <?= $peminjam['bukunya'] ?>');
+
+                                                    $.post('component/Data-Peminjam.php', {
+                                                        idP: <?= $peminjam['id'] ?>,
+                                                        bukunya: '<?= $peminjam['bukunya'] ?>',
+                                                        jumlah_pinjam: '<?= $peminjam['jumlah_pinjam'] ?>'
+                                                    });
+                                                    $('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=<?= $keyword ?>');
+                                                }
+                                            });
+                                            ">
+                            <i class="fa-regular fa-clock"></i> Menunggu
+                        </button>
+                        <?php } ?>
+                    </td>
+                </tr>
+                <?php $id++; endforeach ?>
             </tbody>
         </table>
     </div>
@@ -89,33 +103,33 @@ bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$
             <?= $page->dataPerhalaman() ?> entries
         </p>
 
-        <!-- Pagenation -->
+        <!-- Page -->
 
         <div class="pagination">
             <?php if ($page->halamanAktif() > 1): ?>
-                <button class="left" onclick="
+            <button class="left" onclick="
                 $('.isi-data').load(
                     'component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $keyword ?>'
                 )">
-                    <i class=" fa-solid fa-angle-left"></i>
-                    Prev
-                </button>
+                <i class=" fa-solid fa-angle-left"></i>
+                Prev
+            </button>
             <?php endif ?>
             <?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-                <?php if ($i == $page->halamanAktif()): ?>
-                    <p class="amount-of-data">
-                        <?= $i ?>
-                    </p>
-                <?php endif ?>
+            <?php if ($i == $page->halamanAktif()): ?>
+            <p class="amount-of-data">
+                <?= $i ?>
+            </p>
+            <?php endif ?>
             <?php endfor ?>
             <?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-                <button onclick="
+            <button onclick="
                 $('.isi-data').load(
                         'component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $keyword ?>'
                     )">
-                    Next
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
+                Next
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
             <?php endif ?>
         </div>
     </div>

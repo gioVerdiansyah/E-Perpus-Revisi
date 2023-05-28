@@ -30,6 +30,7 @@ if ($key === hash("sha512", $row["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage Admin</title>
     <link rel="stylesheet" href="CSS/sidebar.css">
+    <link rel="stylesheet" href="CSS/alert.css">
     <link rel="stylesheet" id="dm">
     <link rel="stylesheet" href="../Welcome/CSS/User/Fraction_group.css">
     <script src="https://kit.fontawesome.com/981acb16d7.js" crossorigin="anonymous"></script>
@@ -119,5 +120,6 @@ if ($key === hash("sha512", $row["username"])) {
 </body>
 <script src="JS/jquery-3.6.3.min.js"></script>
 <script src="JS/script.js"></script>
+<script src="JS/alert.js"></script>
 
 </html>

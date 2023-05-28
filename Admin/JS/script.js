@@ -44,13 +44,11 @@ $("main .content-wrapper .heading .profile").mouseenter(function() {
   });
 
 // AJAX
-    let isClick = true;
     $(".content").load('component/Home-Admin.php');
     function onReady (ini, path) {
         $('.content').load(path);
         $('*').removeClass('active');
         $(ini).addClass('active');
-        isClick = false
     }
 
     $(".dashboard").click(function (e) { 
@@ -83,4 +81,3 @@ $("main .content-wrapper .heading .profile").mouseenter(function() {
         e.preventDefault();
         onReady(this, 'component/Data-Peminjam.php');
     });
-    
