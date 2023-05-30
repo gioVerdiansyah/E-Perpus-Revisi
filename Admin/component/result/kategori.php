@@ -3,7 +3,7 @@ require '../../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-    header("Location: ../../login-admin.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -29,26 +29,26 @@ $kategor = mysqli_query($db, "SELECT * FROM buku WHERE kategori LIKE '%$key%' OR
                 $id = 1;
                 foreach ($kategor as $kategori):
                     ?>
-                <tr cellspacing="10">
-                    <td>
-                        <p>
-                            <?= $id ?>
-                        </p>
-                    </td>
-                    <td class="limit">
-                        <p>
-                            <?= $kategori['kategori'] ?>
-                        </p>
-                    </td>
-                    <td>
-                        <button onclick="
+                    <tr cellspacing="10">
+                        <td>
+                            <p>
+                                <?= $id ?>
+                            </p>
+                        </td>
+                        <td class="limit">
+                            <p>
+                                <?= $kategori['kategori'] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <button onclick="
                                 $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $kategori['id'] ?> #pop-up');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                        </button>
-                    </td>
-                </tr>
-                <?php $id++; endforeach ?>
+                            </button>
+                        </td>
+                    </tr>
+                    <?php $id++; endforeach ?>
             </tbody>
         </table>
     </div>
@@ -62,29 +62,29 @@ $kategor = mysqli_query($db, "SELECT * FROM buku WHERE kategori LIKE '%$key%' OR
 
         <div class="pagination">
             <?php if ($page->halamanAktif() > 1): ?>
-            <button class="left" onclick="
+                <button class="left" onclick="
                 $('.isi-data').load(
                     'component/result/kategori.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $key ?>'
                 )">
-                <i class=" fa-solid fa-angle-left"></i>
-                Prev
-            </button>
+                    <i class=" fa-solid fa-angle-left"></i>
+                    Prev
+                </button>
             <?php endif ?>
             <?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-            <?php if ($i == $page->halamanAktif()): ?>
-            <p class="amount-of-data">
-                <?= $i ?>
-            </p>
-            <?php endif ?>
+                <?php if ($i == $page->halamanAktif()): ?>
+                    <p class="amount-of-data">
+                        <?= $i ?>
+                    </p>
+                <?php endif ?>
             <?php endfor ?>
             <?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-            <button onclick="
+                <button onclick="
                 $('.isi-data').load(
                         'component/result/kategori.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $key ?>'
                     )">
-                Next
-                <i class="fa-solid fa-angle-right"></i>
-            </button>
+                    Next
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
             <?php endif ?>
         </div>
     </div>

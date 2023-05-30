@@ -1,14 +1,8 @@
 <?php
+require "../function.php";
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 // cek COOKIE
-
-$db = mysqli_connect(
-    "localhost",
-    "root",
-    "",
-    "perpus"
-);
 
 if (isset($_COOKIE["USRADMNLGNISEQLTHROE"]) && isset($_COOKIE["UISADMNLGNISEQLTRE"])) {
     // cek dulu ada atau tidak

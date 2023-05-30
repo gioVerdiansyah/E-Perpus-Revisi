@@ -3,7 +3,7 @@ require '../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-    header("Location: ../login-admin.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -13,18 +13,18 @@ $penerbit = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagen
 
 ?>
 <style>
-.side-bar {
-    height: 100% !important;
-    box-shadow: none !important;
-}
+    .side-bar {
+        height: 100% !important;
+        box-shadow: none !important;
+    }
 
-main {
-    height: max-content !important;
-}
+    main {
+        height: max-content !important;
+    }
 
-.isi-data .data table tbody tr td.center {
-    text-align: center !important;
-}
+    .isi-data .data table tbody tr td.center {
+        text-align: center !important;
+    }
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
 <div class="title">
@@ -71,26 +71,28 @@ main {
                         $id = 1;
                         foreach ($penerbit as $penerbitnya):
                             ?>
-                        <tr cellspacing="10">
-                            <td>
-                                <p>
-                                    <?= $id ?>
-                                </p>
-                            </td>
-                            <td class="limit">
-                                <p>
-                                    <?= $penerbitnya['penerbit'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $penerbitnya['id'] ?> #pop-up');
+                            <tr cellspacing="10">
+                                <td>
+                                    <p>
+                                        <?= $id ?>
+                                    </p>
+                                </td>
+                                <td class="limit">
+                                    <p>
+                                        <?= $penerbitnya['penerbit'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button onclick="
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $penerbitnya['id'] ?> #pop-up', ()=>{
+                                    $('#pop-up').fadeIn(500);
+                                });
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                                </button>
-                            </td>
-                        </tr>
-                        <?php $id++; endforeach ?>
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php $id++; endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -101,12 +103,12 @@ main {
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                    <button onclick="
+                        <button onclick="
                     $('.isi-data').load('component/result/penerbit.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
                     )">
-                        Next
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                            Next
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     <?php endif ?>
                 </div>
             </div>

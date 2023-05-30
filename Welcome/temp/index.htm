@@ -11,9 +11,37 @@
 <script src="script.js"></script>
 </head>
 <body>
-  <div class="popup"></div>
-  <button onclick="
-  Peringatan.sukses('Data berhasil dihapus!')
-  ">click me</button>
+  <div id="ditolak">
+    <div class="content">
+      <div class="title">
+        <h1>Penolakan Buku</h1>
+        <button onclick="
+            $('#add').attr('id', 'close');
+            
+            setTimeout(()=>{
+            $('#peminjaman').remove();
+            $('.popup').attr('hidden', true);
+            $('body').removeAttr('height')
+            },500);
+        ">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <p>Anda ditolak karena terlalu banyak meminjam buku</p>
+    <div class="hubungi-admin">
+      <p>Hubungi admin berikut untuk masalah penolakan buku anda:</p>
+      <ul>
+        <li>
+          <p>Bu Rahayu :</p>
+          <i>09876544321</i>
+        </li>
+        <li>
+          <p>Bu Vitri</p>
+          <i>089876765422</i>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -3,7 +3,7 @@ require '../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-    header("Location: ../login-admin.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -84,7 +84,9 @@ $kategor = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagena
                                 </td>
                                 <td>
                                     <button onclick="
-                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $kategori['id'] ?> #pop-up');
+                                $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $kategori['id'] ?> #pop-up', ()=>{
+                                    $('#pop-up').fadeIn(500);
+                                });
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
                                     </button>

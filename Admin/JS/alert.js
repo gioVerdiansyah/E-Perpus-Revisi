@@ -56,7 +56,7 @@ function muncul(selector){
     shake($('.confirm'));
     }
   
-    static sukses(pesan){
+    static sukses(pesan, $duration = 2500){
       $('.popup').removeAttr('hidden');
   
       let div = $('<div>').attr('id', 'pop-up')
@@ -70,7 +70,7 @@ function muncul(selector){
   
       setTimeout(() => {
         tutup($('.sukses'));
-      }, 2500);
+      }, $duration);
     }
 
     static menyetujui(pesan, callback){
@@ -107,8 +107,41 @@ function muncul(selector){
     shake($('.persetujuan'));
     }
 
+    static penolakan(pesan, callback){
+      $('.popup').removeAttr('hidden')
+  
+      var div = 
+      $('<div>').attr('id', 'pop-up')
+    .append($('<div>').addClass('penolakan')
+        .append($('<button>').addClass('close').click(function (){
+            tutup($('.penolakan'));
+        })
+            .append('<i class="fa-solid fa-xmark"></i>')
+        )
+        .append($('<h1>').append('<i class="fa-solid fa-ban"></i>'))
+        .append($('<h2>').text("Ingin menolak?"))
+        .append($('<p>').text(pesan))
+        .append($('<input autofocus>') 
+          .attr({
+            type: 'text',
+            placeholder: 'Ketik alasan Anda menolaknya'
+          })
+        )
+        .append($('<ul>')
+          .append($('<li>')
+            .append($('<button>').text('Tolak!').click(function(){
+              tutup($('.penolakan'));
+              callback(true, $('#pop-up .penolakan input').val());
+            }))
+          )
+        )
+    )
+    $('.popup').append(div);
+    muncul($('.penolakan'));
+    }
 
-    static ditolak(pesan){
+
+    static ditolak(pesan, $duration = 2500){
       $('.popup').removeAttr('hidden');
   
       let div = $('<div>').attr('id', 'pop-up')
@@ -122,6 +155,6 @@ function muncul(selector){
   
       setTimeout(() => {
         tutup($('.ditolak'));
-      }, 2500);
+      }, $duration);
     }
   }

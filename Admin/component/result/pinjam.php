@@ -3,7 +3,7 @@ require '../../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-    header("Location: ../../login-admin.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -51,7 +51,8 @@ $pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(buk
                         <p>
                             <?= $peminjam['bukunya'] ?>
                             <strong title="Ini adalah jumlah stock buku">
-                                (<?= getStock($peminjam['bukunya']) ?>)
+                                (
+                                <?= getStock($peminjam['bukunya']) ?>)
                             </strong>
                         </p>
                     </td>
@@ -85,6 +86,17 @@ $pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(buk
                                                         jumlah_pinjam: '<?= $peminjam['jumlah_pinjam'] ?>'
                                                     });
                                                     $('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=<?= $keyword ?>');
+                                                }else{
+                                                    Peringatan.penolakan('Alasan Anda menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue, data){
+                                                        if(isTrue){
+                                                            Peringatan.sukses('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
+                                                            $.post('component/Data-Peminjam.php',{
+                                                                idPenolakan: <?= $borrowers['id'] ?>,
+                                                                isiAlasan: `${data}`
+                                                            })
+                                                            $('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=<?= $keyword ?>');
+                                                        }
+                                                    })
                                                 }
                                             });
                                             ">

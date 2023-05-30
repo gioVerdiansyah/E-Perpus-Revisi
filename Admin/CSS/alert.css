@@ -8,7 +8,10 @@
 #pop-up .confirm,
 #pop-up .sukses,
 #pop-up .persetujuan,
-#pop-up .ditolak{
+#pop-up #ditolak,
+#pop-up .penolakan{
+  min-width: 30%;
+  max-width: 35%;
   background-color: white;
   padding-top: 20px;
   border-radius: 10px;
@@ -22,16 +25,13 @@
   transform: translate(-50%, -50%);
   transition: .4s;
 }
-#pop-up .sukses{
-  width: 40%;
-}
 #pop-up .sukses h1 i{
   color:rgb(81, 211, 81);
 }
 .confirm#add,
 .sukses#add,
 .persetujuan#add,
-.ditolak#add{
+.penolakan#add{
   animation: muncul .5s;
 }
 @keyframes muncul {
@@ -45,7 +45,8 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
-#peminjaman .content#add{
+#peminjaman .content#add,
+#ditolak .content#add{
   animation: njedul .5s;
 }
 @keyframes njedul {
@@ -59,7 +60,8 @@
     transform: scale(1);
   }
 }
-#peminjaman .content#close{
+#peminjaman .content#close,
+#ditolak .content#close{
   animation: nutup .5s;
 }
 @keyframes nutup {
@@ -76,7 +78,7 @@
 .confirm#close,
 .sukses#close,
 .persetujuan#close,
-.ditolak#close{
+.penolakan#close{
   animation: tutup .5s;
 }
 @keyframes tutup {
@@ -92,7 +94,8 @@
 }
 .confirm.shake,
 .persetujuan.shake,
-#peminjaman .content.shake{
+#peminjaman .content.shake,
+.penolakan.shake{
   animation: shake .5s !important;
   background-color: rgb(255, 220, 221) !important;
 }
@@ -132,20 +135,22 @@
   color: rgb(255, 159, 67);
   margin: 0;
 }
-#pop-up .ditolak h1 i{
+#pop-up #ditolak h1 i,
+#pop-up .penolakan h1 i{
   font-size: xxx-large;
   color: rgb(228, 53, 53) !important;
   margin-bottom: 20px;
 }
 #pop-up .confirm h1 i,
-#pop-up .ditolak h1 i,
+#pop-up #ditolak h1 i,
 #pop-up .sukses h1 i{
   font-size: xxx-large;
 }
 #pop-up .confirm h2,
 #pop-up .sukses h2,
 #pop-up .persetujuan h2,
-#pop-up .ditolak h2{
+#pop-up #ditolak h2,
+#pop-up .penolakan h2{
   font-family: 'Font Awesome 6 Free';
   letter-spacing: 2px;
   margin-top: 20px;
@@ -156,12 +161,14 @@
 #pop-up .confirm p,
 #pop-up .sukses p,
 #pop-up .persetujuan p,
-#pop-up .ditolak p{
+#pop-up #ditolak p,
+#pop-up .penolakan p{
   text-align: center;
   margin: 20px;
 }
 #pop-up .confirm ul,
-#pop-up .persetujuan ul{
+#pop-up .persetujuan ul,
+#pop-up .penolakan ul{
   width: 100%;
   padding: 10px 0px;
   background-color: rgb(224, 224, 224);
@@ -173,9 +180,13 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
+#pop-up .penolakan  ul{
+  display: flex;
+  justify-content: center;
+}
 #pop-up .confirm ul li button,
-#pop-up .persetujuan ul li button{
+#pop-up .persetujuan ul li button,
+#pop-up .penolakan  ul li button{
   cursor: pointer;
   border: none;
   border-radius: 3px;
@@ -196,19 +207,32 @@
 #pop-up .confirm ul li:last-child button{
   background-color: rgb(255, 159, 67);
 }
-#pop-up .confirm ul li:last-child button:hover{
+#pop-up .confirm ul li:last-child button:hover,
+#pop-up .persetujuan ul li:last-child button:hover{
   background-color: rgb(233, 127, 28);
 }
 
-#pop-up .persetujuan ul li:first-child button{
+#pop-up .persetujuan ul li:first-child button,
+#pop-up .penolakan ul li:last-child button{
   background-color: rgb(234, 84, 85);
 }
-#pop-up .persetujuan ul li:last-child button:hover{
+#pop-up .persetujuan ul li:first-child button:hover,
+#pop-up .penolakan ul li:last-child button:hover{
   background-color: rgb(228, 53, 53);
 }
 
+#pop-up .penolakan input{
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  outline: rgb(115, 103, 240);
+  width: 70%;
+  margin-bottom: 20px;
+}
+
 /* x mark */
-#pop-up .persetujuan button.close{
+#pop-up .persetujuan button.close,
+#pop-up .penolakan button.close{
   cursor: pointer;
   position: absolute;
   right: -5px;
@@ -220,9 +244,11 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5), -1px -1px 5px rgba(0, 0, 0, 0.5);
   transition: all.3s;
 }
-#pop-up .persetujuan button.close:hover{
+#pop-up .persetujuan button.close:hover,
+#pop-up .penolakan button.close:hover{
   background-color: rgb(212, 212, 212);
 }
-#pop-up .persetujuan button.close i{
+#pop-up .persetujuan button.close i,
+#pop-up .penolakan  button.close i{
   color: rgb(234, 84, 85);
 }

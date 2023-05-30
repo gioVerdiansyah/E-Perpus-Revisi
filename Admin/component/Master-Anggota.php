@@ -2,10 +2,11 @@
 require '../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
-if (!isset($_SESSION["login"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"])) {
-    header("Location: ../login-admin.php");
+if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
+    header("Location: ../index.php");
     exit;
 }
+
 $ops = (isset($_POST['ops'])) ? $_POST['ops'] : 'loginuser';
 
 if (isset($_POST['id'])) {
@@ -22,14 +23,14 @@ $member = mysqli_query($db, "SELECT * FROM $ops ORDER BY id DESC LIMIT {$pagenat
 ?>
 
 <style>
-.side-bar {
-    height: 100% !important;
-    box-shadow: none !important;
-}
+    .side-bar {
+        height: 100% !important;
+        box-shadow: none !important;
+    }
 
-main {
-    height: max-content !important;
-}
+    main {
+        height: max-content !important;
+    }
 </style>
 
 <link rel="stylesheet" href="CSS/style-content.css">
@@ -84,20 +85,20 @@ main {
                         $id = 1;
                         foreach ($member as $members):
                             ?>
-                        <tr>
-                            <td>
-                                <?= $id ?>
-                            </td>
-                            <td>
-                                <img src="../.temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
-                            </td>
-                            <td class="limit">
-                                <p>
-                                    <?= $members['username'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <button class="delete" onclick="
+                            <tr>
+                                <td>
+                                    <?= $id ?>
+                                </td>
+                                <td>
+                                    <img src="../.temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
+                                </td>
+                                <td class="limit">
+                                    <p>
+                                        <?= $members['username'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus akun: <?= $members['username'] ?>?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Master-Anggota.php', { 
@@ -109,10 +110,10 @@ main {
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <?php
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php
                             $id++;
                         endforeach;
                         ?>
@@ -126,13 +127,13 @@ main {
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                    <button onclick="
+                        <button onclick="
                     $('.isi-data').load(
                         'component/result/anggota.php?ops=' + $('#opsi').val() + '&&lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
                     )">
-                        Next
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                            Next
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     <?php endif ?>
                 </div>
             </div>

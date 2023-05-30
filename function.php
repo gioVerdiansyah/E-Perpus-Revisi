@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == "/E-perpus/function.php") {
+if ($_SERVER['REQUEST_URI'] == "/perpus_sekolah/function.php") {
     header("Location: index.php");
 }
 // koneksi ke databases

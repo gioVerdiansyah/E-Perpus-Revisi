@@ -3,7 +3,8 @@ body {
   position: relative;
 }
 .popup #pop-up,
-.popup #peminjaman {
+.popup #peminjaman,
+.popup #ditolak{
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
@@ -25,7 +26,8 @@ body {
   opacity: 1;
 }
 .popup #pop-up .content,
-.popup #peminjaman .content {
+.popup #peminjaman .content,
+.popup #ditolak .content {
   width: 75%;
   height: max-content;
   background-color: white;
@@ -35,7 +37,8 @@ body {
   width: 55%;
 }
 .popup #pop-up .content .title,
-.popup #peminjaman .content .title {
+.popup #peminjaman .content .title,
+.popup #ditolak .content .title {
   position: relative;
   height: max-content;
   background-color: rgb(248, 248, 248);
@@ -47,15 +50,21 @@ body {
   border-top-left-radius: 3px;
 }
 .popup #pop-up .content .title h1,
-.popup #peminjaman .content .title h1 {
-  font-size: medium;
+.popup #peminjaman .content .title h1,
+.popup #ditolak .content .title h1 {
+  font-size: large;
   color: rgb(122, 110, 240);
 }
 .popup #peminjaman .content .title h1{
   color: rgb(255,159,67);
 }
+.popup #ditolak .content .title h1{
+  color: rgb(234, 84, 85);
+
+}
 .popup #pop-up .content .title button,
-.popup #peminjaman .content .title button {
+.popup #peminjaman .content .title button,
+.popup #ditolak .content .title button {
   padding: 8px;
   height: max-content;
   border: none;
@@ -69,12 +78,34 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-.popup #peminjaman .content .title button{
+.popup #peminjaman .content .title button,
+.popup #ditolak .content .title button{
   color: rgb(255,159,67);
 }
+.popup #ditolak{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.popup #ditolak .content .hubungi-admin{
+  display: flex;
+  flex-direction: column;
+  margin: 5% 15px 0 15px;
+}
+.popup #ditolak .content .hubungi-admin ul{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+.popup #ditolak .content .hubungi-admin ul li{
+  display: flex;
+}
 .popup #pop-up .content .title button:hover,
-.popup #peminjaman .content .title button:hover {
+.popup #peminjaman .content .title button:hover,
+.popup #ditolak .content .title button:hover {
   background-color: rgb(248, 248, 248);
+}.popup #ditolak .content p.pesan{
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 20px 0;
 }
 .popup #pop-up .content .data,
 .popup #peminjaman .content .data {
@@ -101,12 +132,12 @@ body {
   width: 100%;
   display: flex;
  align-items: flex-end;
- margin-top: 10px;
+ margin-top: 20px;
 }
 .popup #peminjaman .content .data form ul li:last-child button{
   cursor: pointer;
   width: max-content;
-  padding: 8px 10px;
+  padding: 10px 15px;
   color: white;
   background-color: rgb(255,159,67);
   border: none;

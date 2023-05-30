@@ -1,6 +1,10 @@
 <?php
 session_name("SSILGNPERPUSMEJAYAN");
 session_start();
+if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
+    header("Location: index.php");
+    exit;
+}
 
 $_SESSION = []; //menimpa array agar session benar-benar kosong
 session_unset();

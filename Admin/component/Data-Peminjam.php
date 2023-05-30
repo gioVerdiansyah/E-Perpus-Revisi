@@ -3,7 +3,7 @@ require '../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-    header("Location: ../login-admin.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -23,6 +23,14 @@ if (isset($_POST['jumlah_pinjam'])) {
     mysqli_query($db, "UPDATE peminjam SET status = true WHERE id = $idP");
 }
 
+// menangani POST alasan penolakan
+if (isset($_POST['isiAlasan'])) {
+    $dataAlasan = $_POST['isiAlasan'];
+    $idPenolakan = $_POST['idPenolakan'];
+    mysqli_query($db, "UPDATE peminjam SET alasan = '$dataAlasan', status = '2' WHERE id = $idPenolakan");
+}
+
+
 // Menangani POST delete
 if (isset($_POST['idbor'])) {
     $idBor = $_POST['idbor'];
@@ -31,7 +39,7 @@ if (isset($_POST['idbor'])) {
 
 $pagenation = new Pagenation(10, "peminjam", 1);
 
-$borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false ORDER BY id DESC LIMIT 10");
+$borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER BY id DESC LIMIT 10");
 
 ?>
 <style>
@@ -123,7 +131,8 @@ main {
                                 <p>
                                     <?= $borrowers['bukunya'] ?>
                                     <strong title="Ini adalah jumlah stock buku">
-                                        (<?= getStock($borrowers['bukunya']) ?>)
+                                        (
+                                        <?= getStock($borrowers['bukunya']) ?>)
                                     </strong>
                                 </p>
                             </td>
@@ -158,7 +167,16 @@ main {
                                                     });
                                                     $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
                                                 }else{
-                                                    Peringatan.ditolak('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
+                                                    Peringatan.penolakan('Alasan Anda menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue, data){
+                                                        if(isTrue){
+                                                            Peringatan.sukses('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
+                                                            $.post('component/Data-Peminjam.php',{
+                                                                idPenolakan: <?= $borrowers['id'] ?>,
+                                                                isiAlasan: `${data}`
+                                                            })
+                                                            $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
+                                                        }
+                                                    })
                                                 }
                                             });
                                             ">

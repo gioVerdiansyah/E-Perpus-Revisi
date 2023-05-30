@@ -9,16 +9,30 @@
   background-color: rgb(40,199,111);
   color: white;
 }
+.data-wrapper .isi-data .data table tbody tr td p.persetujuan{
+  border-radius: 3px;
+  padding: 5px 3px;
+}
 .data-wrapper .isi-data .data table tbody tr td p.o{
   color: rgb(255, 159, 67);
   border: 1px solid rgb(255, 159, 67);
-  border-radius: 3px;
-  padding: 5px 3px;
-}.data-wrapper .isi-data .data table tbody tr td p.g{
+}
+.data-wrapper .isi-data .data table tbody tr td .r{
+  color: rgb(234, 84, 85);
+  border: 1px solid rgb(234, 84, 85);
+}
+.data-wrapper .isi-data .data table tbody tr td .r.h:hover{
+  cursor: pointer;
+  color: white;
+  transition: all .3s;
+}
+.data-wrapper .isi-data .data table tbody tr td .r.h:hover{
+  color: white;
+  background-color: rgb(228, 53, 53);
+}
+.data-wrapper .isi-data .data table tbody tr td p.g{
   color: rgb(40,199,111);
   border: 1px solid rgb(40,199,111);
-  border-radius: 3px;
-  padding: 5px 3px;
 }
 .data-wrapper
   .isi-data

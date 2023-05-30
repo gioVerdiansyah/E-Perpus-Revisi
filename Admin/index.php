@@ -1,7 +1,7 @@
 <?php
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
-if (!isset($_SESSION["login"]) || !isset($_COOKIE["USRADMNLGNISEQLTHROE"]) || !isset($_COOKIE["UISADMNLGNISEQLTRE"])) {
+if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
     header("Location: login-admin.php");
     exit;
 }
@@ -102,8 +102,9 @@ if ($key === hash("sha512", $row["username"])) {
                     <img src="Temp/<?= $row['gambar'] ?>" alt="photo profile">
                     <div class="dropdown-profile">
                         <ul>
-                            <li><a href="logout-admin.php" onclick="return confirm('Sure?');"><i
-                                        class="fi fi-rr-sign-out-alt"></i> Logout</a></li>
+                            <li><button onclick="
+
+                            "><i class="fi fi-rr-sign-out-alt"></i> Logout</button></li>
                         </ul>
                     </div>
                 </div>

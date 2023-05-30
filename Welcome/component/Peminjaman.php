@@ -32,8 +32,7 @@ if (isset($_POST['id'])) {
     mysqli_query($db, "DELETE FROM peminjam WHERE id = $id");
 }
 ?>
-<link rel="stylesheet" href="CSS/User/Buku.css">
-<link rel="stylesheet" href="CSS/User/Persetujuan.css">
+
 <div class="title">
     <h2>Data buku yang dipinjam</h2>
     <p>Data di update secara otomatis</p>
@@ -118,9 +117,13 @@ if (isset($_POST['id'])) {
                                 </p>
                             </td>
                             <td>
-                                <?php if ($peminjam["status"]) { ?>
+                                <?php if ($peminjam["status"] == 1) { ?>
                                     <p class="persetujuan g">
                                         <i class="fa-solid fa-check"></i> Disetujui
+                                    </p>
+                                <?php } elseif ($peminjam["status"] == "2") { ?>
+                                    <p class="persetujuan r">
+                                        <i class="fa-regular fa-circle-xmark"></i> Ditolak!
                                     </p>
                                 <?php } else { ?>
                                     <p class="persetujuan o">
@@ -129,9 +132,15 @@ if (isset($_POST['id'])) {
                                 <?php } ?>
                             </td>
                             <td>
-                                <?php if ($peminjam["status"]) { ?>
+                                <?php if ($peminjam["status"] == 1) { ?>
                                     <p class="persetujuan g h">
                                         <i class="fa-solid fa-floppy-disk"></i> Unduh
+                                    </p>
+                                <?php } elseif ($peminjam["status"] == "2") { ?>
+                                    <p class="persetujuan r h" onclick="
+                                        $('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?> #ditolak', ()=>{$('.popup').removeAttr('hidden')});
+                                        ">
+                                        <i class="fa-regular fa-circle-xmark"></i> Tidak ada!
                                     </p>
                                 <?php } else { ?>
                                     <p class="persetujuan o">

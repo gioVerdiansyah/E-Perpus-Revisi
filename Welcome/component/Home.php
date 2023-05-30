@@ -8,6 +8,11 @@ if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) 
 ?>
 
 <link rel="stylesheet" href="CSS/User/Home.css">
+<style>
+    main {
+        padding: 0 !important
+    }
+</style>
 
 <div class="list-creator">
     <img src="../Assets/bg5-2.svg" alt="list-creator" />

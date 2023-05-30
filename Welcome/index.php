@@ -38,6 +38,10 @@ if ($key === hash("sha512", $row["username"])) {
     <link rel="stylesheet" id="css" href="CSS/User/index.css" />
     <link rel="stylesheet" href="../Admin/CSS/alert.css">
     <link rel="stylesheet" id="dm" />
+    <link rel="stylesheet" href="CSS/User/Buku.css">
+    <link rel="stylesheet" href="CSS/User/Persetujuan.css">
+    <link rel="stylesheet" href="CSS/User/Fraction_group.css" />
+    <link rel="stylesheet" href="../Admin/CSS/alert.css">
     <script src="../Admin/JS/alert.js"></script>
 </head>
 

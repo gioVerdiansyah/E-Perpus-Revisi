@@ -3,6 +3,9 @@ require "../../../Admin/database/functions.php";
 $id = $_GET['bukid'];
 
 $fillIn = query("SELECT * FROM buku WHERE id = $id")[0];
+
+$alasanPenolakan = mysqli_query($db, "SELECT * FROM peminjam WHERE id = $id");
+$alasan = mysqli_fetch_assoc($alasanPenolakan);
 ?>
 
 <div id="pop-up" style="display: none">
@@ -114,15 +117,21 @@ $fillIn = query("SELECT * FROM buku WHERE id = $id")[0];
                     <input type="hidden" id="bukunya" name="bukunya" value="<?= $_GET['bukunya'] ?>">
                     <input type="hidden" id="kategori" name="kategori" value="<?= $_GET['kategori'] ?>">
                     <div>
-                        <li><label for="jumlah_pinjam">Jumlah Pinjam</label>
-                            <input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
-                                id="jumlah_pinjam" required placeholder="max buku adalah <?= $_GET['jml'] ?>" oninput="
+                        <li>
+                            <label for="jumlah_pinjam">Jumlah Pinjam</label>
+                            <?php if (!getStock($_GET['bukunya'])) { ?>
+                                <input type="text" placeholder="Stock buku sudah habis!" disabled
+                                    style="border: 1px solid red;">
+                            <?php } else { ?>
+                                <input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
+                                    id="jumlah_pinjam" required placeholder="max buku adalah <?= $_GET['jml'] ?>" oninput="
                         const maxLength = 2;
 
                         if (this.value.length > maxLength) {
                           this.value = this.value.slice(0, maxLength);
                         }
                         ">
+                            <?php } ?>
                         </li>
                         <?php
                         $m = date('m');
@@ -138,6 +147,44 @@ $fillIn = query("SELECT * FROM buku WHERE id = $id")[0];
                     </li>
                 </ul>
             </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="ditolak">
+    <div class="content" id="add">
+        <div class="title">
+            <h1>Penolakan Buku</h1>
+            <button onclick="
+            $('#add').attr('id', 'close');
+            
+            setTimeout(()=>{
+            $('#ditolak').remove();
+            $('.popup').attr('hidden', true);
+            $('body').removeAttr('height')
+            },500);
+        ">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <p class="pesan">Anda ditolak karena
+            <strong>
+                <?= $alasan['alasan'] ?>
+            </strong>
+        </p>
+        <div class="hubungi-admin">
+            <p>Hubungi admin berikut untuk masalah penolakan buku anda:</p>
+            <ul>
+                <li>
+                    <p>Bu Rahayu : </p>
+                    <i>09876544321</i>
+                </li>
+                <li>
+                    <p>Bu Vitri : </p>
+                    <i>089876765422</i>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

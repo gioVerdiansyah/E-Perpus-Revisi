@@ -35,13 +35,9 @@ if (isset($_POST['send'])) {
     $kategori = $_POST['kategori'];
     date_default_timezone_set('Asia/Jakarta');
     $tanggal_pinjam = date("H:i d/m/Y");
-    mysqli_query($db, "INSERT INTO peminjam VALUE('', '$rowGambar','$username', '$bukunya', '$kategori', '$jumlah_pinjam' ,'$tanggal_pinjam', '$tanggal_pengembalian', 0)");
+    mysqli_query($db, "INSERT INTO peminjam VALUE('', '$rowGambar','$username', '$bukunya', '$kategori', '$jumlah_pinjam' ,'$tanggal_pinjam', '$tanggal_pengembalian', '0', 0, 'Tidak ada alasan')");
 }
 ?>
-
-<link rel="stylesheet" href="CSS/User/Buku.css">
-<link rel="stylesheet" href="CSS/User/Fraction_group.css" />
-<link rel="stylesheet" href="../Admin/CSS/alert.css">
 <div class="title">
     <h2>Cari Buku</h2>
     <p>Data di update secara otomatis</p>

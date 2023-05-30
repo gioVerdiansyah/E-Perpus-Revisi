@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == "/E-perpus/Admin/database/functions.php") {
+if ($_SERVER['REQUEST_URI'] == "/perpus_sekolah/Admin/database/functions.php") {
     header("Location: ../index.php");
     exit();
 }
