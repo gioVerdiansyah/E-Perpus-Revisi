@@ -89,7 +89,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 5% 15px 0 15px;
-}
+} 
 .popup #ditolak .content .hubungi-admin ul{
   display: flex;
   flex-direction: column;
@@ -134,6 +134,9 @@ body {
  align-items: flex-end;
  margin-top: 20px;
 }
+.popup #peminjaman .content .data form ul div input.disabled{
+  border: 1px solid rgb(228, 53, 53);
+}
 .popup #peminjaman .content .data form ul li:last-child button{
   cursor: pointer;
   width: max-content;
@@ -143,6 +146,13 @@ body {
   border: none;
   border-radius: 5px;
   transition: .3s;
+}
+.popup #peminjaman .content .data form ul li:last-child button#disabled{
+  cursor: not-allowed;
+  background-color: grey;
+}
+.popup #peminjaman .content .data form ul li:last-child button#disabled:hover{
+  background-color: rgb(228, 53, 53);
 }
 .popup #peminjaman .content .data form ul li:last-child button:hover{
   background-color: rgb(196, 113, 37);
@@ -170,4 +180,25 @@ body {
 }
 .popup #pop-up .content .data p:last-child {
   margin: 0;
+}
+
+/* button download */
+.data-wrapper .data-indicator .unduh-stroke{
+  display: flex;
+  flex-direction: column;
+}
+.data-wrapper .data-indicator .unduh-stroke a{
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 5px 0;
+  margin: 5px 20px 20px;
+  background-color: rgb(255, 159, 67);
+  color: white;
+  transition: all .3s;
+}
+.data-wrapper .data-indicator .unduh-stroke button:hover{
+  background-color: rgb(233, 127, 28);
 }

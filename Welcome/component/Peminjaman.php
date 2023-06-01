@@ -24,11 +24,14 @@ if ($key === hash("sha512", $row["username"])) {
 }
 
 $result = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$username' ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
-$row = mysqli_fetch_assoc($result);
 
+$status;
+while ($row = mysqli_fetch_assoc($result)) {
+    $status = $row['status'];
+}
 // Menangani POST method DELETE data 
-$id = (isset($_POST['id'])) ? $_POST['id'] : 0;
 if (isset($_POST['id'])) {
+    $id = $_POST['id'];
     mysqli_query($db, "DELETE FROM peminjam WHERE id = $id");
 }
 ?>
@@ -60,6 +63,16 @@ if (isset($_POST['id'])) {
             </select>
             <p>entries</p>
         </div>
+        <?php
+        if (isset($status) && $status === '1'):
+            ?>
+            <div class="unduh-stroke">
+                <p>Unduh semua buku yang disetujui:</p>
+                <a href="component/result/cetak.php?usr=<?= urlencode($username) ?>"> <i
+                        class="fa-solid fa-cloud-arrow-down"></i>
+                    Download stroke</a>
+            </div>
+        <?php endif; ?>
         <div class="data-search">
             <label for="search">Search by</label>
             <input type="search" name="search" id="search" onkeyup="
@@ -76,11 +89,11 @@ if (isset($_POST['id'])) {
                 <thead width="100%">
                     <th>NO</th>
                     <th>JUDUL BUKU</th>
+                    <th>KODE BUKU</th>
                     <th>JUMLAH PINJAM</th>
                     <th>TGL PINJAM</th>
                     <th>TGL PENGEMBALIAN</th>
                     <th>STATUS</th>
-                    <th>UNDUH BUKTI</th>
                     <th>HAPUS/CANCEL</th>
                 </thead>
                 <tbody>
@@ -97,6 +110,11 @@ if (isset($_POST['id'])) {
                             <td>
                                 <p class="limit">
                                     <?= $peminjam["bukunya"] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= $peminjam["kode_buku"] ?>
                                 </p>
                             </td>
                             <td>
@@ -122,7 +140,9 @@ if (isset($_POST['id'])) {
                                         <i class="fa-solid fa-check"></i> Disetujui
                                     </p>
                                 <?php } elseif ($peminjam["status"] == "2") { ?>
-                                    <p class="persetujuan r">
+                                    <p class="persetujuan r h" onclick="
+                                        $('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?> #ditolak', ()=>{$('.popup').removeAttr('hidden')});
+                                        ">
                                         <i class="fa-regular fa-circle-xmark"></i> Ditolak!
                                     </p>
                                 <?php } else { ?>
@@ -133,25 +153,19 @@ if (isset($_POST['id'])) {
                             </td>
                             <td>
                                 <?php if ($peminjam["status"] == 1) { ?>
-                                    <p class="persetujuan g h">
-                                        <i class="fa-solid fa-floppy-disk"></i> Unduh
-                                    </p>
-                                <?php } elseif ($peminjam["status"] == "2") { ?>
-                                    <p class="persetujuan r h" onclick="
-                                        $('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?> #ditolak', ()=>{$('.popup').removeAttr('hidden')});
-                                        ">
-                                        <i class="fa-regular fa-circle-xmark"></i> Tidak ada!
-                                    </p>
-                                <?php } else { ?>
-                                    <p class="persetujuan o">
-                                        <i class="fa-regular fa-clock"></i> Belum Ada
-                                    </p>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <?php if ($peminjam["status"]) { ?>
                                     <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
+                                        if(isTrue){
+                                            $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+                                            Peringatan.sukses('Data peminjaman berhasil di HAPUS')
+                                            $('#isi-data').load('component/Peminjaman.php #isi-data')
+                                        }
+                                    });
+                                "><i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                <?php } elseif ($peminjam["status"] === "2") { ?>
+                                    <button class="delete" onclick="
+                                    Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang ditolak?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
                                             Peringatan.sukses('Data peminjaman berhasil di HAPUS')

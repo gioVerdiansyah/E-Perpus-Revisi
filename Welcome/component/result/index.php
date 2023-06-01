@@ -15,7 +15,7 @@ echo $page->halamanAktif() . $page->jumlahHalaman();
 $keyword = $_GET["key"];
 
 $book = mysqli_query($db, "SELECT * FROM buku WHERE
-judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ?>
 <!-- isi data -->
 <div class="isi-data">
@@ -25,6 +25,7 @@ judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyw
                 <th>NO</th>
                 <th>THUMBNAIL</th>
                 <th>JUDUL BUKU</th>
+                <th>KODE BUKU</th>
                 <th>KATEGORI</th>
                 <th>PENULIS</th>
                 <th>PENERBIT</th>
@@ -45,6 +46,11 @@ judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyw
                         <td>
                             <p class="limit">
                                 <?= $book['judul_buku'] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="limit">
+                                <?= $book["kode_buku"] ?>
                             </p>
                         </td>
                         <td>

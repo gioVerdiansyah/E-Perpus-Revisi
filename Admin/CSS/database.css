@@ -44,6 +44,16 @@ form ul .second li {
 form ul .second li input {
   width: 100%;
 }
+form ul li.center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 15px 0 5px 0;
+}
+form ul li.center input{
+  width: 30%;
+  margin-left: 5px;
+}
 form ul li:last-child button {
   border: none;
   color: white;

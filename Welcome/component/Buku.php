@@ -32,10 +32,11 @@ if (isset($_POST['send'])) {
     $jumlah_pinjam = $_POST['jumlah_pinjam'];
     $tanggal_pengembalian = $_POST['tanggal_pengembalian'];
     $bukunya = $_POST['bukunya'];
+    $kode_buku = $_POST['kode_buku'];
     $kategori = $_POST['kategori'];
     date_default_timezone_set('Asia/Jakarta');
     $tanggal_pinjam = date("H:i d/m/Y");
-    mysqli_query($db, "INSERT INTO peminjam VALUE('', '$rowGambar','$username', '$bukunya', '$kategori', '$jumlah_pinjam' ,'$tanggal_pinjam', '$tanggal_pengembalian', '0', 0, 'Tidak ada alasan')");
+    mysqli_query($db, "INSERT INTO peminjam VALUE('', '$rowGambar','$username', '$bukunya','$kode_buku', '$kategori', '$jumlah_pinjam' ,'$tanggal_pinjam', '$tanggal_pengembalian', '0', 'Tidak ada alasan')");
 }
 ?>
 <div class="title">
@@ -82,6 +83,7 @@ if (isset($_POST['send'])) {
                     <th>NO</th>
                     <th>THUMBNAIL</th>
                     <th>JUDUL BUKU</th>
+                    <th>KODE BUKU</th>
                     <th>KATEGORI</th>
                     <th>PENULIS</th>
                     <th>PENERBIT</th>
@@ -110,6 +112,11 @@ if (isset($_POST['send'])) {
                                 </p>
                             </td>
                             <td>
+                                <p class="limit">
+                                    <?= $books["kode_buku"] ?>
+                                </p>
+                            </td>
+                            <td>
                                 <p>
                                     <?= $books["kategori"] ?>
                                 </p>
@@ -127,7 +134,7 @@ if (isset($_POST['send'])) {
                             <td id="detail">
                                 <!-- pinjam -->
                                 <button onclick="
-                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #peminjaman');
+                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kode_buku=<?= $books['kode_buku'] ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #peminjaman');
                                 $('.popup').removeAttr('hidden');
                                 " id="baca-buku">
                                     Pinjam Buku
@@ -135,7 +142,7 @@ if (isset($_POST['send'])) {
 
                                 <!-- detail -->
                                 <button onclick="
-                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up',()=>{
+                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kode_buku=<?= $books['kode_buku'] ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up',()=>{
                                     $('#pop-up').fadeIn(500);
                                     $('.popup').removeAttr('hidden');
                                 });

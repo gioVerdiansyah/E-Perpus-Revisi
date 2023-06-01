@@ -27,6 +27,7 @@ function muncul(selector){
   }
   
   class Peringatan{
+    // !KONFIRMASI
     static konfirmasi(pesan, callback){
       $('.popup').removeAttr('hidden')
   
@@ -56,6 +57,7 @@ function muncul(selector){
     shake($('.confirm'));
     }
   
+    // !SUKSES
     static sukses(pesan, $duration = 2500){
       $('.popup').removeAttr('hidden');
   
@@ -68,11 +70,13 @@ function muncul(selector){
       $('.popup').append(div);
       muncul($('.sukses'));
   
+
       setTimeout(() => {
         tutup($('.sukses'));
       }, $duration);
     }
 
+    // !MENYETUJUI
     static menyetujui(pesan, callback){
         $('.popup').removeAttr('hidden')
   
@@ -107,6 +111,7 @@ function muncul(selector){
     shake($('.persetujuan'));
     }
 
+    // !PENOLAKAN
     static penolakan(pesan, callback){
       $('.popup').removeAttr('hidden')
   
@@ -141,6 +146,7 @@ function muncul(selector){
     }
 
 
+    // !DITOLAK
     static ditolak(pesan, $duration = 2500){
       $('.popup').removeAttr('hidden');
   

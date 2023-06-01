@@ -11,36 +11,91 @@
 <script src="script.js"></script>
 </head>
 <body>
-  <div id="ditolak">
-    <div class="content">
-      <div class="title">
-        <h1>Penolakan Buku</h1>
-        <button onclick="
-            $('#add').attr('id', 'close');
-            
-            setTimeout(()=>{
-            $('#peminjaman').remove();
-            $('.popup').attr('hidden', true);
-            $('body').removeAttr('height')
-            },500);
-        ">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
+  <div class="struk-perpus">
+    <div class="title">
+      <h1>STRUK PEMINJAMAN BUKU <br> PERPUSTAKAAN GREEN</h1>
+      <p>No struk: 000012231</p>
     </div>
-    <p>Anda ditolak karena terlalu banyak meminjam buku</p>
-    <div class="hubungi-admin">
-      <p>Hubungi admin berikut untuk masalah penolakan buku anda:</p>
+    <div class="isi-data-peminjam">
       <ul>
         <li>
-          <p>Bu Rahayu :</p>
-          <i>09876544321</i>
+          <p>
+            Nama Peminjam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+          </p>
+          <p>Verdiansyah</p>
         </li>
+        <div>
         <li>
-          <p>Bu Vitri</p>
-          <i>089876765422</i>
+          <p>
+            Tanggal Peminjaman &nbsp;&nbsp;&nbsp; : 
+          </p>
+          <p>12/5/2023</p>
+      </li>
+        <li>
+          <p>
+            Tanggal Pengembalian&nbsp; : 
+          </p>
+          <p>24/5/2023</p>
         </li>
       </ul>
+
+      <table>
+        <thead>
+        <th>NO</th>
+        <th>Kode Buku</th>
+        <th>Judul Buku</th>
+        <th>Jumlah Pinjam</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>1</p>
+          </td>
+          <td>
+            <p>
+            BIN0100380138
+          </p>
+        </td>
+          <td>
+            <p>
+            FILOSOFI TERAS
+          </p>
+        </td>
+          <td>
+            <p>1</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>2</p>
+          </td>
+          <td>
+            <p>
+            BIN01008556556
+          </p>
+        </td>
+          <td>
+            <p>
+            SEBUAH SENI
+          </p>
+        </td>
+          <td>
+            <p>2</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     </div>
+    <div class="note" style="padding: 10px 8px;border:1px solid grey;margin-top:50px;width:max-content">
+      <h3>Catatan:</h3>
+      <ul style="list-style-type: numeric;padding-left:30px; ">
+        <li>
+          <p>Cek apakah tanggal yang <b>"Harus di kembalikan pada"</b> melebihi tanggal pada saat pengembalian peminjam</p>
+        </li>
+        <li>
+          <p>Jika melebihi maka peminjam wajib dikenakan denda berdasarkan perbuku dan perhari</p>
+        </li>
+      </ul>
     </div>
   </div>
 </body>

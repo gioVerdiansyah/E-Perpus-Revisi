@@ -20,7 +20,7 @@ if (isset($_POST['jumlah_pinjam'])) {
     $jumlah = $number_buku_tersedia - $jumlah_pinjam;
     // update value
     mysqli_query($db, "UPDATE buku SET jumlah_buku = $jumlah WHERE judul_buku = '$book_name'");
-    mysqli_query($db, "UPDATE peminjam SET status = true WHERE id = $idP");
+    mysqli_query($db, "UPDATE peminjam SET status = '1' WHERE id = $idP");
 }
 
 // menangani POST alasan penolakan
@@ -43,18 +43,18 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER B
 
 ?>
 <style>
-.side-bar {
-    height: 100% !important;
-    box-shadow: none !important;
-}
+    .side-bar {
+        height: 100% !important;
+        box-shadow: none !important;
+    }
 
-main {
-    height: max-content !important;
-}
+    main {
+        height: max-content !important;
+    }
 
-.isi-data .data table tbody tr td.center {
-    text-align: center !important;
-}
+    .isi-data .data table tbody tr td.center {
+        text-align: center !important;
+    }
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
 <div class="title">
@@ -112,50 +112,49 @@ main {
                         $id = 1;
                         foreach ($borrower as $borrowers):
                             ?>
-                        <tr cellspacing="10">
-                            <td>
-                                <p>
-                                    <?= $id ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= $borrowers['username'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <img src="../.temp/<?= $borrowers['pp_user'] ?>" alt="photo profile peminjam"
-                                    height="70">
-                            </td>
-                            <td class="limit">
-                                <p>
-                                    <?= $borrowers['bukunya'] ?>
-                                    <strong title="Ini adalah jumlah stock buku">
-                                        (
-                                        <?= getStock($borrowers['bukunya']) ?>)
-                                    </strong>
-                                </p>
-                            </td>
-                            <td class="limit center">
-                                <p>
-                                    <?= $borrowers['jumlah_pinjam'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= getDay($borrowers["tanggal_pinjam"], true) ?> <br>
-                                    <?= $borrowers['tanggal_pinjam'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= getDay($borrowers["tanggal_pengembalian"], false) ?> <br>
-                                    <?= $borrowers['tanggal_pengembalian'] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <?php if (!$borrowers['status']) { ?>
-                                <button class="o" onclick="
+                            <tr cellspacing="10">
+                                <td>
+                                    <p>
+                                        <?= $id ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <?= $borrowers['username'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <img src="../.temp/<?= $borrowers['pp_user'] ?>" alt="photo profile peminjam"
+                                        height="70">
+                                </td>
+                                <td class="limit">
+                                    <p>
+                                        <?= $borrowers['bukunya'] ?>
+                                        <strong title="Ini adalah jumlah stock buku">
+                                            (
+                                            <?= getStock($borrowers['bukunya']) ?>)
+                                        </strong>
+                                    </p>
+                                </td>
+                                <td class="limit center">
+                                    <p>
+                                        <?= $borrowers['jumlah_pinjam'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <?= getDay($borrowers["tanggal_pinjam"], true) ?> <br>
+                                        <?= $borrowers['tanggal_pinjam'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <?= getDay($borrowers["tanggal_pengembalian"], false) ?> <br>
+                                        <?= $borrowers['tanggal_pengembalian'] ?>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button class="o" onclick="
                                             Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue){
                                                 if(isTrue){
                                                     Peringatan.sukses('Anda telah menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>');
@@ -180,12 +179,11 @@ main {
                                                 }
                                             });
                                             ">
-                                    <i class="fa-regular fa-clock"></i> Menunggu
-                                </button>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <?php $id++; endforeach ?>
+                                        <i class="fa-regular fa-clock"></i> Menunggu
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php $id++; endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -196,12 +194,12 @@ main {
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                    <button
-                        onclick="
+                        <button
+                            onclick="
                     $('#isi-data').load('component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
-                        Next
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                            Next
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
                     <?php endif ?>
                 </div>
             </div>

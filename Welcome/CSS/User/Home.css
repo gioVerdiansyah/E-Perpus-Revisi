@@ -3,9 +3,12 @@ main {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  background-color: transparent;
+  box-shadow: none;
 }
 main .list-creator,
 main .about-E-perpus {
+  background-color: rgb(245,245,252);
   box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.2), -2px -1px 3px rgba(0, 0, 0, 0.2);
 }
 main .list-creator img {

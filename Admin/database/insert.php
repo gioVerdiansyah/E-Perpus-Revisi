@@ -26,18 +26,20 @@ if (isset($_POST['submit'])) {
                     <label for="judul_buku">Judul Buku</label><br>
                     <input type="text" name="judul_buku" id="judul_buku" maxlength="64" required autofocus>
                 </li>
-
+                <li>
+                    <label for="kode_buku">Kode Buku</label><br>
+                    <input type="number" name="kode_buku" id="kode_buku" required>
+                </li>
                 <li>
                     <label for="kategori">Kategori</label><br>
                     <input type="text" name="kategori" id="kategori" maxlength="144" required>
                 </li>
-
+            </div>
+            <div>
                 <li>
                     <label for="penulis">Penulis</label><br>
                     <input type="text" name="penulis" id="penulis" maxlength="144" required>
                 </li>
-            </div>
-            <div>
                 <li>
                     <label for="penerbit">Penerbit</label><br>
                     <input type="text" name="penerbit" id="penerbit" maxlength="144" required>
@@ -46,15 +48,14 @@ if (isset($_POST['submit'])) {
                     <label for="tahun_terbit">Tahun Terbit</label><br>
                     <input type="date" name="tahun_terbit" id="tahun_terbit" required>
                 </li>
-                <li>
-                    <label for="isbn">ISBN</label><br>
-                    <input type="text" step="-any" name="isbn" id="isbn" maxlength="144" required>
-                </li>
             </div>
         </div>
-
+        <li class="center">
+            <label for="isbn">ISBN: </label><br>
+            <input type="text" step="-any" name="isbn" id="isbn" maxlength="144" required>
+        </li>
         <li>
-            <label for="sinopsis">Sinopsis Buku</label><br>
+            <label for="sinopsis">Sinopsis Buku</label>
             <textarea name="sinopsis" id="sinopsis" rows="5"></textarea>
         </li>
         <div class="second">

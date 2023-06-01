@@ -41,9 +41,8 @@ if ($key === hash("sha512", $row["username"])) {
 
     <div class="side-bar">
         <a href="" class="icon">
-            <!-- logo -->
-            <div class="kotak"></div>
-            <h1>E-perpus Inpres</h1>
+            <img src="../Assets/logo-smk.png">
+            <h1>E-perpus Skansa</h1>
         </a>
         <ul>
             <li class="dashboard active">

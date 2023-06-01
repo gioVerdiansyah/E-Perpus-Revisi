@@ -13,7 +13,7 @@ $page = new Pagenation($_GET['lim'], "buku", $_GET['page']);
 $keyword = $_GET["key"];
 
 $books = mysqli_query($db, "SELECT * FROM buku WHERE
-judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ;
 ?>
 <!-- isi data -->
@@ -24,7 +24,9 @@ judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyw
             <thead width="100%">
                 <th>NO</th>
                 <th>THUMBNAIL</th>
-                <th>JUDUL BUKU</th>
+                <th>JUDUL <br> BUKU</th>
+                <th>KODE <br> BUKU</th>
+                <th>STOCK <br> BUKU</th>
                 <th>KATEGORI</th>
                 <th>PENULIS</th>
                 <th>PENERBIT</th>
@@ -44,6 +46,16 @@ judul_buku LIKE '%$keyword%' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyw
                         </td>
                         <td class="limit">
                             <?= $book['judul_buku'] ?>
+                        </td>
+                        <td>
+                            <p>
+                                <?= $book['kode_buku'] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?= getStock($book['judul_buku']) ?>
+                            </p>
                         </td>
                         <td>
                             <?= $book['kategori'] ?>

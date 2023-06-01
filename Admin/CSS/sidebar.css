@@ -30,12 +30,10 @@ h1 img {
   width: max-content;
   margin: 2px 0 15px 0px;
   display: flex;
+  align-items: center;
 }
-.side-bar .icon .kotak {
-  width: 30px;
-  background-color: black;
-  aspect-ratio: 1/1;
-  margin-right: 5px;
+.side-bar .icon img {
+  width: 50px;
 }
 
 .side-bar ul li {
@@ -95,6 +93,7 @@ h1 img {
   padding: 0 !important;
 }
 .side-bar ul li.dropdown .master-data {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;

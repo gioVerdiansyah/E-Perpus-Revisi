@@ -55,7 +55,8 @@ if ($key === hash("sha512", $row["username"])) {
                 <button id="humberger"><span></span><span></span><span></span></button>
             </li>
             <li>
-                <h1 class="title">E-Perpus Mejayan</h1>
+                <img src="../Assets/logo-smk.png" alt="Icon Skansa">
+                <h1 class="title">E-Perpus Skansa</h1>
             </li>
             <li>
                 <div>

@@ -36,18 +36,21 @@ if (isset($_POST["submit"])) {
                         value="<?= $books['judul_buku'] ?>">
                 </li>
                 <li>
-                    <label for="kategori">Kategori</label>
+                    <label for="kode_buku">Kode Buku</label><br>
+                    <input type="number" name="kode_buku" id="kode_buku" required value="<?= $books['kode_buku'] ?>">
+                </li>
+                <li>
+                    <label for=" kategori">Kategori</label>
                     <input type="text" name="kategori" id="kategori" maxlength="144" required
                         value="<?= $books['kategori'] ?>">
                 </li>
-
+            </div>
+            <div>
                 <li>
                     <label for="penulis">Penulis</label>
                     <input type="text" name="penulis" id="penulis" maxlength="144" required
                         value="<?= $books["penulis"] ?>">
                 </li>
-            </div>
-            <div>
                 <li>
                     <label for="penerbit">Penerbit</label>
                     <input type="text" name="penerbit" id="penerbit" maxlength="144" required
@@ -58,17 +61,17 @@ if (isset($_POST["submit"])) {
                     <input type="date" name="tahun_terbit" id="tahun_terbit" required
                         value="<?= $books["tahun_terbit"] ?>">
                 </li>
-                <li>
-                    <label for="isbn">ISBN</label>
-                    <input type="text" name="isbn" id="isbn" maxlength="144" required value="<?= $books["isbn"] ?>">
-                </li>
             </div>
         </div>
+        <li class="center">
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" id="isbn" maxlength="144" required value="<?= $books["isbn"] ?>">
+        </li>
         <li>
             <label for="sinopsis">Sinopsis Buku</label>
             <textarea name="sinopsis" id="sinopsis" rows="5"></textarea>
             <script>
-            document.querySelector("textarea").value = "<?= $books["sinopsis"] ?>";
+                document.querySelector("textarea").value = "<?= $books["sinopsis"] ?>";
             </script>
         </li>
         <div class="second">

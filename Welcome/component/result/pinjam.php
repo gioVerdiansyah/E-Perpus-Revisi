@@ -14,7 +14,7 @@ echo $page->halamanAktif() . $page->jumlahHalaman();
 $keyword = $_GET["key"];
 $username = $_GET["usr"];
 
-$result = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$username' AND (bukunya LIKE '%$keyword%' OR kategori LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%' OR tanggal_pengembalian LIKE '$keyword%') ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+$result = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$username' AND (bukunya LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR kategori LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%' OR tanggal_pengembalian LIKE '$keyword%') ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ?>
 <!-- isi data -->
 <div class="isi-data">
@@ -24,6 +24,7 @@ $result = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$username'
                 <th>NO</th>
                 <th>JUDUL BUKU</th>
                 <th>JUMLAH PINJAM</th>
+                <th>KODE BUKU</th>
                 <th>TGL PINJAM</th>
                 <th>TGL PENGEMBALIAN</th>
                 <th>STATUS</th>
@@ -44,6 +45,11 @@ $result = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$username'
                         <td>
                             <p class="limit">
                                 <?= $peminjam["bukunya"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="limit">
+                                <?= $books["kode_buku"] ?>
                             </p>
                         </td>
                         <td>

@@ -11,7 +11,7 @@ $page = new Pagenation($_GET['lim'], "peminjam", $_GET['page']);
 
 $keyword = $_GET["key"];
 
-$pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%') ORDER BY id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+$pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' AND(bukunya LIKE '%$keyword%' OR username LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%') ORDER BY id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ?>
 <!-- isi data -->
 <script src="JS/jquery-3.6.3.min.js"></script>
@@ -74,7 +74,6 @@ $pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(buk
                         </p>
                     </td>
                     <td>
-                        <?php if (!$peminjam['status']) { ?>
                         <button class="o" onclick="
                                             Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $peminjam['username'] ?> meminjam buku <?= $peminjam['bukunya'] ?>?', function(isTrue){
                                                 if(isTrue){
@@ -87,11 +86,11 @@ $pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(buk
                                                     });
                                                     $('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=<?= $keyword ?>');
                                                 }else{
-                                                    Peringatan.penolakan('Alasan Anda menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue, data){
+                                                    Peringatan.penolakan('Alasan Anda menolak <?= $peminjam['username'] ?> untuk meminjam buku <?= $peminjam['bukunya'] ?>?', function(isTrue, data){
                                                         if(isTrue){
-                                                            Peringatan.sukses('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
+                                                            Peringatan.sukses('Anda telah menolak <?= $peminjam['username'] ?> untuk meminjam buku <?= $peminjam['bukunya'] ?>');
                                                             $.post('component/Data-Peminjam.php',{
-                                                                idPenolakan: <?= $borrowers['id'] ?>,
+                                                                idPenolakan: <?= $peminjam['id'] ?>,
                                                                 isiAlasan: `${data}`
                                                             })
                                                             $('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=<?= $keyword ?>');
@@ -102,7 +101,6 @@ $pinjam = mysqli_query($db, "SELECT * FROM peminjam WHERE status = false AND(buk
                                             ">
                             <i class="fa-regular fa-clock"></i> Menunggu
                         </button>
-                        <?php } ?>
                     </td>
                 </tr>
                 <?php $id++; endforeach ?>

@@ -29,6 +29,12 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                         </strong></td>
                 </tr>
                 <tr>
+                    <td>Kode Buku</td>
+                    <td>: <strong>
+                            <?= $fillIn["kode_buku"] ?>
+                        </strong></td>
+                </tr>
+                <tr>
                     <td>Kategori</td>
                     <td>: <strong>
                             <?= $fillIn["kategori"] ?>
@@ -103,6 +109,7 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                         $.post('component/Buku.php', {
                                 send: true,
                                 bukunya: $('#bukunya').val(),
+                                kode_buku: $('#kode_buku').val(),
                                 kategori: $('#kategori').val(),
                                 jumlah_pinjam: $('#jumlah_pinjam').val(),
                                 tanggal_pengembalian: $('#tanggal_pengembalian').val()
@@ -110,21 +117,21 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                             $('#peminjaman').remove();
                             $('body').removeAttr('height')
                         });
-                        Peringatan.sukses('Permintaan meminjam buku <?= $_GET['bukunya'] ?> berhasil dikirim');
+                            Peringatan.sukses('Permintaan meminjam buku <?= $_GET['bukunya'] ?> berhasil dikirim', 2500);
                         ">
                 <ul>
                     <!-- hidden input -->
                     <input type="hidden" id="bukunya" name="bukunya" value="<?= $_GET['bukunya'] ?>">
                     <input type="hidden" id="kategori" name="kategori" value="<?= $_GET['kategori'] ?>">
+                    <input type="hidden" id="kode_buku" name="kode_buku" value="<?= $_GET['kode_buku'] ?>">
                     <div>
                         <li>
                             <label for="jumlah_pinjam">Jumlah Pinjam</label>
                             <?php if (!getStock($_GET['bukunya'])) { ?>
-                                <input type="text" placeholder="Stock buku sudah habis!" disabled
-                                    style="border: 1px solid red;">
+                            <input type="text" class="input disabled" placeholder="Stock buku sudah habis!" disabled>
                             <?php } else { ?>
-                                <input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
-                                    id="jumlah_pinjam" required placeholder="max buku adalah <?= $_GET['jml'] ?>" oninput="
+                            <input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
+                                id="jumlah_pinjam" required placeholder="max buku adalah <?= $_GET['jml'] ?>" oninput="
                         const maxLength = 2;
 
                         if (this.value.length > maxLength) {
@@ -137,13 +144,24 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                         $m = date('m');
                         $max = date('Y-m-d', strtotime('+1 month'));
                         ?>
-                        <li><label for="tanggal_pengembalian">Tanggal Penegmbalian</label>
+                        <li>
+                            <label for="tanggal_pengembalian">Tanggal Penegmbalian</label>
+                            <?php if (!getStock($_GET['bukunya'])) { ?>
+                            <input type="date" class="input disabled" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>"
+                                name="tanggal_pengembalian" id="disabled" disabled>
+                            <?php } else { ?>
                             <input type="date" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>" name="tanggal_pengembalian"
                                 id="tanggal_pengembalian" required>
+                            <?php } ?>
+
                         </li>
                     </div>
                     <li class="send">
+                        <?php if (!getStock($_GET['bukunya'])) { ?>
+                        <button id="disabled" disabled="disabled">Kirim</button>
+                        <?php } else { ?>
                         <button type="submit" name="send">Kirim</button>
+                        <?php } ?>
                     </li>
                 </ul>
             </form>
