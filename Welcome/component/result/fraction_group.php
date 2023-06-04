@@ -127,7 +127,7 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                     <div>
                         <li>
                             <label for="jumlah_pinjam">Jumlah Pinjam</label>
-                            <?php if (!getStock($_GET['bukunya'])) { ?>
+                            <?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
                             <input type="text" class="input disabled" placeholder="Stock buku sudah habis!" disabled>
                             <?php } else { ?>
                             <input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
@@ -145,8 +145,8 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                         $max = date('Y-m-d', strtotime('+1 month'));
                         ?>
                         <li>
-                            <label for="tanggal_pengembalian">Tanggal Penegmbalian</label>
-                            <?php if (!getStock($_GET['bukunya'])) { ?>
+                            <label for="tanggal_pengembalian">Tanggal Pengembalian</label>
+                            <?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
                             <input type="date" class="input disabled" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>"
                                 name="tanggal_pengembalian" id="disabled" disabled>
                             <?php } else { ?>
@@ -157,7 +157,7 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                         </li>
                     </div>
                     <li class="send">
-                        <?php if (!getStock($_GET['bukunya'])) { ?>
+                        <?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
                         <button id="disabled" disabled="disabled">Kirim</button>
                         <?php } else { ?>
                         <button type="submit" name="send">Kirim</button>

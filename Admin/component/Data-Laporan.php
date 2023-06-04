@@ -7,30 +7,6 @@ if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !iss
     exit;
 }
 
-// Menangani POST pinjam
-if (isset($_POST['jumlah_pinjam'])) {
-    $idP = $_POST['idP'];
-    $book_name = $_POST['bukunya'];
-    $buku_tersedia = mysqli_query($db, "SELECT jumlah_buku FROM buku WHERE judul_buku = '$book_name'");
-    $result = mysqli_fetch_assoc($buku_tersedia);
-    $number_buku_tersedia = $result['jumlah_buku'];
-    $jumlah_pinjam = $_POST['jumlah_pinjam'];
-
-    // calc
-    $jumlah = $number_buku_tersedia - $jumlah_pinjam;
-    // update value
-    mysqli_query($db, "UPDATE buku SET jumlah_buku = $jumlah WHERE judul_buku = '$book_name'");
-    mysqli_query($db, "UPDATE peminjam SET status = '1' WHERE id = $idP");
-}
-
-// menangani POST alasan penolakan
-if (isset($_POST['isiAlasan'])) {
-    $dataAlasan = $_POST['isiAlasan'];
-    $idPenolakan = $_POST['idPenolakan'];
-    mysqli_query($db, "UPDATE peminjam SET alasan = '$dataAlasan', status = '2' WHERE id = $idPenolakan");
-}
-
-
 // Menangani POST delete
 if (isset($_POST['idbor'])) {
     $idBor = $_POST['idbor'];
@@ -39,7 +15,7 @@ if (isset($_POST['idbor'])) {
 
 $pagenation = new Pagenation(10, "peminjam", 1);
 
-$borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER BY id DESC LIMIT 10");
+$borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2') ORDER BY id DESC LIMIT 10");
 
 ?>
 <style>
@@ -58,31 +34,16 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER B
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
 <div class="title">
-    <h1>Peminjam</h1>
+    <h1>Laporan</h1>
     <hr>
-    <h2>Data Peminjam <img src="../Assets/angle-small-right.svg" alt=""></h2>
-    <h3>Master-Peminjam</h3>
+    <h2>Data Laporan <img src="../Assets/angle-small-right.svg" alt=""></h2>
+    <h3>Master-Laporan</h3>
 </div>
-<div class="information">
-    <h3>
-        Informasi:
-    </h3>
-    <ul>
-        <li>
-            <p>Data yang sudah disetujui akan otomatis masuk ke dalam laporan dengan status di <strong>setujui</strong>,
-                sedangkan yang ditolak akan berstatus <strong>ditolak</strong> </p>
-        </li>
-        <li>
-            <p>Data yang sudah disetujui otomatis stock buku akan berkurang sesuai permintaan peminjam</p>
-        </li>
-        <li>
-            <p>Admin diharap menentukan antara menyetujuinya atau menolaknya, jika menilaknya diharap menulis alasan
-                yang jelas agar peminjam tidak kecewa</p>
-        </li>
-    </ul>
-    <button onclick="
-        $('.information').slideUp(500);
-    "><i class="fa-solid fa-xmark"></i></button>
+<div class="download">
+    <button onclick="window.location.href = 'component/result/cetak.php?lim=' + $('#selection').val() +
+            '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val()"><i class="fi fi-rr-download"></i>
+        Download Data
+        Laporan (PDF)</button>
 </div>
 <!-- ini.isi -->
 <div class="card-wrapper penulis">
@@ -120,7 +81,8 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER B
                         <th>JUMLAH <br> PINJAM</th>
                         <th>TGL <br> PINJAM</th>
                         <th>TGL <br> PENGEMBALIAN</th>
-                        <th>SETUJUI</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
                     </thead>
                     <tbody width="100%" cellspacing="10">
                         <?php
@@ -169,32 +131,19 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status = '0' ORDER B
                                     </p>
                                 </td>
                                 <td>
-                                    <button class="o" onclick="
-                                            Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue){
-                                                if(isTrue){
-                                                    Peringatan.sukses('Anda telah menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['bukunya'] ?>');
-
-                                                    $.post('component/Data-Peminjam.php', {
-                                                        idP: <?= $borrowers['id'] ?>,
-                                                        bukunya: '<?= $borrowers['bukunya'] ?>',
-                                                        jumlah_pinjam: '<?= $borrowers['jumlah_pinjam'] ?>'
-                                                    });
-                                                    $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
-                                                }else{
-                                                    Peringatan.penolakan('Alasan Anda menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>?', function(isTrue, data){
-                                                        if(isTrue){
-                                                            Peringatan.sukses('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['bukunya'] ?>');
-                                                            $.post('component/Data-Peminjam.php',{
-                                                                idPenolakan: <?= $borrowers['id'] ?>,
-                                                                isiAlasan: `${data}`
-                                                            })
-                                                            $('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
-                                                        }
-                                                    })
-                                                }
-                                            });
-                                            ">
-                                        <i class="fa-regular fa-clock"></i> Menunggu
+                                    <?php if ($borrowers["status"] === "1") { ?>
+                                        <p class="persetujuan g">
+                                            <i class="fa-solid fa-check"></i> Disetujui
+                                        </p>
+                                    <?php } elseif ($borrowers["status"] === "2") { ?>
+                                        <p class="persetujuan r">
+                                            <i class="fa-regular fa-circle-xmark"></i> Ditolak!
+                                        </p>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <button class="delete">
+                                        <i class="fa-solid fa-delete-left"></i>
                                     </button>
                                 </td>
                             </tr>

@@ -249,11 +249,15 @@ main {
   right: 0;
   transform: translateY(-5px);
 }
-.content-wrapper .heading .profile .dropdown-profile ul li,
-.content-wrapper .heading .profile .dropdown-profile ul li a {
+.content-wrapper .heading .profile .dropdown-profile ul li {
   list-style-type: none;
   display: flex;
   align-items: center;
+}
+.content-wrapper .heading .profile .dropdown-profile ul li button{
+  cursor: pointer;
+  background-color: white;
+  border: none;
 }
 .content-wrapper .content .title {
   display: flex;

@@ -352,12 +352,60 @@ main .content-wrapper .content .download button {
   color: white !important;
   background-color: rgb(255, 159, 67) !important;
 }
-.card-wrapper .isi-data .data table tbody tr td p.g{
-  color: rgb(40,199,111) !important;
-  border: 1px solid rgb(40,199,111) !important;
+.card-wrapper .isi-data .data table tbody tr td p.g,
+.card-wrapper .isi-data .data table tbody tr td p.r{
   border-radius: 3px !important;
   padding: 5px 3px !important;
 }
+.card-wrapper .isi-data .data table tbody tr td p.g{
+  color: rgb(40,199,111) !important;
+  border: 1px solid rgb(40,199,111) !important;
+}
 .card-wrapper .isi-data .data table tbody tr td p.g i{
   color: rgb(40,199,111) !important;
+}
+.card-wrapper .isi-data .data table tbody tr td p.r{
+  color: rgb(234, 84, 85);
+  border: 1px solid rgb(234, 84, 85);
+}
+.card-wrapper .isi-data .data table tbody tr td p.r i{
+  color: rgb(234, 84, 85);
+}
+
+
+/* information style */
+.information{
+  width: 100%;
+  background-color: rgb(231,229,247);
+  padding: 3px 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+.information ul{
+  list-style-type:decimal;
+  padding-left: 25px;
+}
+.information h3{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.information h3,
+.information ul li,
+.information button i,
+.information ul li p strong{
+  color: rgb(106, 94, 233);
+}
+.information ul li p{
+  color: rgb(121,109,240);
+}
+.information button{
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+.information button{
+  font-size: medium;
 }

@@ -199,6 +199,6 @@ body {
   color: white;
   transition: all .3s;
 }
-.data-wrapper .data-indicator .unduh-stroke button:hover{
+.data-wrapper .data-indicator .unduh-stroke a:hover{
   background-color: rgb(233, 127, 28);
 }

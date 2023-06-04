@@ -5,21 +5,26 @@ session_start();
 require "../../../Admin/database/functions.php";
 
 if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
-  header("Location: ../../../index.php");
-  exit;
+    header("Location: ../../../index.php");
+    exit;
 }
 
-$usr = $_GET['usr'];
+// denkripsi data username
+$GETDataUsername = urldecode($_GET['usr']);
+$decodedData = base64_decode($GETDataUsername);
+$iv = substr($decodedData, -16);
+$encryptedDataUsr = substr($decodedData, 0, -16);
+$decryptedData = openssl_decrypt($encryptedDataUsr, 'AES-256-CBC', '#XXXMr.Verdi_407xxx#', OPENSSL_RAW_DATA, $iv);
 
-$data = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$usr' AND status = '1'");
+$data = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$decryptedData' AND status = '1'");
 
 $peminjaman = '';
 $pengembalian = '';
 
 
 foreach ($data as $datas) {
-  $peminjaman .= $datas['tanggal_pinjam'];
-  $pengembalian .= $datas['tanggal_pengembalian'];
+    $peminjaman .= $datas['tanggal_pinjam'];
+    $pengembalian .= $datas['tanggal_pengembalian'];
 }
 
 $html = '<link rel="stylesheet" href="../../CSS/cetak.css">
@@ -33,7 +38,7 @@ $html = '<link rel="stylesheet" href="../../CSS/cetak.css">
             <li>
                 <p>
                     Nama Peminjam &nbsp;:
-                    ' . ucfirst($usr) . '
+                    ' . ucfirst($decryptedData) . '
                 </p>
             </li>
         </ul>
@@ -53,7 +58,7 @@ $html = '<link rel="stylesheet" href="../../CSS/cetak.css">
                 ';
 $id = 1;
 foreach ($data as $datas) {
-  $html .= '
+    $html .= '
                 <tr>
                     <td style="border: 1px solid grey;padding: 3px">
                         <p>
@@ -97,13 +102,25 @@ $html .= '</tbody>
     <div class="note" style="padding: 5px;border:2px solid grey;margin-top:50px;width:max-content">
       <h3 style="margin: 0 0 0 10px">Catatan:</h3>
       <ul style="list-style-type: numeric;padding-left:50px; margin:0">
+      ';
+if (!$decryptedData) {
+    $html .= '
+        <li style="margin:0;padding:0">
+            <p style="margin:0 0 10px 0;padding:0">Jika data tidak muncul diharap me-refresh dan tekan tombol download struk lagi</p>
+        </li>
+        ';
+} else {
+    $html .= '
         <li style="margin:0;padding:0">
           <p style="margin:0 0 10px 0;padding:0">Cek apakah tanggal yang <b>"Harus di kembalikan pada"</b> melebihi tanggal pada saat pengembalian buku</p>
         </li>
         <li style="margin:0;padding:0">
           <p style="margin:0;padding:0">Jika melebihi maka peminjam wajib dikenakan denda berdasarkan perbuku dan perhari</p>
         </li>
-      </ul>
+        ';
+}
+
+$html .= '  </ul>
     </div>
 </div>';
 

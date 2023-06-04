@@ -52,7 +52,7 @@ if ($key === hash("sha512", $row["username"])) {
         <ul>
             <li>
                 <h1 id="darkmode" class="light"><i class="fa-solid fa-moon"></i></h1>
-                <button id="humberger"><span></span><span></span><span></span></button>
+                <button id="hamburger"><span></span><span></span><span></span></button>
             </li>
             <li>
                 <img src="../Assets/logo-smk.png" alt="Icon Skansa">
@@ -66,10 +66,15 @@ if ($key === hash("sha512", $row["username"])) {
                     <p>Anggota</p>
                 </div>
                 <img src="../.temp/<?= $row['gambar'] ?>" alt="" />
-                <div class="dropdown-logout">
-                    <a href="../logout-user.php" onclick="confirm('Yakin mau logout?')"><i
-                            class="fi fi-rr-sign-out-alt"></i>
-                        Logout</a>
+                <div class="logout">
+                    <button onclick="
+                        Peringatan.konfirmasi('Apakah anda yakin ingin logout?', (isTrue)=>{
+                            if(isTrue){
+                                window.location.href = '../logout-user.php';
+                            }
+                        })
+                    "><i class="fi fi-rr-sign-out-alt"></i>
+                        Logout</button>
             </li>
             </div>
             </li>
@@ -84,9 +89,9 @@ if ($key === hash("sha512", $row["username"])) {
                 <i class="fa-solid fa-clock-rotate-left"></i>Peminjaman
             </li>
             <li id="feedback" onclick="
-              $('main').load('component/feedback.php?usr_nm=<?= $username ?>');
+              $('main').load('component/feedback.php?usr_nm=<?= urlencode($username) ?>');
               $('*').removeClass('on');
-              $(this).addClass('on');"><i class="fa-solid fa-comment-pen"></i>Feedback</li>
+              $(this).addClass('on');"><i class="fa-solid fa-comments"></i>Feedback</li>
         </ul>
     </header>
 

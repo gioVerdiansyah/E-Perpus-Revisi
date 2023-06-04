@@ -81,3 +81,8 @@ $("main .content-wrapper .heading .profile").mouseenter(function() {
         e.preventDefault();
         onReady(this, 'component/Data-Peminjam.php');
     });
+
+    $("#laporan").click(function (e) { 
+        e.preventDefault();
+        onReady(this, 'component/Data-Laporan.php');
+    });

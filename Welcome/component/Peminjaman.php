@@ -34,6 +34,11 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
     mysqli_query($db, "DELETE FROM peminjam WHERE id = $id");
 }
+
+// Enkripsi
+$iv = openssl_random_pseudo_bytes(16);
+$encryptedData = openssl_encrypt($username, 'AES-256-CBC', '#XXXMr.Verdi_407xxx#', OPENSSL_RAW_DATA, $iv);
+$encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 ?>
 
 <div class="title">
@@ -68,7 +73,7 @@ if (isset($_POST['id'])) {
             ?>
             <div class="unduh-stroke">
                 <p>Unduh semua buku yang disetujui:</p>
-                <a href="component/result/cetak.php?usr=<?= urlencode($username) ?>"> <i
+                <a href="component/result/cetak.php?usr=<?= $encodedDataUsername ?>"> <i
                         class="fa-solid fa-cloud-arrow-down"></i>
                     Download stroke</a>
             </div>

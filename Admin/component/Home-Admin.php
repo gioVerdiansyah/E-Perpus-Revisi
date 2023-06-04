@@ -9,7 +9,7 @@ if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !iss
 
 $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id");
 $user = mysqli_query($db, "SELECT * FROM loginuser ORDER BY id");
-$pinjam = mysqli_query($db, "SELECT * FROM peminjam ORDER BY id");
+$pinjam = mysqli_query($db, "SELECT * FROM peminjam  WHERE status = '1' ORDER BY id");
 
 $jumlahBuku = 0;
 $jumlahUser = 0;
@@ -90,7 +90,7 @@ foreach ($pinjam as $peminjam) {
                             <h2>
                                 <?= $jumlahPeminjam ?>
                             </h2>
-                            <p>Pembaca</p>
+                            <p>Peminjam</p>
                         </div>
                     </li>
                 </ul>

@@ -16,7 +16,7 @@ let onclick = false;
     });
 
 
-    $("nav ul li button").click(function (e) {
+    $("nav ul li #hamburger").click(function (e) {
         e.preventDefault();
 
         if (!onclick) {
@@ -53,11 +53,11 @@ let onclick = false;
     });
 
     $("nav ul li:last-child").mouseenter(function() {
-        $("nav ul li:last-child .dropdown-logout").stop().slideDown();
+        $("nav ul li:last-child .logout").stop().slideDown();
       });
       
       $("nav ul li:last-child").mouseleave(function() {
-        $("nav ul li:last-child .dropdown-logout").stop().slideUp();
+        $("nav ul li:last-child .logout").stop().slideUp();
       });
 
 

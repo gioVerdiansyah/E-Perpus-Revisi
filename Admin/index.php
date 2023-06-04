@@ -74,7 +74,10 @@ if ($key === hash("sha512", $row["username"])) {
                 </ul>
             </li>
             <li id="persetujuan">
-                <h2><i class="fa-solid fa-chart-simple"></i>Persetujuan</h2>
+                <h2><i class="fa-solid fa-clipboard-list"></i>Persetujuan</h2>
+            </li>
+            <li id="laporan">
+                <h2><i class="fa-solid fa-chart-simple"></i>Laporan</h2>
             </li>
         </ul>
     </div>
@@ -101,9 +104,16 @@ if ($key === hash("sha512", $row["username"])) {
                     <img src="Temp/<?= $row['gambar'] ?>" alt="photo profile">
                     <div class="dropdown-profile">
                         <ul>
-                            <li><button onclick="
-
-                            "><i class="fi fi-rr-sign-out-alt"></i> Logout</button></li>
+                            <li>
+                                <button onclick="
+                                    Peringatan.konfirmasi('Apakah Anda yakin ingin logout?', (isTrue)=>{
+                                        if(isTrue){
+                                            window.location.href = 'logout-admin.php';
+                                        }
+                                    })
+                                "><i class="fi fi-rr-sign-out-alt"></i> Logout
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
