@@ -8,14 +8,19 @@ if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !iss
 }
 
 // Menangani POST delete
-if (isset($_POST['idbor'])) {
-    $idBor = $_POST['idbor'];
-    mysqli_query($db, "DELETE FROM peminjam WHERE id = $idBor");
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
+    mysqli_query($db, "DELETE FROM peminjam WHERE id = $id");
 }
 
 $pagenation = new Pagenation(10, "peminjam", 1);
 
 $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2') ORDER BY id DESC LIMIT 10");
+
+// Enkripsi
+$iv = openssl_random_pseudo_bytes(16);
+$encryptedData = openssl_encrypt('!@#)Verdi(*$&%^', 'AES-256-CBC', '#XXXMr.Verdi_Admin_407xxx#', OPENSSL_RAW_DATA, $iv);
+$encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 
 ?>
 <style>
@@ -40,8 +45,8 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2')
     <h3>Master-Laporan</h3>
 </div>
 <div class="download">
-    <button onclick="window.location.href = 'component/result/cetak.php?lim=' + $('#selection').val() +
-            '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val()"><i class="fi fi-rr-download"></i>
+    <button onclick="window.location.href = 'component/result/cetak.php?key=<?= $encodedDataUsername ?>'"><i
+            class="fi fi-rr-download"></i>
         Download Data
         Laporan (PDF)</button>
 </div>
@@ -54,7 +59,7 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2')
                 <select id="selection" name="selection"
                     onchange="
                     let value = $(this).val();
-                    $('#isi-data').load('component/result/pinjam.php?lim=' + value + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())">
+                    $('#isi-data').load('component/result/laporan.php?lim=' + value + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())">
                     <option value="10">10</option>
                     <option value="5">5</option>
                     <option value="2">2</option>
@@ -65,7 +70,7 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2')
                 <label for="search">Search:</label>
                 <input type="search" name="search" id="search" onkeyup="
                 $('#isi-data').load(
-                    'component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val()
+                    'component/result/laporan.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val()
                 )">
             </div>
         </div>
@@ -142,7 +147,16 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2')
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <button class="delete">
+                                    <button class="delete" onclick="
+                                    Peringatan.konfirmasi('Apakah anda yakin ingin menghapusnya?', (isTrue)=>{
+                                        if(isTrue){
+                                            $.post('component/Data-Laporan.php',{
+                                                id: <?= $borrowers['id'] ?>
+                                            });
+                                            $('#isi-data').load('component/result/laporan.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
+                                        }
+                                    })
+                                ">
                                         <i class="fa-solid fa-delete-left"></i>
                                     </button>
                                 </td>
@@ -160,7 +174,7 @@ $borrower = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2')
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
                         <button
                             onclick="
-                    $('#isi-data').load('component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
+                    $('#isi-data').load('component/result/laporan.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
                             Next
                             <i class="fa-solid fa-angle-right"></i>
                         </button>

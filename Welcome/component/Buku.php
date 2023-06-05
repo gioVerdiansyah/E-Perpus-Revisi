@@ -78,7 +78,7 @@ if (isset($_POST['send'])) {
     <!-- isi data -->
     <div class="isi-data" id="isi-data">
         <div class="data">
-            <table width="100%">
+            <table>
                 <thead width="100%">
                     <th>NO</th>
                     <th>THUMBNAIL</th>

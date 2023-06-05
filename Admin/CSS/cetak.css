@@ -1,105 +1,39 @@
-*{
-  padding: 0;
-  margin: 0;
-}
-.struk-perpus{
-  padding: 10px;
-}
-.struk-perpus .title h1{
+h1{
   text-align: center;
   font-size: x-large;
-  margin: 10px 0;
-}
-.struk-perpus .title p{
-  text-align: end;
-}
-.struk-perpus .title{
+  padding-bottom: 10px;
   border-bottom: 2px solid black;
 }
-
-.struk-perpus .isi-data-peminjam ul{
-  padding-top: 20px;
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-}
-.struk-perpus .isi-data-peminjam ul li{
-  display: flex;
-}
-.struk-perpus .isi-data-peminjam ul li p{
-  margin: 3px 0;
-}
-.struk-perpus .isi-data-peminjam ul li p:last-child{
-  font-weight: bolder;
-  width: 30vw;
-  border-bottom: 2px dotted;
-}
-
 table {
-  width: 100%;
-  margin-top: 30px;
-  font-family:Arial, Helvetica, sans-serif;
+  margin-top: 50px;
   text-align: center;
   border-collapse: collapse;
-  border: 1px solid;
 }
-table thead th {
+table thead tr th {
+  width: max-content;
+  background-color: rgb(197, 197, 197);
   color: rgb(43, 43, 43);
-  letter-spacing: -1px;
-}
-table tbody tr td,
-table thead th{
   border: 2px solid grey;
-  padding: 5px;
-}
-table tbody tr td:first-child,
-table tbody tr td:nth-child(2) {
-  text-align: center;
+  padding: 10px 5px;
+  margin: 0 15px;
 }
 table tbody tr td {
-  overflow-wrap: anywhere;
+  padding: 30px 0;
+  border: 2px solid grey;
 }
-table tbody tr td:last-child{
-  width: 40px;
-  padding-bottom: 5px;
-}
-table tbody tr td:last-child::before{
-  content: '';
-  padding: 0 15px;
-  margin-bottom: 5px;
-  border-bottom: 2px dotted;
-}
-table tbody tr td#detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-table tbody tr td p {
-  margin: auto;
-  text-align: center;
-}
-table tbody tr td p.limit {
-  width: 70%;
-  text-align: left;
-}
-
-table tbody tr td#detail button {
-  width: max-content;
-  color: white;
-  padding: 5px 15px;
-  border: none;
-  border-radius: 3px;
-  background-color: rgb(115, 103, 240);
-  margin: 3px auto;
-  cursor: pointer;
+table tbody tr a {
+  text-decoration: underline;
   transition: all 0.3s;
 }
-table tbody tr td#detail button:hover {
-  background-color: rgb(66, 55, 187);
+table tbody tr a:hover {
+  color: rgb(93, 81, 226);
 }
-table tbody tr td#detail i {
-  margin-right: 5px;
-  transform: rotate(90deg);
+table tbody tr:nth-child(even) {
+  background-color: rgba(197, 197, 197, 0.678);
+}
+table tbody tr td.limit {
+  width: 20%;
+  padding: 10px;
+  overflow-wrap: anywhere;
+  text-align: left;
 }

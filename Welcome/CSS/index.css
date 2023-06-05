@@ -5,6 +5,7 @@
 }
 
 body {
+  background-color: rgb(243,243,243);
   display: grid;
   grid-template-columns: 60vw 40vw;
 }
@@ -18,6 +19,7 @@ body {
   align-items: center;
 }
 main {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;

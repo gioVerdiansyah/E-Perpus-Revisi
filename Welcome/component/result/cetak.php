@@ -16,7 +16,7 @@ $iv = substr($decodedData, -16);
 $encryptedDataUsr = substr($decodedData, 0, -16);
 $decryptedData = openssl_decrypt($encryptedDataUsr, 'AES-256-CBC', '#XXXMr.Verdi_407xxx#', OPENSSL_RAW_DATA, $iv);
 
-$data = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$decryptedData' AND status = '1'");
+$data = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$decryptedData' AND status = '1' ORDER BY id DESC");
 
 $peminjaman = '';
 $pengembalian = '';
