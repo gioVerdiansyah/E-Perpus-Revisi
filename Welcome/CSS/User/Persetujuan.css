@@ -73,6 +73,33 @@
 }
 
 @media (max-width: 660px) {
+  main .data-wrapper .data-indicator {
+    flex-direction: column !important;
+  }
+  main .data-wrapper .data-indicator .data-search {
+    width: 100%;
+    flex-direction: column !important;
+  }
+  main .data-wrapper .data-indicator .data-search {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  main .data-wrapper .data-indicator .data-search input{
+    width: 70% !important;
+    border: 1px solid grey;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  .data-wrapper .isi-data .data table thead th:nth-child(3) {
+    text-wrap: wrap;
+  }
+  .data-wrapper .isi-data .data table thead th:nth-child(2){
+    text-wrap: nowrap;
+  }
+  .data-wrapper .isi-data .data table tbody tr td:last-child {
+    display: table-cell;
+    text-align: center;
+  }
   main .title p {
     display: none;
   }

@@ -44,6 +44,7 @@ main .data-wrapper .data-indicator .data-search input {
   outline: none;
 }
 .data-wrapper .isi-data .data table {
+  width: 100%;
   border-collapse: collapse;
 }
 .data-wrapper .isi-data .data table thead th {
@@ -172,6 +173,15 @@ main .data-wrapper .data-indicator .data-search input {
   }
   .popup #pop-up .content {
     width: 100% !important;
+  }
+  .data-wrapper .isi-data .data table thead th{
+    padding: 10px 30px;
+  }
+  .data-wrapper .isi-data .data table thead th:nth-child(3){
+    text-wrap: nowrap;
+  }
+  .data-wrapper .isi-data .data table tbody tr td p {
+    width: 100%;
   }
 }
 @media (max-width: 550px) {

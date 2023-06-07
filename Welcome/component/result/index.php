@@ -9,7 +9,6 @@ if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) 
 }
 
 $page = new Pagenation($_GET['lim'], "buku", $_GET['page']);
-echo $page->halamanAktif() . $page->jumlahHalaman();
 
 
 $keyword = $_GET["key"];
@@ -44,12 +43,12 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                             <img src="../Admin/Temp/<?= $book["image"] ?>" alt="image_of_book" height="70" />
                         </td>
                         <td>
-                            <p class="limit">
+                            <p>
                                 <?= $book['judul_buku'] ?>
                             </p>
                         </td>
                         <td>
-                            <p class="limit">
+                            <p>
                                 <?= $book["kode_buku"] ?>
                             </p>
                         </td>
@@ -59,19 +58,19 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                             </p>
                         </td>
                         <td>
-                            <p class="limit">
+                            <p>
                                 <?= $book['penulis'] ?>
                             </p>
                         </td>
                         <td>
-                            <p class="limit">
+                            <p>
                                 <?= $book['penerbit'] ?>
                             </p>
                         </td>
                         <td id="detail">
                             <!-- pinjam -->
                             <button onclick="
-                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&kategori=<?= urlencode($book['kategori']) ?>&&jml=<?= $book['jumlah_buku'] ?> #peminjaman');
+                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&kode_buku=<?= $book['kode_buku'] ?>&&kategori=<?= urlencode($book['kategori']) ?>&&jml=<?= $book['jumlah_buku'] ?> #peminjaman');
                                 $('.popup').removeAttr('hidden');
                                 " id="baca-buku">
                                 Pinjam Buku
@@ -79,8 +78,10 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
 
                             <!-- detail -->
                             <button onclick="
-                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&kategori=<?= urlencode($book['kategori']) ?>&&jml=<?= $book['jumlah_buku'] ?> #pop-up');
+                                $('.popup').load('component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&kode_buku=<?= $book['kode_buku'] ?>&&kategori=<?= urlencode($book['kategori']) ?>&&jml=<?= $book['jumlah_buku'] ?> #pop-up', ()=>{
+                                    $('#pop-up').fadeIn(500);
                                 $('.popup').removeAttr('hidden');
+                                });
                                 ">
                                 <i class="fa-solid fa-chart-simple"></i>Detail
                             </button>

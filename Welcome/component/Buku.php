@@ -67,7 +67,7 @@ if (isset($_POST['send'])) {
             <p>entries</p>
         </div>
         <div class="data-search">
-            <label for="search">Search by</label>
+            <label for="search">Search by:</label>
             <input type="search" name="search" id="search" onkeyup="
             $('#isi-data').load(
                     'component/result/index.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val()
@@ -107,12 +107,12 @@ if (isset($_POST['send'])) {
                                 </p>
                             </td>
                             <td>
-                                <p class="limit">
+                                <p>
                                     <?= $books["judul_buku"] ?>
                                 </p>
                             </td>
                             <td>
-                                <p class="limit">
+                                <p>
                                     <?= $books["kode_buku"] ?>
                                 </p>
                             </td>
@@ -122,12 +122,12 @@ if (isset($_POST['send'])) {
                                 </p>
                             </td>
                             <td>
-                                <p class="limit">
+                                <p>
                                     <?= $books["penulis"] ?>
                                 </p>
                             </td>
                             <td>
-                                <p class="limit">
+                                <p>
                                     <?= $books["penerbit"] ?>
                                 </p>
                             </td>

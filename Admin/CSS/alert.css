@@ -252,3 +252,14 @@
 #pop-up .penolakan  button.close i{
   color: rgb(234, 84, 85);
 }
+
+@media (max-width: 660px) {
+  #pop-up .confirm,
+  #pop-up .sukses,
+  #pop-up .persetujuan,
+  #pop-up #ditolak,
+  #pop-up .penolakan{
+    min-width: 90% !important;
+    max-width: 95% !important;
+  }  
+}

@@ -202,3 +202,28 @@ body {
 .data-wrapper .data-indicator .unduh-stroke a:hover{
   background-color: rgb(233, 127, 28);
 }
+
+@media (max-width: 660px) {
+  .popup #peminjaman .content{
+    width: 95% !important;
+  }
+  .popup #ditolak .content .hubungi-admin{
+    margin: 10% 15px 5% 15px;
+  }
+  .popup #ditolak .content .hubungi-admin ul li p,
+  .popup #ditolak .content .hubungi-admin ul li i{
+    font-size: smaller;
+  }
+  .popup #peminjaman .content .data form ul div li:first-child,
+  .popup #peminjaman .content .data form ul div li:last-child{
+  width: 80%;
+  }
+  .popup #peminjaman .content .data form ul div li:first-child{
+    margin-bottom: 10px;
+  }
+  .popup #peminjaman .content .data form ul div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -186,13 +186,13 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <p class="pesan">Anda ditolak karena
+        <p class="pesan">Anda ditolak karena <br>
             <strong>
                 <?= $alasan['alasan'] ?>
             </strong>
         </p>
         <div class="hubungi-admin">
-            <p>Hubungi admin berikut untuk masalah penolakan buku anda:</p>
+            <p>Hubungi admin berikut:</p>
             <ul>
                 <li>
                     <p>Bu Rahayu : </p>

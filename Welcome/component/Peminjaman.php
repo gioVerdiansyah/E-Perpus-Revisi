@@ -71,15 +71,15 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
         <?php
         if (isset($status) && $status === '1'):
             ?>
-            <div class="unduh-stroke">
-                <p>Unduh semua buku yang disetujui:</p>
-                <a href="component/result/cetak.php?usr=<?= $encodedDataUsername ?>"> <i
-                        class="fa-solid fa-cloud-arrow-down"></i>
-                    Download stroke</a>
-            </div>
+        <div class="unduh-stroke">
+            <p>Unduh semua buku yang disetujui:</p>
+            <a href="component/result/cetak.php?usr=<?= $encodedDataUsername ?>"> <i
+                    class="fa-solid fa-cloud-arrow-down"></i>
+                Download stroke</a>
+        </div>
         <?php endif; ?>
         <div class="data-search">
-            <label for="search">Search by</label>
+            <label for="search">Search by:</label>
             <input type="search" name="search" id="search" onkeyup="
             $('#isi-data').load(
                     'component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val() + '&&usr=<?= $username ?>'
@@ -106,59 +106,59 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
                     $num = 1;
                     foreach ($result as $peminjam):
                         ?>
-                        <tr>
-                            <td>
-                                <p>
-                                    <?= $num ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p class="limit">
-                                    <?= $peminjam["bukunya"] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= $peminjam["kode_buku"] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= $peminjam["jumlah_pinjam"] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= getDay($peminjam["tanggal_pinjam"], true) ?>
-                                    <?= $peminjam["tanggal_pinjam"] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
-                                    <?= $peminjam["tanggal_pengembalian"] ?>
-                                </p>
-                            </td>
-                            <td>
-                                <?php if ($peminjam["status"] == 1) { ?>
-                                    <p class="persetujuan g">
-                                        <i class="fa-solid fa-check"></i> Disetujui
-                                    </p>
-                                <?php } elseif ($peminjam["status"] == "2") { ?>
-                                    <p class="persetujuan r h" onclick="
+                    <tr>
+                        <td>
+                            <p>
+                                <?= $num ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="limit">
+                                <?= $peminjam["bukunya"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?= $peminjam["kode_buku"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?= $peminjam["jumlah_pinjam"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?= getDay($peminjam["tanggal_pinjam"], true) ?>
+                                <?= $peminjam["tanggal_pinjam"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
+                                <?= $peminjam["tanggal_pengembalian"] ?>
+                            </p>
+                        </td>
+                        <td>
+                            <?php if ($peminjam["status"] == 1) { ?>
+                            <p class="persetujuan g">
+                                <i class="fa-solid fa-check"></i> Disetujui
+                            </p>
+                            <?php } elseif ($peminjam["status"] == "2") { ?>
+                            <p class="persetujuan r h" onclick="
                                         $('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?> #ditolak', ()=>{$('.popup').removeAttr('hidden')});
                                         ">
-                                        <i class="fa-regular fa-circle-xmark"></i> Ditolak!
-                                    </p>
-                                <?php } else { ?>
-                                    <p class="persetujuan o">
-                                        <i class="fa-regular fa-clock"></i> Belum
-                                    </p>
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <?php if ($peminjam["status"] == 1) { ?>
-                                    <button class="delete" onclick="
+                                <i class="fa-regular fa-circle-xmark"></i> Ditolak!
+                            </p>
+                            <?php } else { ?>
+                            <p class="persetujuan o">
+                                <i class="fa-regular fa-clock"></i> Belum
+                            </p>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if ($peminjam["status"] == 1) { ?>
+                            <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
@@ -167,9 +167,9 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                <?php } elseif ($peminjam["status"] === "2") { ?>
-                                    <button class="delete" onclick="
+                            </button>
+                            <?php } elseif ($peminjam["status"] === "2") { ?>
+                            <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang ditolak?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
@@ -178,9 +178,9 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                <?php } else { ?>
-                                    <button class="delete" onclick="
+                            </button>
+                            <?php } else { ?>
+                            <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin membatalkan meminjam buku <?= $peminjam['bukunya'] ?>?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
@@ -189,11 +189,11 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                        <?php $num++; endforeach;
+                            </button>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php $num++; endforeach;
                     ?>
                 </tbody>
             </table>
@@ -206,13 +206,13 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
             <div class="pagination">
                 <p class="amount-of-data">1</p>
                 <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                    <button onclick="
+                <button onclick="
                     $('.isi-data').load(
                         'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'
                     )">
-                        Next
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
+                    Next
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
                 <?php endif ?>
             </div>
         </div>
