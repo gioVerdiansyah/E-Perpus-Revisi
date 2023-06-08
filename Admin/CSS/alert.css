@@ -8,7 +8,7 @@
 #pop-up .confirm,
 #pop-up .sukses,
 #pop-up .persetujuan,
-#pop-up #ditolak,
+#pop-up .ditolak,
 #pop-up .penolakan{
   min-width: 30%;
   max-width: 35%;
@@ -30,6 +30,7 @@
 }
 .confirm#add,
 .sukses#add,
+.ditolak#add,
 .persetujuan#add,
 .penolakan#add{
   animation: muncul .5s;
@@ -46,7 +47,7 @@
   }
 }
 #peminjaman .content#add,
-#ditolak .content#add{
+.ditolak-admin .content#add{
   animation: njedul .5s;
 }
 @keyframes njedul {
@@ -61,7 +62,7 @@
   }
 }
 #peminjaman .content#close,
-#ditolak .content#close{
+.ditolak-admin .content#close{
   animation: nutup .5s;
 }
 @keyframes nutup {
@@ -76,6 +77,7 @@
     }
 }
 .confirm#close,
+.ditolak#close,
 .sukses#close,
 .persetujuan#close,
 .penolakan#close{
@@ -135,21 +137,21 @@
   color: rgb(255, 159, 67);
   margin: 0;
 }
-#pop-up #ditolak h1 i,
+#pop-up .ditolak h1 i,
 #pop-up .penolakan h1 i{
   font-size: xxx-large;
   color: rgb(228, 53, 53) !important;
   margin-bottom: 20px;
 }
 #pop-up .confirm h1 i,
-#pop-up #ditolak h1 i,
+#pop-up .ditolak h1 i,
 #pop-up .sukses h1 i{
   font-size: xxx-large;
 }
 #pop-up .confirm h2,
 #pop-up .sukses h2,
 #pop-up .persetujuan h2,
-#pop-up #ditolak h2,
+#pop-up .ditolak h2,
 #pop-up .penolakan h2{
   font-family: 'Font Awesome 6 Free';
   letter-spacing: 2px;
@@ -161,7 +163,7 @@
 #pop-up .confirm p,
 #pop-up .sukses p,
 #pop-up .persetujuan p,
-#pop-up #ditolak p,
+#pop-up .ditolak p,
 #pop-up .penolakan p{
   text-align: center;
   margin: 20px;
@@ -257,7 +259,7 @@
   #pop-up .confirm,
   #pop-up .sukses,
   #pop-up .persetujuan,
-  #pop-up #ditolak,
+  #pop-up .ditolak,
   #pop-up .penolakan{
     min-width: 90% !important;
     max-width: 95% !important;

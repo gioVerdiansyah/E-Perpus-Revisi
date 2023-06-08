@@ -8,7 +8,7 @@ body {
 form {
   position: relative;
   width: 65%;
-  height: 80%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +92,7 @@ form ul li:last-child button:last-child:hover {
 form ul li:last-child button:first-child {
   background-color: var(--red);
 }
-form ul li:first-child button:first-child:hover {
+form ul li:last-child button:first-child:hover {
   background-color: var(--red-h);
 }
 

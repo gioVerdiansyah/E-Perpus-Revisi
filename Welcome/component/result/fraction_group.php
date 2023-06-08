@@ -206,3 +206,27 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
         </div>
     </div>
 </div>
+
+<div id="ditolak-admin">
+    <div class="content" id="add">
+        <div class="title">
+            <h1>Penolakan Buku</h1>
+            <button onclick="
+            $('#add').attr('id', 'close');
+            
+            setTimeout(()=>{
+            $('#ditolak-admin').remove();
+            $('.popup').attr('hidden', true);
+            $('body').removeAttr('height')
+            },500);
+        ">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <p class="pesan">Anda menolaknya karena <br>
+            <strong>
+                <?= $alasan['alasan'] ?>
+            </strong>
+        </p>
+    </div>
+</div>

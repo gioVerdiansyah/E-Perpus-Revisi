@@ -223,7 +223,8 @@ main .content-wrapper .content .download button {
   margin: 0 auto;
   cursor: pointer;
   transition: all 0.3s;
-}.content-wrapper
+}
+.content-wrapper
 .content
 .card-wrapper
 .isi-data
@@ -286,6 +287,7 @@ button.edit i{
   td
   button
   i.fa-chart-simple {
+  color: white;
   margin-right: 5px;
   transform: rotate(90deg);
 }

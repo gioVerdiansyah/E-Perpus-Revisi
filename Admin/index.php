@@ -147,6 +147,7 @@ if ($key === hash("sha512", $row["username"])) {
         <?php } ?>
     </script>
     <?php unset($_SESSION['tambah-buku']);
+    unset($_SESSION['ubah-buku']);
 } else { ?>
     <script>
         $(".content").load('component/Home-Admin.php');

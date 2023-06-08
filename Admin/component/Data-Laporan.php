@@ -141,7 +141,9 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
                                             <i class="fa-solid fa-check"></i> Disetujui
                                         </p>
                                     <?php } elseif ($borrowers["status"] === "2") { ?>
-                                        <p class="persetujuan r">
+                                        <p class="persetujuan r h" onclick="
+                                        $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $borrowers['id'] ?> #ditolak-admin', ()=>{$('.popup').removeAttr('hidden')});
+                                        ">
                                             <i class="fa-regular fa-circle-xmark"></i> Ditolak!
                                         </p>
                                     <?php } ?>

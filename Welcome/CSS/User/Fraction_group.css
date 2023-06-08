@@ -6,7 +6,8 @@ body {
 }
 .popup #pop-up,
 .popup #peminjaman,
-.popup #ditolak{
+.popup #ditolak,
+.popup #ditolak-admin{
   background-color: var(--bg-0-5);
   width: 100vw;
   height: 100vh;
@@ -29,7 +30,8 @@ body {
 }
 .popup #pop-up .content,
 .popup #peminjaman .content,
-.popup #ditolak .content {
+.popup #ditolak .content,
+.popup #ditolak-admin .content {
   width: 75%;
   height: max-content;
   background-color: white;
@@ -40,7 +42,8 @@ body {
 }
 .popup #pop-up .content .title,
 .popup #peminjaman .content .title,
-.popup #ditolak .content .title {
+.popup #ditolak .content .title ,
+.popup #ditolak-admin .content .title{
   position: relative;
   height: max-content;
   background-color: rgb(248, 248, 248);
@@ -53,20 +56,23 @@ body {
 }
 .popup #pop-up .content .title h1,
 .popup #peminjaman .content .title h1,
-.popup #ditolak .content .title h1 {
+.popup #ditolak .content .title h1,
+.popup #ditolak-admin .content .title h1 {
   font-size: large;
   color: var(--purple);
 }
 .popup #peminjaman .content .title h1{
   color: var(--orange);
 }
-.popup #ditolak .content .title h1{
+.popup #ditolak .content .title h1,
+.popup #ditolak-admin .content .title h1{
   color: var(--red);
 
 }
 .popup #pop-up .content .title button,
 .popup #peminjaman .content .title button,
-.popup #ditolak .content .title button {
+.popup #ditolak .content .title button,
+.popup #ditolak-admin .content .title button {
   padding: 8px;
   height: max-content;
   border: none;
@@ -81,13 +87,16 @@ body {
   transition: all 0.3s;
 }
 .popup #peminjaman .content .title button,
-.popup #ditolak .content .title button{
+.popup #ditolak .content .title button,
+.popup #ditolak-admin .content .title button{
   color: var(--orange);
 }
-.popup #ditolak{
+.popup #ditolak,
+.popup #ditolak-admin{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.popup #ditolak .content .hubungi-admin{
+.popup #ditolak .content .hubungi-admin,
+.popup #ditolak-admin .content .hubungi-admin{
   display: flex;
   flex-direction: column;
   margin: 5% 15px 0 15px;
@@ -104,10 +113,15 @@ body {
 .popup #peminjaman .content .title button:hover,
 .popup #ditolak .content .title button:hover {
   background-color: rgb(248, 248, 248);
-}.popup #ditolak .content p.pesan{
+}
+.popup #ditolak .content p.pesan{
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 20px 0;
+}
+.popup #ditolak-admin .content p.pesan{
+  margin: 20px 0;
+  text-align: center;
 }
 .popup #pop-up .content .data,
 .popup #peminjaman .content .data {

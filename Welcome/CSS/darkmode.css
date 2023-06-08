@@ -51,10 +51,48 @@ main .data-wrapper .data-indicator .data-search input {
   background-color: var(--grey) !important;
 }
 .popup #pop-up .content .title {
-  background-color: var(--grey) !important;
+  background-color: var(--light) !important;
 }
 .popup #pop-up .content .title button {
   background-color: var(--grey) !important;
+}
+/* popup */
+.popup #pop-up .content,
+.popup #peminjaman .content,
+.popup #ditolak .content,
+.popup #pop-up .confirm,
+.popup #pop-up .persetujuan,
+.popup #pop-up .penolakan,
+.popup #pop-up .sukses,
+.popup #pop-up .ditolak{
+  background-color: var(--grey) !important;
+}
+.popup .content-popup .title,
+.popup #pop-up .content .title,
+.popup #peminjaman .content .title,
+.popup #ditolak .content .title ,
+.popup #pop-up .confirm ul,
+.popup #pop-up .persetujuan ul,
+.popup #pop-up .persetujuan button.close{
+  background-color: var(--light) !important;
+}
+.popup .content-popup .title button,
+#pop-up .content .title button,
+.popup #pop-up .content .title button,
+.popup #peminjaman .content .title button,
+.popup #ditolak .content .title button{
+  background-color: var(--grey) !important;
+}
+.popup .content-popup form,
+#pop-up .content .data{
+  background-color: var(--grey);
+  color: var(--white);
+}
+form ul li input,
+form ul li textarea,
+form ul .first li input,
+form ul .second li input{
+  background-color: var(--light);
 }
 
 /* history */

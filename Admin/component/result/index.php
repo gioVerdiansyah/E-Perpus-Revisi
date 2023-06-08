@@ -37,41 +37,43 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                 $id = 1;
                 foreach ($books as $book):
                     ?>
-                    <tr cellspacing="10">
-                        <td>
-                            <?= $id ?>
-                        </td>
-                        <td>
-                            <img src="Temp/<?= $book['image'] ?>" alt=" Thumbnail" height="70">
-                        </td>
-                        <td class="limit">
-                            <?= $book['judul_buku'] ?>
-                        </td>
-                        <td>
-                            <p>
-                                <?= $book['kode_buku'] ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <?= getStock($book['judul_buku']) ?>
-                            </p>
-                        </td>
-                        <td>
-                            <?= $book['kategori'] ?>
-                        </td>
-                        <td class="limit">
-                            <?= $book['penulis'] ?>
-                        </td>
-                        <td class="limit">
-                            <?= $book['penerbit'] ?>
-                        </td>
-                        <td>
-                            <!-- delete -->
-                            <button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>')">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </button>
-                            <button class="delete" onclick="
+                <tr cellspacing="10">
+                    <td>
+                        <?= $id ?>
+                    </td>
+                    <td>
+                        <img src="Temp/<?= $book['image'] ?>" alt=" Thumbnail" height="70">
+                    </td>
+                    <td class="limit">
+                        <?= $book['judul_buku'] ?>
+                    </td>
+                    <td>
+                        <p>
+                            <?= $book['kode_buku'] ?>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <?= getStock($book['judul_buku']) ?>
+                        </p>
+                    </td>
+                    <td>
+                        <?= $book['kategori'] ?>
+                    </td>
+                    <td class="limit">
+                        <?= $book['penulis'] ?>
+                    </td>
+                    <td class="limit">
+                        <?= $book['penerbit'] ?>
+                    </td>
+                    <td>
+                        <!-- delete -->
+                        <button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>', ()=>{
+                                    $('.popup').removeAttr('hidden');
+                                })">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus buku <?= $book['judul_buku'] ?>?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Master-Buku.php', { 
@@ -82,16 +84,16 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                            </button><br>
-                            <!-- detail -->
-                            <button onclick="
+                        </button><br>
+                        <!-- detail -->
+                        <button onclick="
                                 $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                            </button>
-                        </td>
-                    </tr>
-                    <?php
+                        </button>
+                    </td>
+                </tr>
+                <?php
                     $id++;
                 endforeach;
                 ?>
@@ -108,29 +110,29 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
 
         <div class="pagination">
             <?php if ($page->halamanAktif() > 1): ?>
-                <button class="left" onclick="
+            <button class="left" onclick="
                 $('.isi-data').load(
                     'component/result/index.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $keyword ?>'
                 )">
-                    <i class=" fa-solid fa-angle-left"></i>
-                    Prev
-                </button>
+                <i class=" fa-solid fa-angle-left"></i>
+                Prev
+            </button>
             <?php endif ?>
             <?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-                <?php if ($i == $page->halamanAktif()): ?>
-                    <p class="amount-of-data">
-                        <?= $i ?>
-                    </p>
-                <?php endif ?>
+            <?php if ($i == $page->halamanAktif()): ?>
+            <p class="amount-of-data">
+                <?= $i ?>
+            </p>
+            <?php endif ?>
             <?php endfor ?>
             <?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-                <button onclick="
+            <button onclick="
                 $('.isi-data').load(
                         'component/result/index.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $keyword ?>'
                     )">
-                    Next
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
+                Next
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
             <?php endif ?>
         </div>
     </div>
