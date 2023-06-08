@@ -44,7 +44,6 @@ $("main .content-wrapper .heading .profile").mouseenter(function() {
   });
 
 // AJAX
-    $(".content").load('component/Home-Admin.php');
     function onReady (ini, path) {
         $('.content').load(path);
         $('*').removeClass('active');

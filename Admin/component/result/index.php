@@ -13,7 +13,7 @@ $page = new Pagenation($_GET['lim'], "buku", $_GET['page']);
 $keyword = $_GET["key"];
 
 $books = mysqli_query($db, "SELECT * FROM buku WHERE
-judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
+judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");
 ;
 ?>
 <!-- isi data -->
@@ -68,8 +68,9 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                         </td>
                         <td>
                             <!-- delete -->
-                            <a href="database/update.php?id=<?= $book['id'] ?>"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
+                            <button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>')">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
                             <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus buku <?= $book['judul_buku'] ?>?', function(isTrue){
                                         if(isTrue){

@@ -1,3 +1,5 @@
+@import url(../../../Assets/assets.css);
+
 body {
   margin: 0;
   position: relative;
@@ -5,7 +7,7 @@ body {
 .popup #pop-up,
 .popup #peminjaman,
 .popup #ditolak{
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--bg-0-5);
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
@@ -53,13 +55,13 @@ body {
 .popup #peminjaman .content .title h1,
 .popup #ditolak .content .title h1 {
   font-size: large;
-  color: rgb(122, 110, 240);
+  color: var(--purple);
 }
 .popup #peminjaman .content .title h1{
-  color: rgb(255,159,67);
+  color: var(--orange);
 }
 .popup #ditolak .content .title h1{
-  color: rgb(234, 84, 85);
+  color: var(--red);
 
 }
 .popup #pop-up .content .title button,
@@ -70,7 +72,7 @@ body {
   border: none;
   border-radius: 3px;
   background-color: white;
-  color: rgb(122, 110, 240);
+  color: var(--purple);
   box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.3);
   position: absolute;
   right: -10px;
@@ -80,7 +82,7 @@ body {
 }
 .popup #peminjaman .content .title button,
 .popup #ditolak .content .title button{
-  color: rgb(255,159,67);
+  color: var(--orange);
 }
 .popup #ditolak{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -121,7 +123,7 @@ body {
 }
 .popup #peminjaman .content .data form ul div input{
   padding: 5px;
-  outline-color: rgb(122, 110, 240);
+  outline-color: var(--purple);
   border: 1px solid grey;
   border-radius: 3px;
 }
@@ -135,14 +137,14 @@ body {
  margin-top: 20px;
 }
 .popup #peminjaman .content .data form ul div input.disabled{
-  border: 1px solid rgb(228, 53, 53);
+  border: 1px solid var(--red);
 }
 .popup #peminjaman .content .data form ul li:last-child button{
   cursor: pointer;
   width: max-content;
   padding: 10px 15px;
   color: white;
-  background-color: rgb(255,159,67);
+  background-color: var(--orange);
   border: none;
   border-radius: 5px;
   transition: .3s;
@@ -152,10 +154,10 @@ body {
   background-color: grey;
 }
 .popup #peminjaman .content .data form ul li:last-child button#disabled:hover{
-  background-color: rgb(228, 53, 53);
+  background-color: var(--red-h);
 }
 .popup #peminjaman .content .data form ul li:last-child button:hover{
-  background-color: rgb(196, 113, 37);
+  background-color: var(--orange-h);
 }
 .popup #peminjaman .content .data form ul div{
   display: flex;
@@ -195,12 +197,12 @@ body {
   border-radius: 3px;
   padding: 5px 0;
   margin: 5px 20px 20px;
-  background-color: rgb(255, 159, 67);
+  background-color: var(--orange);
   color: white;
   transition: all .3s;
 }
 .data-wrapper .data-indicator .unduh-stroke a:hover{
-  background-color: rgb(233, 127, 28);
+  background-color: var(--orange-h);
 }
 
 @media (max-width: 660px) {

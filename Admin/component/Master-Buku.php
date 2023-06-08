@@ -14,18 +14,18 @@ if (isset($id)) {
 
 $pagenation = new Pagenation(10, "buku", 1);
 
-$books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenation->dataPerhalaman()}");
+$books = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
 ?>
 
 <style>
-    .side-bar {
-        height: 100% !important;
-        box-shadow: none !important;
-    }
+.side-bar {
+    height: 100% !important;
+    box-shadow: none !important;
+}
 
-    main {
-        height: max-content !important;
-    }
+main {
+    height: max-content !important;
+}
 </style>
 
 <link rel="stylesheet" href="CSS/style-content.css">
@@ -37,9 +37,11 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
 </div>
 <!-- ini.isi -->
 <div class="card-wrapper penulis">
-    <a href="database/insert.php" rel="noopener noreferrer">
-        <button class="tambah"><i class="fa-solid fa-plus"></i>Tambah</button>
-    </a>
+    <button class="tambah" onclick="
+            $('.popup').load('database/insert.php', ()=>{
+                $('.popup').removeAttr('hidden');
+            });
+        "><i class="fa-solid fa-plus"></i>Tambah</button>
     <div class="data-wrapper">
         <div class="data-indicator">
             <div class="data-entries">
@@ -81,42 +83,44 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
                         $id = 1;
                         foreach ($books as $book):
                             ?>
-                            <tr>
-                                <td>
-                                    <?= $id ?>
-                                </td>
-                                <td>
-                                    <img src="Temp/<?= $book['image'] ?>" alt="Thumbnail" height="70">
-                                </td>
-                                <td class="limit">
-                                    <p>
-                                        <?= $book['judul_buku'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <?= $book['kode_buku'] ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <?= getStock($book['judul_buku']) ?>
-                                    </p>
-                                </td>
-                                <td>
-                                    <?= $book['kategori'] ?>
-                                </td>
-                                <td class="limit">
-                                    <?= $book['penulis'] ?>
-                                </td>
-                                <td class="limit">
-                                    <?= $book['penerbit'] ?>
-                                </td>
-                                <td>
-                                    <a href="database/update.php?id=<?= $book['id'] ?>"><i
-                                            class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <button class="delete" onclick="
+                        <tr>
+                            <td>
+                                <?= $id ?>
+                            </td>
+                            <td>
+                                <img src="Temp/<?= $book['image'] ?>" alt="Thumbnail" height="70">
+                            </td>
+                            <td class="limit">
+                                <p>
+                                    <?= $book['judul_buku'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= $book['kode_buku'] ?>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <?= getStock($book['judul_buku']) ?>
+                                </p>
+                            </td>
+                            <td>
+                                <?= $book['kategori'] ?>
+                            </td>
+                            <td class="limit">
+                                <?= $book['penulis'] ?>
+                            </td>
+                            <td class="limit">
+                                <?= $book['penerbit'] ?>
+                            </td>
+                            <td>
+                                <button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>', ()=>{
+                                    $('.popup').removeAttr('hidden');
+                                })">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus buku <?= $book['judul_buku'] ?>?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Master-Buku.php', { 
@@ -127,17 +131,17 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                                    </button><br>
-                                    <button onclick="
+                                </button><br>
+                                <button onclick="
                                 $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?> #pop-up', ()=>{
                                     $('#pop-up').fadeIn(500);
                                 });
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php
+                                </button>
+                            </td>
+                        </tr>
+                        <?php
                             $id++;
                         endforeach;
                         ?>
@@ -151,13 +155,13 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id ASC LIMIT {$pagenatio
                 <div class="pagination">
                     <p class="amount-of-data">1</p>
                     <?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-                        <button onclick="
+                    <button onclick="
                     $('.isi-data').load(
                         'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
                     )">
-                            Next
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
+                        Next
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
                     <?php endif ?>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 <?php
+require "../function.php";
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
@@ -11,7 +12,7 @@ $id = $_COOKIE["USRADMNLGNISEQLTHROE"];
 $key = $_COOKIE["UISADMNLGNISEQLTRE"];
 
 // cek username berdasarkan id
-$result = mysqli_query(mysqli_connect("localhost", "root", "", "perpustakaan_sekolah"), "SELECT * FROM loginadmin WHERE id='$id'");
+$result = mysqli_query($db, "SELECT * FROM loginadmin WHERE id='$id'");
 $row = mysqli_fetch_assoc($result); //ambil
 $username = '';
 
@@ -131,5 +132,25 @@ if ($key === hash("sha512", $row["username"])) {
 <script src="JS/jquery-3.6.3.min.js"></script>
 <script src="JS/script.js"></script>
 <script src="JS/alert.js"></script>
+<?php if (isset($_SESSION['tambah-buku']) || isset($_SESSION['ubah-buku'])) { ?>
+    <script>
+        $('.content').load('component/Master-Buku.php');
+        $('*').removeClass('active');
+        $('#buku h3').addClass('active');
+        $('#list-master-data').addClass('list-master-data-onclick');
+        $('.side-bar ul li.dropdown .master-data .dropdown-icon').addClass('dropdown-icon-onclick');
+        $('.side-bar ul .dropdown .master-data').addClass('addBg');
+        <?php if (isset($_SESSION['ubah-buku'])) { ?>
+            Peringatan.sukses("Berhasil mengubah buku!", 3000);
+        <?php } else { ?>
+            Peringatan.sukses("Berhasil menambah buku!", 3000);
+        <?php } ?>
+    </script>
+    <?php unset($_SESSION['tambah-buku']);
+} else { ?>
+    <script>
+        $(".content").load('component/Home-Admin.php');
+    </script>
+<?php } ?>
 
 </html>

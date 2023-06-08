@@ -50,13 +50,13 @@ h1 img {
   align-items: center;
 }
 .side-bar ul li.active {
-  background-color: blueviolet;
+  background-color: var(--voilet);
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
 }
 .side-bar ul li.dropdown ul li h3.active {
-  background-color: blueviolet;
+  background-color: var(--voilet);
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
@@ -120,7 +120,7 @@ h1 img {
 }
 .side-bar ul li.dropdown .master-data h2 .notif {
   background-color: rgba(255, 0, 0, 0.116);
-  color: red;
+  color: var(--red);
   border-radius: 50%;
   padding: 0 7px;
   margin: 0 5px;
@@ -276,7 +276,7 @@ main {
   transform: translateY(5px);
 }
 .content-wrapper .content .title h2 {
-  color: blueviolet;
+  color: var(--voilet);
 }
 
 /* footer */
@@ -285,7 +285,7 @@ main footer {
   margin-top: 10px;
 }
 main footer h2 a {
-  color: blueviolet;
+  color: var(--voilet);
   transition: all 0.3s;
 }
 main footer h2 a:hover {

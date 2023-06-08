@@ -1,3 +1,4 @@
+@import url("../../Assets/assets.css");
 * {
   margin: 0;
   padding: 0;
@@ -86,6 +87,7 @@ main form ul li:nth-child(3) * {
   margin: 0 5px 0 0;
 }
 main form ul li input {
+  outline-color: var(--purple);
   padding: 5px 3px;
   border: 1px solid grey;
   border-radius: 3px;
@@ -93,21 +95,21 @@ main form ul li input {
 main form ul li:last-child button {
   outline: none;
   border: none;
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   color: white;
   border-radius: 3px;
   padding: 5px 3px;
   transition: all 0.3s;
 }
 main form ul li p.error {
-  color: red;
+  color: var(--red);
   font-family: Arial, Helvetica, sans-serif;
 }
 main form ul li:last-child button:hover {
-  background-color: rgb(64, 53, 180);
+  background-color: var(--purple-h);
 }
 main p a {
-  color: rgb(115, 103, 240);
+  color: var(--purple)
 }
 
 @media (max-width: 660px) {
@@ -123,7 +125,7 @@ main p a {
   main {
     width: 100%;
     padding: 10px 0;
-    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--bs-0-5);
   }
   main form ul li {
     width: 75%;

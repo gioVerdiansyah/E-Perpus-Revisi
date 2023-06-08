@@ -1,16 +1,25 @@
+@import url('../../Assets/assets.css');
+
 body {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 form {
-  width: 50%;
+  position: relative;
+  width: 65%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
 }
 form ul {
-  margin: auto;
+  width: 75%;
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 }
 form ul li:last-child {
   align-self: flex-end;
@@ -54,21 +63,92 @@ form ul li.center input{
   width: 30%;
   margin-left: 5px;
 }
+form ul li,
+form ul .first li,
+form ul .second li{
+  margin: 10px 0;
+}
+form ul li input,
+form ul li textarea,
+form ul .first li input,
+form ul .second li input{
+  border: 1px solid grey;
+  border-radius: 3px;
+  outline-color: var(--purple);
+}
 form ul li:last-child button {
+  cursor: pointer;
   border: none;
   color: white;
-  padding: 3px 5px;
+  padding: 10px 5px;
   border-radius: 3px;
 }
-form ul li:last-child button:first-child {
-  background-color: rgb(40,199,111);
-}
-form ul li:last-child button:first-child:hover {
-  background-color: rgb(81, 211, 81);
-}
 form ul li:last-child button:last-child {
-  background-color: rgb(234, 84, 85);
+  background-color: var(--lightgreen);
 }
 form ul li:last-child button:last-child:hover {
-  background-color: rgb(228, 53, 53);
+  background-color: var(--lightgreen-h);
+}
+form ul li:last-child button:first-child {
+  background-color: var(--red);
+}
+form ul li:first-child button:first-child:hover {
+  background-color: var(--red-h);
+}
+
+
+/* ! Style for CRUD */
+.popup .content-popup{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-0-5);
+}
+.popup .content-popup form .title {
+  position: absolute;
+  top: 0;
+  height: max-content;
+  width: 100%;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 10px 20px;
+  border-top-left-radius: 3px;
+}
+
+.popup .content-popup .title h1 {
+  font-size: large;
+}.popup .content-popup .title h1.tambah,
+.popup .content-popup form .title button.tambah i{
+  color: var(--lightgreen);
+}
+.popup .content-popup .title h1.edit,
+.popup .content-popup form .title button.edit i{
+  color: var(--orange);
+}
+
+.popup .content-popup form .title button {
+  padding: 8px;
+  height: max-content;
+  border: none;
+  border-radius: 3px;
+  background-color: white;
+  color: var(--purple);
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.popup .content-popup form .title button i{
+  color: var(--red);
 }

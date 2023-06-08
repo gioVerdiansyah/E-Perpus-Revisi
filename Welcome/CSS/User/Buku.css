@@ -1,3 +1,4 @@
+@import url(../../../Assets/assets.css);
 main {
   width: 90%;
   margin: 0 auto;
@@ -87,13 +88,13 @@ main .data-wrapper .data-indicator .data-search input {
   padding: 5px 15px;
   border: none;
   border-radius: 3px;
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   margin: 3px auto;
   cursor: pointer;
   transition: all 0.3s;
 }
 .data-wrapper .isi-data .data table tbody tr td#detail button:hover {
-  background-color: rgb(66, 55, 187);
+  background-color: var(--purple-h);
 }
 .data-wrapper .isi-data .data table tbody tr td#detail i {
   margin-right: 5px;
@@ -117,7 +118,7 @@ main .data-wrapper .data-indicator .data-search input {
   padding: 0 5px;
 }
 .data-wrapper .isi-data .description .pagination p.amount-of-data {
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 50%;

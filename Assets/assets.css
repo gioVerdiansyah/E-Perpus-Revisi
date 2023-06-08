@@ -1,0 +1,23 @@
+:root{
+    --bg-0-3: rgba(0, 0, 0, 0.3);
+    --bg-0-5: rgba(0, 0, 0, 0.5);
+    --voilet: blueviolet;
+    --lightgreen: rgb(40,199,111);
+    --lightgreen-h: rgb(81, 211, 81);
+    --red: rgb(234, 84, 85);
+    --red-h: rgb(228, 53, 53);
+    --purple: rgb(115, 103, 240);
+    --purple-h: rgb(93, 81, 226);
+    --orange: rgb(255, 159, 67);
+    --orange-h: rgb(233, 127, 28);
+
+
+    /* box shadow */
+    --bs-0-5: 1px 0px 5px rgba(0, 0, 0, 0.5);
+
+
+    /* darkmode */
+    --grey: rgb(32, 33, 35);
+    --light: rgb(68, 70, 84);
+    --white: #fff;
+}

@@ -1,10 +1,6 @@
+@import url(../../Assets/assets.css);
 * {
   color: white;
-}
-:root {
-  --grey: rgb(32, 33, 35);
-  --light: rgb(68, 70, 84);
-  --white: #fff;
 }
 body {
   background-color: var(--light);

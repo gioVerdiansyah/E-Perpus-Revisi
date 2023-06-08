@@ -1,3 +1,4 @@
+@import url(../../../Assets/assets.css);
 main {
   width: 90%;
   margin: 0 auto;
@@ -78,20 +79,20 @@ form ul li button {
   cursor: pointer;
 }
 form ul li button:first-child {
-  background-color: rgb(57, 206, 57);
+  background-color: var(--lightgreen);
 }
 
 form ul li button:first-child:hover {
-  background-color: rgb(28, 158, 28);
+  background-color: var(--lightgreen-h);
 }
 
 form ul li button:last-child {
-  background-color: rgb(234, 84, 85);
+  background-color: var(--red);
   margin-left: 10px;
 }
 
 form ul li button:last-child:hover {
-  background-color: rgb(228, 53, 53);
+  background-color: var(--red-h);
 }
 form ul li .button p {
   align-items: center;
@@ -105,8 +106,8 @@ form ul li .button p {
   align-items: center;
   margin: 10px auto;
   padding: 10px 15px;
-  background-color: rgb(40,199,111);
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-5);
   border-radius: 3px;
   position: relative;
 }
@@ -120,7 +121,7 @@ form ul li .button p {
   font-size: larger;
   font-weight: 200;
   border: none;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: transparent;
   cursor: pointer;
   position: absolute;
   top: -10px;

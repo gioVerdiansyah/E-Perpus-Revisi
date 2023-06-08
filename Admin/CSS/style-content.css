@@ -1,5 +1,7 @@
+@import url('../../Assets/assets.css');
+
 main .content-wrapper .content .download {
-  background-color: rgb(255, 159, 67);
+  background-color: var(--orange);
   box-shadow: 1px 0px 5px rgb(0, 0, 0, 0.3);
   padding: 5px 20px;
   border-radius: 5px;
@@ -26,7 +28,7 @@ main .content-wrapper .content .download button {
 }
 
 .content-wrapper .content .download:hover {
-  background-color: rgb(233, 127, 28);
+  background-color: var(--orange-h);
 }
 
 .content-wrapper .content .card-wrapper {
@@ -45,8 +47,8 @@ main .content-wrapper .content .download button {
   width: max-content;
   display: flex;
   align-items: center;
-  background-color: rgb(40,199,111);
-  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.5);
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-6);
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -56,7 +58,7 @@ main .content-wrapper .content .download button {
 .content-wrapper .content .card-wrapper #opsi {
   width: max-content;
   padding: 3px;
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   color: white;
   border-radius: 5px;
 }
@@ -64,7 +66,7 @@ main .content-wrapper .content .download button {
   margin-right: 5px;
 }
 .content-wrapper .content .card-wrapper button.tambah:hover {
-  background-color: rgb(81, 211, 81);
+  background-color: var(--lightgreen-h);
 }
 .content-wrapper .content .card-wrapper .data-wrapper .data-indicator {
   display: flex;
@@ -118,13 +120,6 @@ main .content-wrapper .content .download button {
 .content-wrapper .content .card-wrapper .isi-data table tbody tr td {
   padding: 20px 0;
 }
-.content-wrapper .content .card-wrapper .isi-data table tbody tr a {
-  text-decoration: underline;
-  transition: all 0.3s;
-}
-.content-wrapper .content .card-wrapper .isi-data table tbody tr a:hover {
-  color: rgb(93, 81, 226);
-}
 .content-wrapper
   .content
   .card-wrapper
@@ -173,7 +168,7 @@ main .content-wrapper .content .download button {
   tr
   td
   i.fa-pen-to-square {
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
 }
 .content-wrapper
   .content
@@ -184,7 +179,7 @@ main .content-wrapper .content .download button {
   tr
   td
   i.fa-delete-left {
-  background-color: rgb(234, 84, 85);
+  background-color: var(--red);
 }
 .content-wrapper
   .content
@@ -195,7 +190,7 @@ main .content-wrapper .content .download button {
   tr
   td
   i.fa-pen-to-square:hover {
-  background-color: rgb(93, 81, 226);
+  background-color: var(--purple-h);
 }
 .content-wrapper
   .content
@@ -206,7 +201,7 @@ main .content-wrapper .content .download button {
   tr
   td
   i.fa-delete-left:hover {
-  background-color: rgb(228, 53, 53);
+  background-color: var(--red-h);
 }
 .content-wrapper
   .content
@@ -224,10 +219,33 @@ main .content-wrapper .content .download button {
   padding: 5px 15px;
   border: none;
   border-radius: 3px;
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   margin: 0 auto;
   cursor: pointer;
   transition: all 0.3s;
+}.content-wrapper
+.content
+.card-wrapper
+.isi-data
+.data
+table
+tbody
+tr
+td
+button.edit{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.content
+.card-wrapper
+.isi-data
+.data
+table
+tbody
+tr
+td
+button.edit i{
+  padding-top: 5px;
 }
 .content-wrapper
   .content
@@ -239,7 +257,7 @@ main .content-wrapper .content .download button {
   tr
   td
   button:hover {
-  background-color: rgb(66, 55, 187);
+  background-color: var(--purple-h);
 }
 .content-wrapper
   .content
@@ -295,7 +313,7 @@ main .content-wrapper .content .download button {
   .description
   .pagination
   p.amount-of-data {
-  background-color: rgb(115, 103, 240);
+  background-color: var(--purple);
   color: #ffffff;
   padding: 5px 10px;
   border-radius: 50%;
@@ -339,18 +357,18 @@ main .content-wrapper .content .download button {
 .card-wrapper .isi-data .data table tbody tr td button.o{
   margin: 0 !important;
   width: auto !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  color: rgb(255, 159, 67) !important;
-  border: 1px solid rgb(255, 159, 67) !important;
+  background-color: transparent!important;
+  color: var(--orange) !important;
+  border: 1px solid var(--orange) !important;
   padding: 5px 3px !important;
 }
 .card-wrapper .isi-data .data table tbody tr td button.o i{
-  color: rgb(255, 159, 67);
+  color: var(--orange);
 }
 .card-wrapper .isi-data .data table tbody tr td button.o:hover,
 .card-wrapper .isi-data .data table tbody tr td button.o:hover i{
   color: white !important;
-  background-color: rgb(255, 159, 67) !important;
+  background-color: var(--orange) !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.g,
 .card-wrapper .isi-data .data table tbody tr td p.r{
@@ -358,18 +376,18 @@ main .content-wrapper .content .download button {
   padding: 5px 3px !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.g{
-  color: rgb(40,199,111) !important;
-  border: 1px solid rgb(40,199,111) !important;
+  color: var(--lightgreen) !important;
+  border: 1px solid var(--lightgreen) !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.g i{
-  color: rgb(40,199,111) !important;
+  color: var(--lightgreen) !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.r{
-  color: rgb(234, 84, 85);
-  border: 1px solid rgb(234, 84, 85);
+  color: var(--red);
+  border: 1px solid var(--red);
 }
 .card-wrapper .isi-data .data table tbody tr td p.r i{
-  color: rgb(234, 84, 85);
+  color: var(--red);
 }
 
 
@@ -384,7 +402,7 @@ main .content-wrapper .content .download button {
 }
 .information ul{
   list-style-type:decimal;
-  padding-left: 25px;
+  padding: 10px 10px 10px 23px;
 }
 .information h3{
   font-family: Arial, Helvetica, sans-serif;
@@ -396,7 +414,7 @@ main .content-wrapper .content .download button {
   color: rgb(106, 94, 233);
 }
 .information ul li p{
-  color: rgb(121,109,240);
+  color: var(--purple);
 }
 .information button{
   cursor: pointer;

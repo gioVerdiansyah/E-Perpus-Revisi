@@ -1,3 +1,5 @@
+@import url(../../../Assets/assets.css);
+
 .data-wrapper .isi-data .data table tbody tr td p.persetujuan{
   width: 80%;
   text-align: center;
@@ -6,7 +8,7 @@
   transition: all .3s;
 }
 .data-wrapper .isi-data .data table tbody tr td p.h:hover{
-  background-color: rgb(40,199,111);
+  background-color: var(--lightgreen-h);
   color: white;
 }
 .data-wrapper .isi-data .data table tbody tr td p.persetujuan{
@@ -14,12 +16,12 @@
   padding: 5px 3px;
 }
 .data-wrapper .isi-data .data table tbody tr td p.o{
-  color: rgb(255, 159, 67);
-  border: 1px solid rgb(255, 159, 67);
+  color: var(--orange);
+  border: 1px solid var(--orange);
 }
 .data-wrapper .isi-data .data table tbody tr td .r{
-  color: rgb(234, 84, 85);
-  border: 1px solid rgb(234, 84, 85);
+  color: var(--red);
+  border: 1px solid var(--red);
 }
 .data-wrapper .isi-data .data table tbody tr td .r.h:hover{
   cursor: pointer;
@@ -28,11 +30,11 @@
 }
 .data-wrapper .isi-data .data table tbody tr td .r.h:hover{
   color: white;
-  background-color: rgb(228, 53, 53);
+  background-color: var(--red-h);
 }
 .data-wrapper .isi-data .data table tbody tr td p.g{
-  color: rgb(40,199,111);
-  border: 1px solid rgb(40,199,111);
+  color: var(--lightgreen-h);
+  border: 1px solid var(--lightgreen-h);
 }
 .data-wrapper
   .isi-data
@@ -53,7 +55,7 @@
   td
   button.delete {
     cursor: pointer;
-    background-color: rgb(234, 84, 85);
+    background-color: var(--red);
     color: white;
     font-size: small;
     padding: 8px;
@@ -69,7 +71,7 @@
   tr
   td
   button.delete:hover {
-  background-color: rgb(228, 53, 53);
+  background-color: var(--red-h);
 }
 
 @media (max-width: 660px) {
