@@ -385,11 +385,19 @@ button.edit i{
   color: var(--lightgreen) !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.r{
+  cursor: pointer;
   color: var(--red);
   border: 1px solid var(--red);
+  transition: all .3s;
 }
 .card-wrapper .isi-data .data table tbody tr td p.r i{
   color: var(--red);
+  transition: all .3s;
+}
+.card-wrapper .isi-data .data table tbody tr td p.r:hover,
+.card-wrapper .isi-data .data table tbody tr td p.r:hover i{
+  color: white;
+  background-color: var(--red-h);
 }
 
 

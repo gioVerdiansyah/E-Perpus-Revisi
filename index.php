@@ -67,40 +67,41 @@ if (isset($_POST["submit"])) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login dulu~</title>
-  <link rel="stylesheet" href="Welcome/CSS/index.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login dulu~</title>
+    <link rel="stylesheet" href="Welcome/CSS/index.css" />
 </head>
 
 <body>
-  <div class="image"></div>
-  <main>
-    <h1>Selamat Datang <span id="hello">&#128075</span></h1>
-    <form action="" method="post">
-      <ul>
-        <li>
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="Masukkan Username" maxlength="64" required />
-        </li>
-        <li>
-          <label for="pass">Password</label>
-          <input type="password" name="pass" id="pass" maxlength="144" required />
-        </li>
-        <li><input type="checkbox" name="remember" checked /> Remember Me</li>
-        <li>
-          <?php if (isset($err)): ?>
-            <p class="error">Username atau Password salah!</p>
-          <?php endif ?>
-        </li>
-        <li>
-          <button type="submit" name="submit">Send</button>
-        </li>
-      </ul>
-    </form>
-    <p>Belum terdaftar menjadi Anggota? <a href="register.php">daftar</a></p>
-  </main>
+    <div class="image"></div>
+    <main>
+        <h1>Selamat Datang <span id="hello">&#128075</span></h1>
+        <form action="" method="post">
+            <ul>
+                <li>
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Masukkan Username" maxlength="64"
+                        required autofocus />
+                </li>
+                <li>
+                    <label for="pass">Password</label>
+                    <input type="password" name="pass" id="pass" maxlength="144" required />
+                </li>
+                <li><input type="checkbox" name="remember" checked /> Remember Me</li>
+                <li>
+                    <?php if (isset($err)): ?>
+                    <p class="error">Username atau Password salah!</p>
+                    <?php endif ?>
+                </li>
+                <li>
+                    <button type="submit" name="submit">Send</button>
+                </li>
+            </ul>
+        </form>
+        <p>Belum terdaftar menjadi Anggota? <a href="register.php">daftar</a></p>
+    </main>
 </body>
 
 </html>

@@ -31,6 +31,7 @@
 .confirm#add,
 .sukses#add,
 .ditolak#add,
+.ditolak .content#add,
 .persetujuan#add,
 .penolakan#add{
   animation: muncul .5s;
@@ -47,7 +48,8 @@
   }
 }
 #peminjaman .content#add,
-.ditolak-admin .content#add{
+#ditolak-admin .content#add,
+#ditolak .content#add{
   animation: njedul .5s;
 }
 @keyframes njedul {
@@ -62,7 +64,8 @@
   }
 }
 #peminjaman .content#close,
-.ditolak-admin .content#close{
+#ditolak-admin .content#close,
+#ditolak .content#close{
   animation: nutup .5s;
 }
 @keyframes nutup {
