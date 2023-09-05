@@ -1,3 +1,5 @@
+@import url("../../Assets/assets.css");
+
 * {
   margin: 0;
   padding: 0;
@@ -95,6 +97,7 @@ main form ul li:last-child button {
   border-radius: 3px;
   padding: 5px 3px;
   transition: all 0.3s;
+  cursor: pointer;
 }
 main form ul li:last-child button:hover {
   background-color: var(--purple-h);

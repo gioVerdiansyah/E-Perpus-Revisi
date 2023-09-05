@@ -75,6 +75,10 @@ $("main .content-wrapper .heading .profile").mouseenter(function() {
         e.preventDefault();
         onReady(this, 'component/Master-Anggota.php');
     });
+	$("#ulasan h3").click(function (e) { 
+		e.preventDefault();
+		onReady(this, 'component/Ulasan-Buku.php');
+	});
 
     $("#persetujuan").click(function (e) { 
         e.preventDefault();

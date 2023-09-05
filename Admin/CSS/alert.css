@@ -1,6 +1,5 @@
-#pop-up{
+#pop-up {
   width: 100vw;
-  height: 100vh !important;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
   position: absolute;
@@ -9,7 +8,7 @@
 #pop-up .sukses,
 #pop-up .persetujuan,
 #pop-up .ditolak,
-#pop-up .penolakan{
+#pop-up .penolakan {
   min-width: 30%;
   max-width: 35%;
   background-color: white;
@@ -18,116 +17,116 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3),-1px -1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: .4s;
+  transition: 0.4s;
 }
-#pop-up .sukses h1 i{
-  color:rgb(81, 211, 81);
+#pop-up .sukses h1 i {
+  color: rgb(81, 211, 81);
 }
 .confirm#add,
 .sukses#add,
 .ditolak#add,
 .ditolak .content#add,
 .persetujuan#add,
-.penolakan#add{
-  animation: muncul .5s;
+.penolakan#add {
+  animation: muncul 0.5s;
 }
 @keyframes muncul {
-  0%{
-  transform: translate(-50%, -50%) scale(0);
+  0% {
+    transform: translate(-50%, -50%) scale(0);
   }
-  50%{
+  50% {
     transform: translate(-50%, -50%) scale(1.3);
   }
-  100%{
+  100% {
     transform: translate(-50%, -50%) scale(1);
   }
 }
 #peminjaman .content#add,
 #ditolak-admin .content#add,
-#ditolak .content#add{
-  animation: njedul .5s;
+#ditolak .content#add {
+  animation: njedul 0.5s;
 }
 @keyframes njedul {
-  0%{
-  transform: scale(0);
+  0% {
+    transform: scale(0);
   }
-  50%{
+  50% {
     transform: scale(1.3);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
 #peminjaman .content#close,
 #ditolak-admin .content#close,
-#ditolak .content#close{
-  animation: nutup .5s;
+#ditolak .content#close {
+  animation: nutup 0.5s;
 }
 @keyframes nutup {
-  0%{
+  0% {
     transform: scale(1);
-    }
-    50%{
-      transform: scale(1.3);
-    }
-    100%{
-      transform: scale(0);
-    }
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(0);
+  }
 }
 .confirm#close,
 .ditolak#close,
 .sukses#close,
 .persetujuan#close,
-.penolakan#close{
-  animation: tutup .5s;
+.penolakan#close {
+  animation: tutup 0.5s;
 }
 @keyframes tutup {
-  0%{
-  transform: translate(-50%, -50%) scale(1);
+  0% {
+    transform: translate(-50%, -50%) scale(1);
   }
-  50%{
+  50% {
     transform: translate(-50%, -50%) scale(1.3);
   }
-  100%{
+  100% {
     transform: translate(-50%, -50%) scale(0);
   }
 }
 .confirm.shake,
 .persetujuan.shake,
 #peminjaman .content.shake,
-.penolakan.shake{
-  animation: shake .5s !important;
+.penolakan.shake {
+  animation: shake 0.5s !important;
   background-color: rgb(255, 220, 221) !important;
 }
 @keyframes shake {
-  0%{
+  0% {
     transform: translate(-50%, -50%) scale(1);
   }
-  25%{
+  25% {
     transform: translate(-60%, -50%) scale(1);
   }
-  50%{
+  50% {
     transform: translate(-50%, -50%) scale(1);
   }
-  75%{
+  75% {
     transform: translate(-40%, -50%) scale(1);
   }
-  100%{
+  100% {
     transform: translate(-50%, -50%) scale(1);
   }
 }
-#pop-up .confirm h1{
+#pop-up .confirm h1 {
   font-size: xx-large;
   border-radius: 50px;
   padding: 5px 14px;
   font-family: monospace;
 }
-#pop-up .persetujuan h1{
+#pop-up .persetujuan h1 {
   padding: 10px 21px;
   margin-bottom: 20px;
   border: 1px solid grey;
@@ -135,45 +134,45 @@
   background-color: rgb(255, 159, 67);
   color: white;
 }
-#pop-up .confirm h1 i{
+#pop-up .confirm h1 i {
   font-size: xxx-large;
   color: rgb(255, 159, 67);
   margin: 0;
 }
 #pop-up .ditolak h1 i,
-#pop-up .penolakan h1 i{
+#pop-up .penolakan h1 i {
   font-size: xxx-large;
   color: rgb(228, 53, 53) !important;
   margin-bottom: 20px;
 }
 #pop-up .confirm h1 i,
 #pop-up .ditolak h1 i,
-#pop-up .sukses h1 i{
+#pop-up .sukses h1 i {
   font-size: xxx-large;
 }
 #pop-up .confirm h2,
 #pop-up .sukses h2,
 #pop-up .persetujuan h2,
 #pop-up .ditolak h2,
-#pop-up .penolakan h2{
-  font-family: 'Font Awesome 6 Free';
+#pop-up .penolakan h2 {
+  font-family: "Font Awesome 6 Free";
   letter-spacing: 2px;
   margin-top: 20px;
 }
-#pop-up .sukses h2{
+#pop-up .sukses h2 {
   font-size: medium;
 }
 #pop-up .confirm p,
 #pop-up .sukses p,
 #pop-up .persetujuan p,
 #pop-up .ditolak p,
-#pop-up .penolakan p{
+#pop-up .penolakan p {
   text-align: center;
   margin: 20px;
 }
 #pop-up .confirm ul,
 #pop-up .persetujuan ul,
-#pop-up .penolakan ul{
+#pop-up .penolakan ul {
   width: 100%;
   padding: 10px 0px;
   background-color: rgb(224, 224, 224);
@@ -185,48 +184,48 @@
   flex-direction: row;
   justify-content: space-between;
 }
-#pop-up .penolakan  ul{
+#pop-up .penolakan ul {
   display: flex;
   justify-content: center;
 }
 #pop-up .confirm ul li button,
 #pop-up .persetujuan ul li button,
-#pop-up .penolakan  ul li button{
+#pop-up .penolakan ul li button {
   cursor: pointer;
   border: none;
   border-radius: 3px;
   padding: 10px 15px !important;
   color: white;
-  transition: all .3s;
+  transition: all 0.3s;
   margin: 0 20px;
   padding: 5px;
 }
 #pop-up .confirm ul li:first-child button,
-#pop-up .persetujuan ul li:last-child button{
-  background-color: rgb(40,199,111);
+#pop-up .persetujuan ul li:last-child button {
+  background-color: rgb(40, 199, 111);
 }
 #pop-up .confirm ul li:first-child button:hover,
-#pop-up .persetujuan ul li:last-child button:hover{
+#pop-up .persetujuan ul li:last-child button:hover {
   background-color: rgb(81, 211, 81);
 }
-#pop-up .confirm ul li:last-child button{
+#pop-up .confirm ul li:last-child button {
   background-color: rgb(255, 159, 67);
 }
 #pop-up .confirm ul li:last-child button:hover,
-#pop-up .persetujuan ul li:last-child button:hover{
+#pop-up .persetujuan ul li:last-child button:hover {
   background-color: rgb(233, 127, 28);
 }
 
 #pop-up .persetujuan ul li:first-child button,
-#pop-up .penolakan ul li:last-child button{
+#pop-up .penolakan ul li:last-child button {
   background-color: rgb(234, 84, 85);
 }
 #pop-up .persetujuan ul li:first-child button:hover,
-#pop-up .penolakan ul li:last-child button:hover{
+#pop-up .penolakan ul li:last-child button:hover {
   background-color: rgb(228, 53, 53);
 }
 
-#pop-up .penolakan input{
+#pop-up .penolakan input {
   padding: 10px;
   border: 1px solid grey;
   border-radius: 5px;
@@ -237,7 +236,7 @@
 
 /* x mark */
 #pop-up .persetujuan button.close,
-#pop-up .penolakan button.close{
+#pop-up .penolakan button.close {
   cursor: pointer;
   position: absolute;
   right: -5px;
@@ -250,11 +249,11 @@
   transition: all.3s;
 }
 #pop-up .persetujuan button.close:hover,
-#pop-up .penolakan button.close:hover{
+#pop-up .penolakan button.close:hover {
   background-color: rgb(212, 212, 212);
 }
 #pop-up .persetujuan button.close i,
-#pop-up .penolakan  button.close i{
+#pop-up .penolakan button.close i {
   color: rgb(234, 84, 85);
 }
 
@@ -263,8 +262,8 @@
   #pop-up .sukses,
   #pop-up .persetujuan,
   #pop-up .ditolak,
-  #pop-up .penolakan{
+  #pop-up .penolakan {
     min-width: 90% !important;
     max-width: 95% !important;
-  }  
+  }
 }

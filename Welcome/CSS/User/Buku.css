@@ -69,17 +69,40 @@ main .data-wrapper .data-indicator .data-search input {
 .data-wrapper .isi-data .data table tbody tr td#detail {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 10px;
 }
 .data-wrapper .isi-data .data table tbody tr td p {
   margin: auto;
   text-align: center;
 }
-.data-wrapper .isi-data .data table tbody tr td p.limit {
+.data-wrapper .isi-data .data table tbody tr td p {
   width: 70%;
   text-align: left;
+}
+.data-wrapper .isi-data .data table tbody tr td .rating p {
+  font-size: small;
+  text-align: center;
+}
+
+.data-wrapper .isi-data .data table tbody tr td .rating button.rate {
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+}
+
+.data-wrapper .isi-data .data table tbody tr td .rating button.rate:hover {
+  text-decoration: underline;
+}
+
+.data-wrapper .isi-data .data table tbody tr td .rating .checked {
+  font-size: xx-small;
+  color: orange;
+}
+
+.data-wrapper .isi-data .data table tbody tr td p.except {
+  width: 100%;
+  text-align: center;
 }
 
 .data-wrapper .isi-data .data table tbody tr td#detail button {
@@ -89,7 +112,7 @@ main .data-wrapper .data-indicator .data-search input {
   border: none;
   border-radius: 3px;
   background-color: var(--purple);
-  margin: 3px auto;
+  margin: 3px;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -166,19 +189,19 @@ main .data-wrapper .data-indicator .data-search input {
   .data-wrapper .description p {
     font-size: small;
   }
-  table{
+  table {
     width: max-content;
   }
-  .data-wrapper .isi-data .data{
+  .data-wrapper .isi-data .data {
     overflow-x: scroll;
   }
   .popup #pop-up .content {
     width: 100% !important;
   }
-  .data-wrapper .isi-data .data table thead th{
+  .data-wrapper .isi-data .data table thead th {
     padding: 10px 30px;
   }
-  .data-wrapper .isi-data .data table thead th:nth-child(3){
+  .data-wrapper .isi-data .data table thead th:nth-child(3) {
     text-wrap: nowrap;
   }
   .data-wrapper .isi-data .data table tbody tr td p {

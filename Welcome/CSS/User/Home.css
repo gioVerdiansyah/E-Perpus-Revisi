@@ -8,24 +8,33 @@ main {
 }
 main .list-creator,
 main .about-E-perpus {
-  background-color: rgb(245,245,252);
+  background-color: rgb(245, 245, 252);
   box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.2), -2px -1px 3px rgba(0, 0, 0, 0.2);
 }
 main .list-creator img {
   width: 100%;
 }
-
-main .list-creator ul li.title h1 {
+main .list-creator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+main .list-creator .content {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+main .list-creator .content h2 {
   text-align: center;
   font-size: x-large;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-main .list-creator ul {
-  background-color: white;
+main .list-creator .content p {
   border-radius: 3px;
   padding: 10px 20px;
-}
-main .list-creator ul li {
   margin: 5px 0;
 }
 main .list-creator ul li h1 {

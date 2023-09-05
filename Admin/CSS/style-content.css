@@ -1,4 +1,4 @@
-@import url('../../Assets/assets.css');
+@import url("../../Assets/assets.css");
 
 main .content-wrapper .content .download {
   background-color: var(--orange);
@@ -225,27 +225,19 @@ main .content-wrapper .content .download button {
   transition: all 0.3s;
 }
 .content-wrapper
-.content
-.card-wrapper
-.isi-data
-.data
-table
-tbody
-tr
-td
-button.edit{
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  button.edit {
   padding: 0 !important;
   margin: 0 !important;
 }
-.content
-.card-wrapper
-.isi-data
-.data
-table
-tbody
-tr
-td
-button.edit i{
+.content .card-wrapper .isi-data .data table tbody tr td button.edit i {
   padding-top: 5px;
 }
 .content-wrapper
@@ -354,79 +346,77 @@ button.edit i{
   transform: translate(-3px, 1px);
 }
 
-
 /* persetujuan */
-.card-wrapper .isi-data .data table tbody tr td button.o{
+.card-wrapper .isi-data .data table tbody tr td button.o {
   margin: 0 !important;
   width: auto !important;
-  background-color: transparent!important;
+  background-color: transparent !important;
   color: var(--orange) !important;
   border: 1px solid var(--orange) !important;
   padding: 5px 3px !important;
 }
-.card-wrapper .isi-data .data table tbody tr td button.o i{
+.card-wrapper .isi-data .data table tbody tr td button.o i {
   color: var(--orange);
 }
 .card-wrapper .isi-data .data table tbody tr td button.o:hover,
-.card-wrapper .isi-data .data table tbody tr td button.o:hover i{
+.card-wrapper .isi-data .data table tbody tr td button.o:hover i {
   color: white !important;
   background-color: var(--orange) !important;
 }
 .card-wrapper .isi-data .data table tbody tr td p.g,
-.card-wrapper .isi-data .data table tbody tr td p.r{
+.card-wrapper .isi-data .data table tbody tr td p.r {
   border-radius: 3px !important;
   padding: 5px 3px !important;
 }
-.card-wrapper .isi-data .data table tbody tr td p.g{
+.card-wrapper .isi-data .data table tbody tr td p.g {
   color: var(--lightgreen) !important;
   border: 1px solid var(--lightgreen) !important;
 }
-.card-wrapper .isi-data .data table tbody tr td p.g i{
+.card-wrapper .isi-data .data table tbody tr td p.g i {
   color: var(--lightgreen) !important;
 }
-.card-wrapper .isi-data .data table tbody tr td p.r{
+.card-wrapper .isi-data .data table tbody tr td p.r {
   cursor: pointer;
   color: var(--red);
   border: 1px solid var(--red);
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.card-wrapper .isi-data .data table tbody tr td p.r i{
+.card-wrapper .isi-data .data table tbody tr td p.r i {
   color: var(--red);
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .card-wrapper .isi-data .data table tbody tr td p.r:hover,
-.card-wrapper .isi-data .data table tbody tr td p.r:hover i{
+.card-wrapper .isi-data .data table tbody tr td p.r:hover i {
   color: white;
   background-color: var(--red-h);
 }
 
-
 /* information style */
-.information{
+.information {
   width: 100%;
-  background-color: rgb(231,229,247);
+  background-color: rgb(231, 229, 247);
   padding: 3px 5px;
   margin-bottom: 20px;
   border-radius: 5px;
   position: relative;
 }
-.information ul{
-  list-style-type:decimal;
+.information ul {
+  list-style-type: decimal;
   padding: 10px 10px 10px 23px;
 }
-.information h3{
+.information h3 {
   font-family: Arial, Helvetica, sans-serif;
 }
 .information h3,
 .information ul li,
 .information button i,
-.information ul li p strong{
+.information ul li p strong {
   color: rgb(106, 94, 233);
 }
-.information ul li p{
+.information ul li p {
   color: var(--purple);
 }
-.information button{
+.information button {
   cursor: pointer;
   background: transparent;
   border: none;
@@ -434,6 +424,131 @@ button.edit i{
   top: -3px;
   right: -3px;
 }
-.information button{
+.information button {
   font-size: medium;
+}
+
+/* ulasan */
+.content-wrapper .content .card-wrapper .data-wrapper .data-indicator.mt-0 {
+  margin-top: 0px;
+}
+
+#isi-data .data ul li,
+#isi-data .data ul li .wrapper-books .stars-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+#isi-data .data ul li {
+  padding: 10px 20px;
+}
+
+#isi-data .data ul li img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+#isi-data .data ul li .wrapper-books {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#isi-data .data ul li .wrapper-books h2 {
+  margin-bottom: 5px;
+}
+
+#isi-data .data ul li .wrapper-books .stars-wrapper span.checked {
+  color: orange;
+}
+
+#isi-data .data ul li .wrapper-books .stars-wrapper .respon {
+  font-size: medium;
+  margin-left: 10px;
+}
+#isi-data .data ul li .wrapper-books button {
+  width: max-content;
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-6);
+  border: none;
+  border-radius: 5px;
+  padding: 7px 17px;
+  cursor: pointer;
+}
+
+#isi-data .data ul li .wrapper-books button,
+#isi-data .data ul li .wrapper-books button a {
+  transition: all 0.3s;
+}
+
+#isi-data .data ul li .wrapper-books button:hover {
+  color: var(--white);
+  background-color: var(--lightgreen-h);
+}
+#isi-data .data ul li .wrapper-books .penulis {
+  margin-bottom: 5px;
+}
+
+/* ulasan */
+#isi-data .data .komentar-title {
+  font-weight: bold;
+}
+
+#isi-data .data .komentar-wrapper {
+  padding: 20px 40px;
+}
+
+#isi-data .data .komentar-wrapper .card .profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#isi-data .data .komentar-wrapper .card .profile .nickname-saya {
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+#isi-data .data .komentar-wrapper .card .input-komentar textarea {
+  margin-top: 20px;
+  border: 1px solid var(--purple);
+  outline-color: var(--purple);
+  border-radius: 5px;
+}
+
+#isi-data .data .komentar-wrapper .card .input-komentar form {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+
+#isi-data .data .komentar-wrapper .card .input-komentar form button {
+  align-self: flex-end;
+  width: max-content;
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-6);
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#isi-data .data .komentar-wrapper .card .input-komentar form button:hover {
+  color: var(--white);
+  background-color: var(--lightgreen-h);
+}
+
+/* isi comentar */
+#isi-data .data .komentar-wrapper .card.komentar {
+  margin-top: 30px;
+  padding: 30px;
+  width: 70%;
+  border: 1px solid var(--purple);
+  border-radius: 5px;
+}
+#isi-data .data .komentar-wrapper .card .komentar p {
+  margin-top: 10px;
 }

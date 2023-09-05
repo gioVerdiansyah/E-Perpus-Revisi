@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/80e53aea6c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../Admin/JS/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="/Admin/CSS/style-content.css"
+    /> -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="side-bar">
+      <a href="" class="icon">
+        <img src="/Assets/logo-smk.png" />
+        <h1>E-perpus Skansa</h1>
+      </a>
+      <ul>
+        <li class="dashboard active">
+          <h2><i class="fa-solid fa-house"></i> Dashboard</h2>
+        </li>
+        <li class="dropdown">
+          <div class="master-data">
+            <h2>
+              <i class="fa-solid fa-database"></i>Master data
+              <span class="notif">5</span>
+            </h2>
+            <div class="dropdown-icon">
+              <h2><i class="fa-sharp fa-solid fa-angle-down"></i></h2>
+            </div>
+          </div>
+          <ul class="list-master-data" id="list-master-data">
+            <li id="penulis">
+              <h3>Penulis</h3>
+            </li>
+            <li id="penerbit">
+              <h3>Penerbit</h3>
+            </li>
+            <li id="kategori">
+              <h3>Kategori</h3>
+            </li>
+            <li id="buku">
+              <h3>Buku</h3>
+            </li>
+            <li id="anggota">
+              <h3>Anggota</h3>
+            </li>
+          </ul>
+        </li>
+        <li id="persetujuan">
+          <h2><i class="fa-solid fa-clipboard-list"></i>Persetujuan</h2>
+        </li>
+        <li id="laporan">
+          <h2><i class="fa-solid fa-chart-simple"></i>Laporan</h2>
+        </li>
+      </ul>
+    </div>
+    <!-- content -->
+    <main>
+      <div class="content-wrapper">
+        <header class="heading">
+          <div class="action">
+            <button id="humberger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <button id="darkmode" class="light">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+          </div>
+          <div class="profile">
+            <div class="text">
+              <h2 class="name">Verdi</h2>
+              <h3 class="type">Admin</h3>
+            </div>
+            <!-- photo profile user -->
+            <img src="/Admin/Temp/6433ee9dcef97.jpg" alt="photo profile" />
+            <div class="dropdown-profile">
+              <ul>
+                <li>
+                  <button
+                    onclick="
+                                    Peringatan.konfirmasi('Apakah Anda yakin ingin logout?', (isTrue)=>{
+                                        if(isTrue){
+                                            window.location.href = 'logout-admin.php';
+                                        }
+                                    })
+                                "
+                  >
+                    <i class="fi fi-rr-sign-out-alt"></i> Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+        <div class="content">
+          <div class="title">
+            <h1>Master Data</h1>
+            <hr />
+            <h2>Ulasan <img src="/Assets/angle-small-right.svg" alt="" /></h2>
+            <h3>Buku</h3>
+          </div>
+          <!-- ini.isi -->
+          <div class="card-wrapper penulis">
+            <div class="data-wrapper">
+              <div class="data-indicator mt-0">
+                <div class="data-entries">
+                  <p>show</p>
+                  <select
+                    id="selection"
+                    name="selection"
+                    onchange="
+						$('#isi-data').load('component/result/index.php?lim=' + $(this).val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val())"
+                  >
+                    <option value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="2">2</option>
+                  </select>
+                  <p>entries</p>
+                </div>
+                <div class="data-search">
+                  <label for="search">Search:</label>
+                  <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    onkeyup="
+					$('#isi-data').load(
+						'component/result/index.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val()
+					)"
+                  />
+                </div>
+              </div>
+              <!-- isi data -->
+              <div class="isi-data" id="isi-data">
+                <div class="data">
+                  <ul>
+                    <li>
+                      <img
+                        src="/Admin/Temp/64f2e01d723ed.jpg"
+                        alt="gambar sementara"
+                      />
+                      <div class="wrapper-books">
+                        <div class="row">
+                          <h2>Sejarah dunia yang di sembunyikan</h2>
+                          <div class="stars-wrapper">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <p class="respon">Cukup bagus</p>
+                          </div>
+                        </div>
+                        <p class="penulis">Verdianysah</p>
+                        <button>Komentar user</button>
+                      </div>
+                    </li>
+                  </ul>
+                  <hr />
+                  <p class="komentar-title">Komentar:</p>
+                  <div class="komentar-wrapper">
+                    <div class="card">
+                      <div class="profile">
+                        <img
+                          src="/Admin/Temp/6433ee9dcef97.jpg"
+                          alt="photo profile user verdi"
+                          width="35"
+                        />
+                        <p class="nickname-saya">Verdi</p>
+                      </div>
+                      <div class="input-komentar">
+                        <form action="">
+                          <textarea
+                            name="isi_ulasan"
+                            id="isi_ulasan"
+                            cols="50"
+                            rows="5"
+                            placeholder="Ketik ulasan anda disini"
+                          >
+                          </textarea>
+                          <button type="submit">
+                            <i class="fa-solid fa-paper-plane"></i>kirim
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="card komentar">
+                      <div class="profile">
+                        <img
+                          src="/Admin/Temp/6433ee9dcef97.jpg"
+                          alt="photo profile user verdi"
+                          width="35"
+                        />
+                        <p class="nickname-saya">Verdi</p>
+                      </div>
+                      <div class="komentar">
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. A cum praesentium, dicta et, ut nihil
+                          dignissimos maxime sint error ipsam totam nostrum
+                          possimus. Praesentium fugit aspernatur nostrum minima
+                          labore corrupti dicta, laboriosam aliquid cum vel?
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="description">
+                  <p>Showing 5 of 10 entries</p>
+                  <div class="pagination">
+                    <p class="amount-of-data">1</p>
+                    <button>
+                      Next
+                      <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <h2>
+          COPYRIGHT &#x24B8;
+          <a href="https://smkn1mejayan.sch.id/" target="_blank">
+            2023 SMKN 1 MEJAYAN Kab. MADIUN</a
+          >,All rights Reserved
+        </h2>
+      </footer>
+    </main>
+  </body>
+</html>

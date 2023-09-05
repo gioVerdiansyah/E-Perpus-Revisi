@@ -4,11 +4,26 @@ require '../../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();
 if (!isset($_SESSION["login"]) && !isset($_COOKIE["UISADMNLGNISEQLTRE"]) && !isset($_COOKIE["USRADMNLGNISEQLTHROE"])) {
-  header("Location: ../../login-admin.php");
-  exit;
+	header("Location: ../../login-admin.php");
+	exit;
 }
 
-$data = mysqli_query($db, "SELECT * FROM peminjam WHERE status IN ('1', '2') ORDER BY id DESC");
+$query = "SELECT
+peminjam.*,
+buku.judul_buku,
+loginuser.username,
+loginuser.gambar
+FROM
+peminjam
+LEFT JOIN buku ON peminjam.buku_id = buku.id
+LEFT JOIN loginuser ON peminjam.user_id = loginuser.id
+WHERE
+peminjam.status IN ('1', '2')
+ORDER BY
+peminjam.id DESC
+";
+
+$data = mysqli_query($db, $query);
 
 
 // denkripsi
@@ -20,7 +35,7 @@ $decryptedData = openssl_decrypt($encryptedDataKey, 'AES-256-CBC', '#XXXMr.Verdi
 $html = '';
 
 if ($decryptedData === "!@#)Verdi(*$&%^") {
-  $html .= '
+	$html .= '
   <img src="../../../Assets/logo-smk.png" alt="Logo SMKN 1 Mejayan" width="70" style="margin-left:45%">
   <h1>Data Laporan Peminjaman Buku E-Perpus Skansa</h1>
         <table width="100%" style="padding:0 !impoetant; border: 1px solid grey;">
@@ -38,9 +53,9 @@ if ($decryptedData === "!@#)Verdi(*$&%^") {
             </thead>
             <tbody width="100%" cellspacing="10">
             ';
-  $id = 1;
-  foreach ($data as $peminjam) {
-    $html .= '
+	$id = 1;
+	foreach ($data as $peminjam) {
+		$html .= '
                     <tr cellspacing="10">
                         <td>
                             <p>
@@ -53,11 +68,11 @@ if ($decryptedData === "!@#)Verdi(*$&%^") {
                             </p>
                         </td>
                         <td>
-                            <img src="../../../.temp/' . $peminjam['pp_user'] . '" alt="photo profile peminjam" height="70">
+                            <img src="../../../.temp/' . $peminjam['gambar'] . '" alt="photo profile peminjam" height="70">
                         </td>
                         <td class="limit">
                             <p>
-                                ' . $peminjam['bukunya'] . '
+                                ' . $peminjam['judul_buku'] . '
                             </p>
                         </td>
                         <td class="limit center" style="text-align: center;">
@@ -79,26 +94,26 @@ if ($decryptedData === "!@#)Verdi(*$&%^") {
                         </td>
                         <td>
                         ';
-    if ($peminjam["status"] === "1") {
-      $html .= '<p class="persetujuan g">
+		if ($peminjam["status"] === "1") {
+			$html .= '<p class="persetujuan g">
                                     <i class="fa-solid fa-check"></i> Disetujui
                                 </p>';
-    } elseif ($peminjam["status"] === "2") {
-      $html .= '<p class="persetujuan r">
+		} elseif ($peminjam["status"] === "2") {
+			$html .= '<p class="persetujuan r">
                                     <i class="fa-regular fa-circle-xmark"></i> Ditolak!
                                 </p>';
-    }
-    $html .= '</td>
+		}
+		$html .= '</td>
                     </tr>
                     ' . $id++;
-  }
-  ;
-  $html .= '</tbody>
+	}
+	;
+	$html .= '</tbody>
         </table>
     <script src="https://kit.fontawesome.com/981acb16d7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../CSS/cetak.css">';
 } else {
-  $html .= '
+	$html .= '
   <h1>Data tidak dapat ditampilkan!!!</h1>
   <p>Coba refresh dan tekan tombol "Download Data Laporan"</p>
   <p style="font-size: 8px">Apakah Anda Hengker Pro Tzy???</p>

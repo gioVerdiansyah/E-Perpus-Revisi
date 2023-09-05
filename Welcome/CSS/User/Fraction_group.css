@@ -7,10 +7,11 @@ body {
 .popup #pop-up,
 .popup #peminjaman,
 .popup #ditolak,
-.popup #ditolak-admin{
+.popup #ditolak-admin,
+.popup #ulasan {
   background-color: var(--bg-0-5);
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   overflow-y: scroll;
   position: absolute;
   z-index: 2;
@@ -31,19 +32,24 @@ body {
 .popup #pop-up .content,
 .popup #peminjaman .content,
 .popup #ditolak .content,
-.popup #ditolak-admin .content {
+.popup #ditolak-admin .content,
+.popup #ulasan .content {
   width: 50%;
   height: max-content;
   background-color: white;
   border-radius: 3px;
 }
-.popup #peminjaman .content{
+.popup #ulasan .content {
+  width: 70%;
+}
+.popup #peminjaman .content {
   width: 55%;
 }
 .popup #pop-up .content .title,
 .popup #peminjaman .content .title,
-.popup #ditolak .content .title ,
-.popup #ditolak-admin .content .title{
+.popup #ditolak .content .title,
+.popup #ditolak-admin .content .title,
+.popup #ulasan .content .title {
   position: relative;
   height: max-content;
   background-color: rgb(248, 248, 248);
@@ -57,22 +63,23 @@ body {
 .popup #pop-up .content .title h1,
 .popup #peminjaman .content .title h1,
 .popup #ditolak .content .title h1,
-.popup #ditolak-admin .content .title h1 {
+.popup #ditolak-admin .content .title h1,
+.popup #ulasan .content .title h1 {
   font-size: large;
   color: var(--purple);
 }
-.popup #peminjaman .content .title h1{
+.popup #peminjaman .content .title h1 {
   color: var(--orange);
 }
 .popup #ditolak .content .title h1,
-.popup #ditolak-admin .content .title h1{
+.popup #ditolak-admin .content .title h1 {
   color: var(--red);
-
 }
 .popup #pop-up .content .title button,
 .popup #peminjaman .content .title button,
 .popup #ditolak .content .title button,
-.popup #ditolak-admin .content .title button {
+.popup #ditolak-admin .content .title button,
+.popup #ulasan .content .title button {
   padding: 8px;
   height: max-content;
   border: none;
@@ -88,25 +95,26 @@ body {
 }
 .popup #peminjaman .content .title button,
 .popup #ditolak .content .title button,
-.popup #ditolak-admin .content .title button{
+.popup #ditolak-admin .content .title button {
   color: var(--orange);
 }
 .popup #ditolak,
-.popup #ditolak-admin{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.popup #ditolak-admin {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .popup #ditolak .content .hubungi-admin,
-.popup #ditolak-admin .content .hubungi-admin{
+.popup #ditolak-admin .content .hubungi-admin {
   display: flex;
   flex-direction: column;
   margin: 5% 15px 0 15px;
-} 
-.popup #ditolak .content .hubungi-admin ul{
+}
+.popup #ditolak .content .hubungi-admin ul {
   display: flex;
   flex-direction: column;
   align-self: flex-end;
 }
-.popup #ditolak .content .hubungi-admin ul li{
+.popup #ditolak .content .hubungi-admin ul li {
   display: flex;
 }
 .popup #pop-up .content .title button:hover,
@@ -114,12 +122,13 @@ body {
 .popup #ditolak .content .title button:hover {
   background-color: rgb(248, 248, 248);
 }
-.popup #ditolak .content p.pesan{
+.popup #ditolak .content p.pesan {
   text-align: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   margin: 20px 0;
 }
-.popup #ditolak-admin .content p.pesan{
+.popup #ditolak-admin .content p.pesan {
   margin: 20px 0;
   text-align: center;
 }
@@ -127,33 +136,33 @@ body {
 .popup #peminjaman .content .data {
   padding: 15px;
 }
-.popup #peminjaman .content .data form ul{
+.popup #peminjaman .content .data form ul {
   display: flex;
   flex-direction: column;
 }
-.popup #peminjaman .content .data form ul li{
+.popup #peminjaman .content .data form ul li {
   display: flex;
   flex-direction: column;
 }
-.popup #peminjaman .content .data form ul div input{
+.popup #peminjaman .content .data form ul div input {
   padding: 5px;
   outline-color: var(--purple);
   border: 1px solid grey;
   border-radius: 3px;
 }
-.popup #peminjaman .content .data form ul div input[type="date"]{
-  background-color: rgb(239,239,239);
+.popup #peminjaman .content .data form ul div input[type="date"] {
+  background-color: rgb(239, 239, 239);
 }
-.popup #peminjaman .content .data form ul li.send{
+.popup #peminjaman .content .data form ul li.send {
   width: 100%;
   display: flex;
- align-items: flex-end;
- margin-top: 20px;
+  align-items: flex-end;
+  margin-top: 20px;
 }
-.popup #peminjaman .content .data form ul div input.disabled{
+.popup #peminjaman .content .data form ul div input.disabled {
   border: 1px solid var(--red);
 }
-.popup #peminjaman .content .data form ul li:last-child button{
+.popup #peminjaman .content .data form ul li:last-child button {
   cursor: pointer;
   width: max-content;
   padding: 10px 15px;
@@ -161,27 +170,28 @@ body {
   background-color: var(--orange);
   border: none;
   border-radius: 5px;
-  transition: .3s;
+  transition: 0.3s;
 }
-.popup #peminjaman .content .data form ul li:last-child button#disabled{
+.popup #peminjaman .content .data form ul li:last-child button#disabled {
   cursor: not-allowed;
   background-color: grey;
 }
-.popup #peminjaman .content .data form ul li:last-child button#disabled:hover{
+.popup #peminjaman .content .data form ul li:last-child button#disabled:hover {
   background-color: var(--red-h);
 }
-.popup #peminjaman .content .data form ul li:last-child button:hover{
+.popup #peminjaman .content .data form ul li:last-child button:hover {
   background-color: var(--orange-h);
 }
-.popup #peminjaman .content .data form ul div{
+.popup #peminjaman .content .data form ul div {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.popup #peminjaman .content .data form ul div li{
+.popup #peminjaman .content .data form ul div li {
   margin: 0 10px;
-}.popup #peminjaman .content .data form ul div li:first-child,
-.popup #peminjaman .content .data form ul div li:last-child{
+}
+.popup #peminjaman .content .data form ul div li:first-child,
+.popup #peminjaman .content .data form ul div li:last-child {
   width: 40%;
 }
 .popup #pop-up .content .data table {
@@ -199,11 +209,11 @@ body {
 }
 
 /* button download */
-.data-wrapper .data-indicator .unduh-stroke{
+.data-wrapper .data-indicator .unduh-stroke {
   display: flex;
   flex-direction: column;
 }
-.data-wrapper .data-indicator .unduh-stroke a{
+.data-wrapper .data-indicator .unduh-stroke a {
   cursor: pointer;
   text-decoration: none;
   text-align: center;
@@ -213,32 +223,252 @@ body {
   margin: 5px 20px 20px;
   background-color: var(--orange);
   color: white;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.data-wrapper .data-indicator .unduh-stroke a:hover{
+.data-wrapper .data-indicator .unduh-stroke a:hover {
   background-color: var(--orange-h);
 }
 
+/* ! ulasan */
+.popup #ulasan .content .data form ul li.isi-ulasan {
+  display: flex;
+  flex-direction: column;
+}
+.popup #ulasan .content .data ul li,
+.popup #ulasan .content .data ul li .wrapper-books .stars-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.popup #ulasan .content .data ul li {
+  padding: 10px 20px;
+}
+
+.popup #ulasan .content .data ul li img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books h2 {
+  margin-bottom: 5px;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books .stars-wrapper span.checked {
+  color: orange;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books .row .respon {
+  font-size: medium;
+  margin-left: 10px;
+}
+.popup #ulasan .content .data ul li .wrapper-books button {
+  width: max-content;
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-6);
+  border: none;
+  border-radius: 5px;
+  padding: 7px 17px;
+  cursor: pointer;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books button,
+.popup #ulasan .content .data ul li .wrapper-books button a {
+  transition: all 0.3s;
+}
+
+.popup #ulasan .content .data ul li .wrapper-books button:hover {
+  color: var(--white);
+  background-color: var(--lightgreen-h);
+}
+.popup #ulasan .content .data ul li .wrapper-books .penulis {
+  margin-bottom: 5px;
+}
+
+.popup #ulasan .content .data form ul li:first-child {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+}
+
+.popup #ulasan .content .data form ul div.input-ulasan {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+}
+.popup
+  #ulasan
+  .content
+  .data
+  form
+  ul
+  div.input-ulasan
+  li
+  div
+  input[type="radio"] {
+  display: none;
+}
+.popup #ulasan .content .data form ul div.input-ulasan li div label {
+  font-size: 20px;
+  cursor: pointer;
+}
+.popup #ulasan .content .data form ul div.input-ulasan li div label i.fa-star {
+  color: #ccc;
+}
+.popup #ulasan .content .data form ul div.input-ulasan li.isi-ulasan button {
+  width: max-content;
+  align-self: flex-end;
+  background-color: var(--lightgreen);
+  border: none;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.popup
+  #ulasan
+  .content
+  .data
+  form
+  ul
+  div.input-ulasan
+  li.isi-ulasan
+  button:hover {
+  background-color: var(--lightgreen-h);
+}
+
+.popup
+  #ulasan
+  .content
+  .data
+  form
+  ul
+  div.input-ulasan
+  li
+  div
+  input[type="radio"]:checked
+  + label
+  i.fa-star {
+  color: #f7b731;
+}
+
+.popup #ulasan .content .data .beri-ulasan {
+  font-weight: bold;
+}
+
+.popup #ulasan .content .data {
+  padding: 20px 40px;
+}
+
+.popup #ulasan .content .data .card .profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.popup #ulasan .content .data .card .profile .nickname-saya {
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.popup #ulasan .content .data form ul div.input-ulasan li.isi-ulasan textarea {
+  margin-top: 20px;
+  border: 1px solid var(--purple);
+  outline-color: var(--purple);
+  border-radius: 5px;
+}
+
+.popup #ulasan .content .data .card .input-komentar form {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+
+.popup #ulasan .content .data .card .input-komentar form button {
+  align-self: flex-end;
+  width: max-content;
+  background-color: var(--lightgreen);
+  box-shadow: var(--bs-0-6);
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.popup #ulasan .content .data .card .input-komentar form button:hover {
+  color: var(--white);
+  background-color: var(--lightgreen-h);
+}
+
+/* isi comentar */
+.popup #ulasan .content .data .card.komentar {
+  margin-top: 30px;
+  padding: 30px;
+  width: 70%;
+  border: 1px solid var(--purple);
+  border-radius: 5px;
+}
+.popup #ulasan .content .data .card .komentar p {
+  margin-top: 10px;
+}
 @media (max-width: 660px) {
+  .popup #ulasan .content .data ul li .wrapper-books .penulis {
+    font-size: smaller;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .popup #ulasan .content .data ul li .wrapper-books .row .respon {
+    font-size: x-small;
+    margin-left: 0px;
+  }
+  .popup #ulasan .content .data ul li img {
+    width: 40px;
+    height: fit-content;
+  }
+  .popup #ulasan .content .data ul li .wrapper-books h2 {
+    font-size: smaller;
+  }
+  .popup #ulasan .content .data ul li .wrapper-books span.checked {
+    font-size: x-small;
+  }
+  .popup #ulasan .content .data form ul div.input-ulasan {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  .popup #ulasan .content {
+    height: max-content;
+    width: 80%;
+  }
   .popup #peminjaman .content,
-  .popup #ditolak .content{
+  .popup #ditolak .content {
     width: 75% !important;
   }
-  .popup #ditolak .content .hubungi-admin{
+  .popup #ditolak .content .hubungi-admin {
     margin: 10% 15px 5% 15px;
   }
   .popup #ditolak .content .hubungi-admin ul li p,
-  .popup #ditolak .content .hubungi-admin ul li i{
+  .popup #ditolak .content .hubungi-admin ul li i {
     font-size: smaller;
   }
   .popup #peminjaman .content .data form ul div li:first-child,
-  .popup #peminjaman .content .data form ul div li:last-child{
-  width: 80%;
+  .popup #peminjaman .content .data form ul div li:last-child {
+    width: 80%;
   }
-  .popup #peminjaman .content .data form ul div li:first-child{
+  .popup #peminjaman .content .data form ul div li:first-child {
     margin-bottom: 10px;
   }
-  .popup #peminjaman .content .data form ul div{
+  .popup #peminjaman .content .data form ul div {
     display: flex;
     flex-direction: column;
     align-items: center;
