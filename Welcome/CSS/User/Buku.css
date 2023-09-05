@@ -71,12 +71,10 @@ main .data-wrapper .data-indicator .data-search input {
   flex-direction: column;
   padding: 10px;
 }
-.data-wrapper .isi-data .data table tbody tr td p {
-  margin: auto;
-  text-align: center;
-}
+
 .data-wrapper .isi-data .data table tbody tr td p {
   width: 70%;
+  margin: auto;
   text-align: left;
 }
 .data-wrapper .isi-data .data table tbody tr td .rating p {
@@ -95,7 +93,12 @@ main .data-wrapper .data-indicator .data-search input {
   text-decoration: underline;
 }
 
-.data-wrapper .isi-data .data table tbody tr td .rating .checked {
+.data-wrapper .isi-data .data table tbody tr td .rating .rate .fa-star {
+  font-size: xx-small;
+  color: #ccc;
+}
+
+.data-wrapper .isi-data .data table tbody tr td .rating .rate .checked {
   font-size: xx-small;
   color: orange;
 }

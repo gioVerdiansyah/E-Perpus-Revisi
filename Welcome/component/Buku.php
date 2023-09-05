@@ -27,25 +27,29 @@ if ($key === hash("sha512", $row["username"])) {
 
 $query = "SELECT
 buku.*,
-(
-	SELECT rating
-	FROM ulasan
-	WHERE ulasan.buku_id = buku.id
-) AS avg_rating
+IFNULL(ulasan.avg_rating, 0) AS avg_rating
 FROM
 buku
-LEFT JOIN
-loginuser
+LEFT JOIN (
+SELECT
+	buku_id,
+	AVG(rating) AS avg_rating
+FROM
+	ulasan
+GROUP BY
+	buku_id
+) AS ulasan
 ON
-ulasan.user_id = loginuser.id
+buku.id = ulasan.buku_id
 ORDER BY
 buku.id ASC
 LIMIT
 {$pagenation->dataPerhalaman()}
-
 ";
 
 $buku = mysqli_query($db, $query);
+
+$tanggal = date("H:i d/m/Y");
 
 // Menangani data POST dari meminjam buku
 if (isset($_POST['send'])) {
@@ -53,10 +57,9 @@ if (isset($_POST['send'])) {
 	$tanggal_pengembalian = $_POST['tanggal_pengembalian'];
 	$buku_id = $_POST['buku_id'];
 	date_default_timezone_set('Asia/Jakarta');
-	$tanggal_pinjam = date("H:i d/m/Y");
 
 
-	mysqli_query($db, "INSERT INTO peminjam VALUE('', '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal_pinjam', '$tanggal_pengembalian', '0', 'Tidak ada alasan')");
+	mysqli_query($db, "INSERT INTO peminjam VALUE('', '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal', '$tanggal_pengembalian', '0', 'Tidak ada alasan')");
 }
 
 // Menangani data POST ulasan
@@ -67,7 +70,7 @@ if (isset($_POST['ulasan'])) {
 	$buku_id = intval($_POST['buku_id']);
 	$user_id = intval($_POST['user_id']);
 
-	mysqli_query($db, "INSERT INTO ulasan VALUE('', '$isi_ulasan', $rating, $user_id, $buku_id)");
+	mysqli_query($db, "INSERT INTO ulasan VALUE('', '$isi_ulasan', $rating, $user_id, $buku_id, '$tanggal')");
 }
 ?>
 <div class="title">
@@ -140,18 +143,21 @@ if (isset($_POST['ulasan'])) {
 								<div class="rating">
 									<button class="rate" onclick="
 											$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&usr=<?= $user_id ?> #ulasan',() => {
-												$('#ulasan').fadeIn(500);
-												$('.popup').removeAttr('hidden');
+												$('#ulasan').removeAttr('hidden');
+												$('.popup').fadeIn(500);
 											})
 											">
 										<?php
-										$query = "SELECT buku.id,ulasan.rating FROM buku LEFT JOIN ulasan ON ulasan.buku_id = {$books['id']}";
+										$query = "SELECT AVG(ulasan.rating) as rating FROM buku LEFT JOIN ulasan ON ulasan.buku_id = buku.id WHERE ulasan.buku_id = {$books['id']}";
 										$rating = mysqli_fetch_assoc(mysqli_query($db, $query))['rating'];
 										if ($rating >= 1) {
-											for ($i = 1; $i <= $books['rating']; $i++):
-												if ($i <= 5) { ?>
-													<span class="fa fa-star checked"></span>
-												<?php }endfor; ?>
+											for ($i = 1; $i <= 5; $i++): ?>
+												<?php if ($i <= $rating) { ?>
+													<i class="fa fa-star checked"></i>
+												<?php } else { ?>
+													<i class="fa fa-star"></i>
+												<?php } ?>
+											<?php endfor; ?>
 										</button>
 									<?php } elseif ($rating < 1) { ?>
 										<button class="rate" onclick="

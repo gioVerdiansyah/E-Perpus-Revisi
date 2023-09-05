@@ -1,76 +1,57 @@
 @import url(../../../Assets/assets.css);
-
-.data-wrapper .isi-data .data table tbody tr td p.persetujuan{
+.data-wrapper .isi-data .data table tbody tr td p.persetujuan {
   width: 80%;
   text-align: center;
-}.data-wrapper .isi-data .data table tbody tr td p.h{
-  cursor: pointer;
-  transition: all .3s;
 }
-.data-wrapper .isi-data .data table tbody tr td p.h:hover{
+.data-wrapper .isi-data .data table tbody tr td p.h {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.data-wrapper .isi-data .data table tbody tr td p.h:hover {
   background-color: var(--lightgreen-h);
   color: white;
 }
-.data-wrapper .isi-data .data table tbody tr td p.persetujuan{
+.data-wrapper .isi-data .data table tbody tr td p.persetujuan {
   border-radius: 3px;
   padding: 5px 3px;
 }
-.data-wrapper .isi-data .data table tbody tr td p.o{
+.data-wrapper .isi-data .data table tbody tr td p.o {
   color: var(--orange);
   border: 1px solid var(--orange);
 }
-.data-wrapper .isi-data .data table tbody tr td .r{
+.data-wrapper .isi-data .data table tbody tr td .r {
   color: var(--red);
   border: 1px solid var(--red);
 }
-.data-wrapper .isi-data .data table tbody tr td .r.h:hover{
+.data-wrapper .isi-data .data table tbody tr td .r.h:hover {
   cursor: pointer;
   color: white;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.data-wrapper .isi-data .data table tbody tr td .r.h:hover{
+.data-wrapper .isi-data .data table tbody tr td .r.h:hover {
   color: white;
   background-color: var(--red-h);
 }
-.data-wrapper .isi-data .data table tbody tr td p.g{
+.data-wrapper .isi-data .data table tbody tr td p.g {
   color: var(--lightgreen-h);
   border: 1px solid var(--lightgreen-h);
 }
-.data-wrapper
-  .isi-data
-  .data
-  table
-  tbody
-  tr
-  td:last-child{
-    display: flex;
-    justify-content: center;
-  }
-.data-wrapper
-  .isi-data
-  .data
-  table
-  tbody
-  tr
-  td
-  button.delete {
-    cursor: pointer;
-    background-color: var(--red);
-    color: white;
-    font-size: small;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    transform: translateY(3px);
-    transition: all 0.3s;
+.data-wrapper .isi-data .data table tbody tr td:last-child {
+  display: flex;
+  justify-content: center;
 }
-.data-wrapper
-  .isi-data
-  table
-  tbody
-  tr
-  td
-  button.delete:hover {
+.data-wrapper .isi-data .data table tbody tr td button.delete {
+  cursor: pointer;
+  background-color: var(--red);
+  color: white;
+  font-size: small;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  transform: translateY(3px);
+  transition: all 0.3s;
+}
+.data-wrapper .isi-data table tbody tr td button.delete:hover {
   background-color: var(--red-h);
 }
 
@@ -86,7 +67,7 @@
     width: 100% !important;
     margin-bottom: 20px;
   }
-  main .data-wrapper .data-indicator .data-search input{
+  main .data-wrapper .data-indicator .data-search input {
     width: 70% !important;
     border: 1px solid grey;
     padding: 5px;
@@ -95,7 +76,7 @@
   .data-wrapper .isi-data .data table thead th:nth-child(3) {
     text-wrap: wrap;
   }
-  .data-wrapper .isi-data .data table thead th:nth-child(2){
+  .data-wrapper .isi-data .data table thead th:nth-child(2) {
     text-wrap: nowrap;
   }
   .data-wrapper .isi-data .data table tbody tr td:last-child {

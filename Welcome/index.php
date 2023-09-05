@@ -1,6 +1,7 @@
 <?php
 session_name("SSILGNPERPUSMEJAYAN");
 session_start();
+require "../Admin/database/functions.php";
 if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
 	header("Location: ../index.php");
 	exit;
@@ -11,7 +12,7 @@ $id = $_COOKIE["UsrLgnMJYNiSeQlThRuE"];
 $key = $_COOKIE["UIDprpsMJYNisThroe"];
 
 // cek username berdasarkan id
-$result = mysqli_query(mysqli_connect("localhost", "root", "", "perpustakaan_sekolah"), "SELECT * FROM loginuser WHERE id='$id'");
+$result = mysqli_query($db, "SELECT * FROM loginuser WHERE id='$id'");
 $row = mysqli_fetch_assoc($result); //ambil
 $username = '';
 
@@ -67,14 +68,15 @@ if ($key === hash("sha512", $row["username"])) {
 				</div>
 				<img src="../.temp/<?= $row['gambar'] ?>" alt="" />
 				<div class="logout">
+					<?php $sql = mysqli_query($db, "SELECT id,judul_buku,jumlah_buku FROM buku");
+					$books = mysqli_fetch_assoc($sql); ?>
 					<button onclick="
-						Peringatan.konfirmasi('Apakah anda yakin ingin logout?', (isTrue)=>{
-							if(isTrue){
-								window.location.href = '../logout-user.php';
-							}
+						$('.popup').load('component/result/fraction_group.php?usr=<?= $username ?>&&bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #profile', ()=>{
+							$('#profile').fadeIn(500);
+							$('.popup').removeAttr('hidden');
 						})
 					"><i class="fi fi-rr-sign-out-alt"></i>
-						Logout</button>
+						Profile</button>
 			</li>
 			</div>
 			</li>

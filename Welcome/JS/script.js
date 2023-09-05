@@ -1,4 +1,14 @@
 $(document).ready(function () {
+		$("input[type='radio']").change(function() {
+			var selectedStar = $(this).val();
+			$("label i.fa-star").removeClass("checked");
+			console.log("diclick");
+	
+			for (var i = 1; i <= selectedStar; i++) {
+				$("label:nth-child(" + i + ") i.fa-star").addClass("checked");
+			}
+		});
+
 let onclick = false;
 
     if (window.matchMedia("(max-width: 768px)").matches) {

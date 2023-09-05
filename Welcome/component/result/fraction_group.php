@@ -85,6 +85,68 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 	</div>
 </div>
 
+<?php
+$sql = mysqli_query($db, "SELECT * FROM loginuser WHERE username = \"{$_GET['usr']}\"");
+$profile = mysqli_fetch_assoc($sql);
+?>
+
+<div id="profile">
+	<div class="content" id="add">
+		<div class="title">
+			<h1>Profile
+				<?= ucfirst($profile['username']) ?>
+			</h1>
+			<button onclick="
+				$('#add').attr('id', 'close');
+				
+				setTimeout(()=>{
+				$('#peminjaman').remove();
+				$('.popup').attr('hidden', true);
+				$('body').removeAttr('height')
+				},500);
+			">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+		</div>
+		<div class="data">
+			<!-- profile -->
+			<div class="profile">
+				<form method="post" action="">
+					<div class="image">
+						<img src="../.temp/<?= $profile['gambar'] ?>" alt="">
+					</div>
+					<div class="nama">
+						<label for="username">Nama:</label>
+						<input type="text" name="username" id="username" value="<?= $profile['username'] ?>">
+					</div>
+					<div class="row">
+						<div class="col">
+							<label for="pass_lama">Password Lama:</label><br>
+							<input type="password" name="pass_lama" id="pass_lama" required>
+						</div>
+						<div class="col">
+							<label for="pass">Password Baru:</label><br>
+							<input type="password" name="pass" id="pass" required>
+						</div>
+					</div>
+					<div class="col textarea">
+						<label for="deskripsi">Deskripsi:</label>
+						<textarea name="deskripsi" id="deskripsi" cols="50"
+							rows="3"><?= $profile['deskripsi'] ?></textarea>
+					</div>
+					<div class="row kirim">
+						<p>Bergabung sejak <br>
+							<?= $profile['tanggal_bergabung'] ?>
+						</p>
+						<button type="submit" name="new_data"><i class="fa-solid fa-paper-plane"></i> Perbarui
+							data</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
 
 <div id="peminjaman">
 	<div class="content" id="add">
@@ -122,10 +184,10 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 						<li>
 							<label for="jumlah_pinjam">Jumlah Pinjam</label>
 							<?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
-								<input type="text" class="input disabled" placeholder="Stock buku sudah habis!" disabled>
+							<input type="text" class="input disabled" placeholder="Stock buku sudah habis!" disabled>
 							<?php } else { ?>
-								<input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
-									id="jumlah_pinjam" required placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="
+							<input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
+								id="jumlah_pinjam" required placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="
 						const maxLength = 2;
 
 						if (this.value.length > maxLength) {
@@ -141,20 +203,20 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 						<li>
 							<label for="tanggal_pengembalian">Tanggal Pengembalian</label>
 							<?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
-								<input type="date" class="input disabled" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>"
-									name="tanggal_pengembalian" id="disabled" disabled>
+							<input type="date" class="input disabled" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>"
+								name="tanggal_pengembalian" id="disabled" disabled>
 							<?php } else { ?>
-								<input type="date" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>" name="tanggal_pengembalian"
-									id="tanggal_pengembalian" required>
+							<input type="date" min="<?= date('Y-m-d'); ?>" max="<?= $max ?>" name="tanggal_pengembalian"
+								id="tanggal_pengembalian" required>
 							<?php } ?>
 
 						</li>
 					</div>
 					<li class="send">
 						<?php if (intval(getStock($_GET['bukunya'])) < 1) { ?>
-							<button id="disabled" disabled="disabled">Kirim</button>
+						<button id="disabled" disabled="disabled">Kirim</button>
 						<?php } else { ?>
-							<button type="submit" name="send">Kirim</button>
+						<button type="submit" name="send">Kirim</button>
 						<?php } ?>
 					</li>
 				</ul>
@@ -182,33 +244,34 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 		<div class="data">
 			<ul>
 				<?php
-				$ulasan = mysqli_query($db, "SELECT ulasan.*,buku.judul_buku,buku.image,buku.penulis, loginuser.username, loginuser.gambar FROM ulasan INNER JOIN buku ON ulasan.buku_id = {$_GET['bukid']} INNER JOIN loginuser ON ulasan.user_id = {$_GET['usr']} WHERE ulasan.buku_id = buku.id");
+				$ulasan = mysqli_query($db, "SELECT ulasan.*,AVG(ulasan.rating) AS rating,buku.judul_buku,buku.image,buku.penulis, loginuser.username, loginuser.gambar FROM ulasan INNER JOIN buku ON ulasan.buku_id = buku.id INNER JOIN loginuser ON ulasan.user_id = loginuser.id WHERE ulasan.buku_id = {$_GET['bukid']}");
 				$row = mysqli_fetch_assoc($ulasan);
 				?>
 				<?php
 				if (isset($row['rating'])) {
 					?>
-					<li>
-						<img src="../Admin/Temp/<?= $row['image'] ?>"
-							alt="ini adalah gambar dari buku <?= $row['judul_buku'] ?>" />
-						<div class="wrapper-books">
-							<div class="row">
-								<h2>
-									<?= $row['judul_buku'] ?>
-								</h2>
-								<div class="stars-wrapper">
-									<?php
+				<li>
+					<img src="../Admin/Temp/<?= $row['image'] ?>"
+						alt="ini adalah gambar dari buku <?= $row['judul_buku'] ?>" />
+					<div class="wrapper-books">
+						<div class="row">
+							<h2>
+								<?= $row['judul_buku'] ?>
+							</h2>
+							<div class="stars-wrapper">
+								<?php
 									if (isset($row['rating'])) {
-										for ($i = 1; $i <= $row['rating']; $i++) {
-											if ($i <= 5) {
-												echo '<span class="fa fa-star checked"></span>';
-											}
-										}
-									}
-									?>
-								</div>
-								<p class="respon">
-									<?php
+										for ($i = 1; $i <= 5; $i++): ?>
+								<?php if ($i <= $row['rating']) { ?>
+								<span class="fa fa-star checked"></span>
+								<?php } else { ?>
+								<span class="fa fa-star"></span>
+								<?php } ?>
+								<?php endfor; ?>
+								<?php } ?>
+							</div>
+							<p class="respon">
+								<?php
 									switch ($row['rating']) {
 										case 1:
 										case 2:
@@ -225,33 +288,33 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 											break;
 									}
 									?>
-								</p>
-							</div>
-							<p class="penulis">-
-								<?= $row['penulis'] ?>
 							</p>
 						</div>
-					</li>
-				</ul>
+						<p class="penulis">-
+							<?= $row['penulis'] ?>
+						</p>
+					</div>
+				</li>
+			</ul>
 			<?php } else { ?>
-				<ul>
-					<li>
-						<?php
+			<ul>
+				<li>
+					<?php
 						$sql = mysqli_query($db, "SELECT judul_buku,penulis,image FROM buku WHERE buku.id = {$_GET['bukid']}");
 						$buku = mysqli_fetch_assoc($sql);
 						?>
-						<img src="../Admin/Temp/<?= $buku['image'] ?>"
-							alt="ini adalah gambar dari buku <?= $buku['judul_buku'] ?>" />
-						<div class="wrapper-books">
-							<div class="row">
-								<h2>
-									<?= $buku['judul_buku'] ?>
-								</h2>
-							</div>
-							<p>Belum ada Rating</p>
-							<p class="penulis">-
-								<?= $buku['penulis'] ?>
-							</p>
+					<img src="../Admin/Temp/<?= $buku['image'] ?>"
+						alt="ini adalah gambar dari buku <?= $buku['judul_buku'] ?>" />
+					<div class="wrapper-books">
+						<div class="row">
+							<h2>
+								<?= $buku['judul_buku'] ?>
+							</h2>
+						</div>
+						<p>Belum ada Rating</p>
+						<p class="penulis">-
+							<?= $buku['penulis'] ?>
+						</p>
 						<?php } ?>
 				</li>
 			</ul>
@@ -280,10 +343,10 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 							<p>Beri Rating:</p>
 							<div>
 								<?php for ($i = 1; $i <= 5; $i++): ?>
-									<input type="radio" name="rate" value="<?= $i ?>" id="radio<?= $i ?>" required>
-									<label for="radio<?= $i ?>">
-										<i class="fa fa-star"></i>
-									</label>
+								<input type="radio" name="rate" value="<?= $i ?>" id="radio<?= $i ?>" required>
+								<label for="radio<?= $i ?>" id="radio<?= $i ?>">
+									<i class="fa fa-star"></i>
+								</label>
 								<?php endfor; ?>
 							</div>
 						</li>
@@ -291,32 +354,39 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 							<label for="ulasan">Ulasan</label>
 							<textarea name="ulasan" id="isi_ulasan" cols="40" rows="5" placeholder="Ketik Ulasan anda"
 								required></textarea>
-							<button type="submit" name="ulasan"><i class="fa-solid fa-paper-plane"></i>kirim</button>
+							<button type="submit" name="ulasan"><i class="fa-solid fa-paper-plane"></i> kirim</button>
 						</li>
 					</div>
 				</ul>
 			</form>
+			<p class="kumpulan-komentar">komentar user:</p>
+			<hr>
 			<?php
 			if (isset($row['rating'])) {
-				$sql = mysqli_query($db, "SELECT ulasan.*,buku.judul_buku,buku.image,buku.penulis, loginuser.username, loginuser.gambar FROM ulasan INNER JOIN buku ON ulasan.buku_id = buku.id INNER JOIN loginuser ON ulasan.user_id = loginuser.id WHERE ulasan.buku_id = buku.id");
+				$sql = mysqli_query($db, "SELECT ulasan.*,buku.judul_buku,buku.image,buku.penulis, loginuser.username, loginuser.gambar FROM ulasan INNER JOIN buku ON ulasan.buku_id = buku.id INNER JOIN loginuser ON ulasan.user_id = loginuser.id WHERE ulasan.buku_id = {$_GET['bukid']}");
 				foreach ($sql as $cell):
 					?>
-					<div class="card komentar">
-						<div class="profile">
-							<img src="../.temp/<?= $cell['gambar'] ?>" alt="photo profile user verdi" width="35" />
-							<p class="nickname-saya">
-								<?= $cell['username'] ?>
-							</p>
-						</div>
-						<div class="komentar">
-							<p>
-								<?= $cell['isi_ulasan'] ?>
-							</p>
-						</div>
+			<div class="card komentar">
+				<div class="profile">
+					<img src="../.temp/<?= $cell['gambar'] ?>" alt="photo profile user verdi" width="35" />
+					<div>
+						<span>
+							<?= $cell['tanggal_komentar'] ?>
+						</span>
+						<p class="nickname-saya">
+							<?= $cell['username'] ?>
+						</p>
 					</div>
-				<?php endforeach;
+				</div>
+				<div class="komentar">
+					<p>
+						<?= $cell['isi_ulasan'] ?>
+					</p>
+				</div>
+			</div>
+			<?php endforeach;
 			} else { ?>
-				<p>Tidak Ada ulasan</p>
+			<p>Tidak Ada ulasan</p>
 			<?php } ?>
 		</div>
 	</div>

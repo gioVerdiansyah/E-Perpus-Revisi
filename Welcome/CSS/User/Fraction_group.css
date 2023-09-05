@@ -8,7 +8,8 @@ body {
 .popup #peminjaman,
 .popup #ditolak,
 .popup #ditolak-admin,
-.popup #ulasan {
+.popup #ulasan,
+.popup #profile {
   background-color: var(--bg-0-5);
   width: 100vw;
   height: 100%;
@@ -20,6 +21,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .popup,
 .popup.fade-out {
   opacity: 0;
@@ -33,7 +35,8 @@ body {
 .popup #peminjaman .content,
 .popup #ditolak .content,
 .popup #ditolak-admin .content,
-.popup #ulasan .content {
+.popup #ulasan .content,
+.popup #profile .content {
   width: 50%;
   height: max-content;
   background-color: white;
@@ -41,6 +44,8 @@ body {
 }
 .popup #ulasan .content {
   width: 70%;
+  height: 80vh;
+  overflow: scroll;
 }
 .popup #peminjaman .content {
   width: 55%;
@@ -49,7 +54,8 @@ body {
 .popup #peminjaman .content .title,
 .popup #ditolak .content .title,
 .popup #ditolak-admin .content .title,
-.popup #ulasan .content .title {
+.popup #ulasan .content .title,
+.popup #profile .content .title {
   position: relative;
   height: max-content;
   background-color: rgb(248, 248, 248);
@@ -64,7 +70,8 @@ body {
 .popup #peminjaman .content .title h1,
 .popup #ditolak .content .title h1,
 .popup #ditolak-admin .content .title h1,
-.popup #ulasan .content .title h1 {
+.popup #ulasan .content .title h1,
+.popup #profile .content .title h1 {
   font-size: large;
   color: var(--purple);
 }
@@ -79,7 +86,8 @@ body {
 .popup #peminjaman .content .title button,
 .popup #ditolak .content .title button,
 .popup #ditolak-admin .content .title button,
-.popup #ulasan .content .title button {
+.popup #ulasan .content .title button,
+.popup #profile .content .title button {
   padding: 8px;
   height: max-content;
   border: none;
@@ -92,6 +100,9 @@ body {
   top: -10px;
   cursor: pointer;
   transition: all 0.3s;
+}
+.popup #ulasan .content .title button {
+  position: unset;
 }
 .popup #peminjaman .content .title button,
 .popup #ditolak .content .title button,
@@ -247,6 +258,7 @@ body {
 .popup #ulasan .content .data ul li img {
   width: 100px;
   margin-right: 20px;
+  border: 1px solid grey;
 }
 
 .popup #ulasan .content .data ul li .wrapper-books {
@@ -265,7 +277,6 @@ body {
 
 .popup #ulasan .content .data ul li .wrapper-books .row .respon {
   font-size: medium;
-  margin-left: 10px;
 }
 .popup #ulasan .content .data ul li .wrapper-books button {
   width: max-content;
@@ -341,6 +352,7 @@ body {
   div.input-ulasan
   li.isi-ulasan
   button:hover {
+  color: white;
   background-color: var(--lightgreen-h);
 }
 
@@ -355,11 +367,24 @@ body {
   div
   input[type="radio"]:checked
   + label
-  i.fa-star {
+  i.fa-star,
+.popup
+  #ulasan
+  .content
+  .data
+  form
+  ul
+  div.input-ulasan
+  li
+  div
+  input[type="radio"]
+  + label
+  i.fa-star.checked {
   color: #f7b731;
 }
 
-.popup #ulasan .content .data .beri-ulasan {
+.popup #ulasan .content .data ul .beri-ulasan,
+.popup #ulasan .content .data .kumpulan-komentar {
   font-weight: bold;
 }
 
@@ -373,14 +398,20 @@ body {
   align-items: center;
 }
 
-.popup #ulasan .content .data .card .profile .nickname-saya {
+.popup #ulasan .content .data .card .profile img {
+  width: 35px;
+  margin-right: 15px;
+}
+
+.popup #ulasan .content .data .card .profile div span {
+  font-size: smaller;
+}
+.popup #ulasan .content .data .card .profile div .nickname-saya {
   font-size: medium;
   font-weight: bold;
-  margin-left: 15px;
 }
 
 .popup #ulasan .content .data form ul div.input-ulasan li.isi-ulasan textarea {
-  margin-top: 20px;
   border: 1px solid var(--purple);
   outline-color: var(--purple);
   border-radius: 5px;
@@ -421,6 +452,92 @@ body {
 .popup #ulasan .content .data .card .komentar p {
   margin-top: 10px;
 }
+
+/* profile */
+.popup #profile .content .data form .image {
+  display: flex;
+  justify-content: center;
+}
+.popup #profile .content .data form .image img {
+  width: 120px;
+  margin: 15px 0;
+  border-radius: 5px;
+}
+
+.popup #profile .content .data form .nama {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.popup #profile .content .data form .nama label {
+  margin-right: 10px;
+  transform: translateY(8px);
+}
+
+.popup #profile .content .data form input[name="username"] {
+  font-size: larger;
+}
+
+.popup #profile .content .data form {
+  padding-left: 30px;
+  padding-bottom: 20px;
+}
+
+.popup #profile .content .data form .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 25px;
+}
+.popup #profile .content .data form .col,
+.popup #profile .content .data form input .col {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup #profile .content .data form input,
+.popup #profile .content .data form textarea {
+  border: none;
+  border-bottom: 1px solid var(--purple);
+  background-color: none;
+  outline-color: #00000000;
+}
+
+.popup #profile .content .data form .col.textarea {
+  width: 80%;
+}
+
+.popup #profile .content .data form textarea {
+  padding: 5px;
+  border-right: 1px solid var(--purple);
+  border-left: 1px solid var(--purple);
+}
+.popup #profile .content .data form .kirim button {
+  cursor: pointer;
+  background-color: var(--lightgreen);
+  color: white;
+  font-size: small;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  transform: translateY(3px);
+  transition: all 0.3s;
+}
+.popup #profile .content .data form .kirim button:hover {
+  background-color: var(--lightgreen-h);
+}
+
+.popup #profile .content .data form .kirim p {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+}
+
+.popup #profile .content {
+  position: relative;
+}
+
 @media (max-width: 660px) {
   .popup #ulasan .content .data ul li .wrapper-books .penulis {
     font-size: smaller;

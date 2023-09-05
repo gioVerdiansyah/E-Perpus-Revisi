@@ -64,7 +64,10 @@ main .about-E-perpus ul {
   flex-direction: column;
   align-items: flex-start;
 }
-main .about-E-perpus ul li.title h1 {
+main .about-E-perpus ul li.about {
+  margin: 10px 0 -10px 0;
+}
+main .about-E-perpus ul li.about h1 {
   margin-left: 10px;
   font-size: x-large;
   font-family: Arial, Helvetica, sans-serif;

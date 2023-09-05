@@ -31,7 +31,7 @@ if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) 
 <div class="about-E-perpus">
 	<img src="../Assets/bg15-1.svg" alt="about-E-perpus" />
 	<ul>
-		<li class="title">
+		<li class="about">
 			<h1>Tentang E-Perpus ini:</h1>
 		</li>
 		<li>

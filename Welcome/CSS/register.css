@@ -78,14 +78,17 @@ main form ul li {
 }
 main form ul li input {
   padding: 5px 3px;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   border-radius: 3px;
 }
-main form ul li:nth-child(4) input {
-  padding: 0;
-  border: none;
-  border-radius: none;
+main form ul li textarea {
+  padding: 10px;
 }
+/* main form ul li:nth-child(4) input { */
+/* padding: 0; */
+/* border: none; */
+/* border-radius: none; */
+/* } */
 main form ul li:nth-child(4) img {
   margin: 3px 0;
 }

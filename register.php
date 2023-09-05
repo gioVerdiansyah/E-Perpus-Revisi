@@ -82,6 +82,10 @@ if (isset($_POST["submit"])) {
 						required />
 				</li>
 				<li>
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" placeholder="Masukkan email" maxlength="255" required />
+				</li>
+				<li>
 					<label for="pass">Password</label>
 					<input type="password" name="pass" id="pass" maxlength="144" required />
 				</li>
@@ -102,6 +106,10 @@ if (isset($_POST["submit"])) {
 					reader.readAsDataURL(input.files[0]);
 					">
 
+				</li>
+				<li>
+					<label for="deskripsi">Deksripsi Diri:</label>
+					<textarea name="deksripsi" id="deksripsi" cols="50" rows="5"></textarea>
 				</li>
 				<?php echo $massage ?>
 				<li>
