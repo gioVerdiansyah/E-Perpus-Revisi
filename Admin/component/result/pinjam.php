@@ -15,11 +15,12 @@ $query = "SELECT
 	peminjam.*,
 	buku.judul_buku,
 	loginuser.username,
-	loginuser.gambar
+	data_user.gambar
 FROM
 	peminjam
     LEFT JOIN buku ON peminjam.buku_id = buku.id
     LEFT JOIN loginuser ON peminjam.user_id = loginuser.id
+	LEFT JOIN data_user ON loginuser.id = data_user.user_id
 WHERE
 	peminjam.status = '0' AND(buku.judul_buku LIKE '%$keyword%' OR loginuser.username LIKE '$keyword%' OR tanggal_pinjam LIKE '$keyword%')
 ORDER BY
@@ -50,48 +51,48 @@ $pinjam = mysqli_query($db, $query);
 				$id = 1;
 				foreach ($pinjam as $peminjam):
 					?>
-				<tr cellspacing="10">
-					<td>
-						<p>
-							<?= $id ?>
-						</p>
-					</td>
-					<td>
-						<p>
-							<?= $peminjam['username'] ?>
-						</p>
-					</td>
-					<td>
-						<img src="../.temp/<?= $peminjam['gambar'] ?>" alt="photo profile peminjam" height="70">
-					</td>
-					<td class="limit">
-						<p>
-							<?= $peminjam['judul_buku'] ?>
-							<strong title="Ini adalah jumlah stock buku">
-								(
-								<?= getStock($peminjam['judul_buku']) ?>)
-							</strong>
-						</p>
-					</td>
-					<td class="limit center">
-						<p>
-							<?= $peminjam['jumlah_pinjam'] ?>
-						</p>
-					</td>
-					<td>
-						<p>
-							<?= getDay($peminjam["tanggal_pinjam"], true) ?> <br>
-							<?= $peminjam['tanggal_pinjam'] ?>
-						</p>
-					</td>
-					<td>
-						<p>
-							<?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
-							<?= $peminjam['tanggal_pengembalian'] ?>
-						</p>
-					</td>
-					<td>
-						<button class="o" onclick="
+					<tr cellspacing="10">
+						<td>
+							<p>
+								<?= $id ?>
+							</p>
+						</td>
+						<td>
+							<p>
+								<?= $peminjam['username'] ?>
+							</p>
+						</td>
+						<td>
+							<img src="../.temp/<?= $peminjam['gambar'] ?>" alt="photo profile peminjam" height="70">
+						</td>
+						<td class="limit">
+							<p>
+								<?= $peminjam['judul_buku'] ?>
+								<strong title="Ini adalah jumlah stock buku">
+									(
+									<?= getStock($peminjam['judul_buku']) ?>)
+								</strong>
+							</p>
+						</td>
+						<td class="limit center">
+							<p>
+								<?= $peminjam['jumlah_pinjam'] ?>
+							</p>
+						</td>
+						<td>
+							<p>
+								<?= getDay($peminjam["tanggal_pinjam"], true) ?> <br>
+								<?= $peminjam['tanggal_pinjam'] ?>
+							</p>
+						</td>
+						<td>
+							<p>
+								<?= getDay($peminjam["tanggal_pengembalian"], false) ?> <br>
+								<?= $peminjam['tanggal_pengembalian'] ?>
+							</p>
+						</td>
+						<td>
+							<button class="o" onclick="
 											Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $peminjam['username'] ?> meminjam buku <?= $peminjam['judul_buku'] ?>?', function(isTrue){
 												if(isTrue){
 													Peringatan.sukses('Anda telah menyetujui <?= $peminjam['username'] ?> meminjam buku <?= $peminjam['judul_buku'] ?>');
@@ -116,11 +117,11 @@ $pinjam = mysqli_query($db, $query);
 												}
 											});
 											">
-							<i class="fa-regular fa-clock"></i> Menunggu
-						</button>
-					</td>
-				</tr>
-				<?php $id++; endforeach ?>
+								<i class="fa-regular fa-clock"></i> Menunggu
+							</button>
+						</td>
+					</tr>
+					<?php $id++; endforeach ?>
 			</tbody>
 		</table>
 	</div>
@@ -134,29 +135,29 @@ $pinjam = mysqli_query($db, $query);
 
 		<div class="pagination">
 			<?php if ($page->halamanAktif() > 1): ?>
-			<button class="left" onclick="
+				<button class="left" onclick="
 				$('.isi-data').load(
 					'component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $keyword ?>'
 				)">
-				<i class=" fa-solid fa-angle-left"></i>
-				Prev
-			</button>
+					<i class=" fa-solid fa-angle-left"></i>
+					Prev
+				</button>
 			<?php endif ?>
 			<?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-			<?php if ($i == $page->halamanAktif()): ?>
-			<p class="amount-of-data">
-				<?= $i ?>
-			</p>
-			<?php endif ?>
+				<?php if ($i == $page->halamanAktif()): ?>
+					<p class="amount-of-data">
+						<?= $i ?>
+					</p>
+				<?php endif ?>
 			<?php endfor ?>
 			<?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-			<button onclick="
+				<button onclick="
 				$('.isi-data').load(
 						'component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $keyword ?>'
 					)">
-				Next
-				<i class="fa-solid fa-angle-right"></i>
-			</button>
+					Next
+					<i class="fa-solid fa-angle-right"></i>
+				</button>
 			<?php endif ?>
 		</div>
 	</div>

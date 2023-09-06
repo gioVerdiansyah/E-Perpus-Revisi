@@ -45,7 +45,7 @@ $borrower = mysqli_query(
 	peminjam.*,
 	buku.judul_buku,
 	loginuser.username,
-	loginuser.gambar
+	data_user.gambar
 FROM
 	peminjam
 INNER JOIN
@@ -56,6 +56,10 @@ INNER JOIN
 	loginuser
 ON
 	peminjam.user_id = loginuser.id
+INNER JOIN
+	data_user
+ON
+    loginuser.id = data_user.user_id
 WHERE
 	peminjam.status = '0'
 "

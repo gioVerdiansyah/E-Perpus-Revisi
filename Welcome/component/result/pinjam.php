@@ -15,9 +15,11 @@ $username = $_GET["usr"];
 
 $query = "SELECT 
 peminjam.*,
+peminjam.id AS pjm_id,
 buku.*,
+buku.id AS bukid,
 loginuser.username,
-loginuser.gambar
+data_user.gambar
 FROM
 peminjam
 INNER JOIN
@@ -28,6 +30,10 @@ INNER JOIN
 buku
 ON
 peminjam.buku_id = buku.id
+INNER JOIN 
+    data_user
+ON
+    loginuser.id = data_user.user_id
 WHERE username = '$username' AND (judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR kategori LIKE '$keyword%') ORDER BY peminjam.id DESC LIMIT {$page->awalData()},{$page->dataPerhalaman()}
 ";
 
@@ -40,10 +46,10 @@ $result = mysqli_query($db, $query);
 			<thead width="100%">
 				<th>NO</th>
 				<th>JUDUL BUKU</th>
-				<th>KODE BUKU</th>
-				<th>JUMLAH PINJAM</th>
+				<th>KODE <br> BUKU</th>
+				<th>JUMLAH <br> PINJAM</th>
 				<th>TGL PINJAM</th>
-				<th>TGL PENGEMBALIAN</th>
+				<th>TGL <br> PENGEMBALIAN</th>
 				<th>STATUS</th>
 				<th>HAPUS/CANCEL</th>
 			</thead>
@@ -103,6 +109,12 @@ $result = mysqli_query($db, $query);
 							<?php } ?>
 						</td>
 						<td>
+							<button onclick="
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?> #peminjaman.update');
+								$('.popup').removeAttr('hidden');
+								" id="baca-buku">
+								Edit
+							</button>
 							<?php if ($peminjam["status"]) { ?>
 								<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){

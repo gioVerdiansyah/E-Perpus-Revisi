@@ -19,61 +19,88 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
 <!-- isi data -->
 <script src="JS/jquery-3.6.3.min.js"></script>
 <div class="isi-data">
-    <div class="data">
-        <table width="100%">
-            <thead width="100%">
-                <th>NO</th>
-                <th>THUMBNAIL</th>
-                <th>JUDUL <br> BUKU</th>
-                <th>KODE <br> BUKU</th>
-                <th>STOCK <br> BUKU</th>
-                <th>KATEGORI</th>
-                <th>PENULIS</th>
-                <th>PENERBIT</th>
-                <th>ACTION</th>
-            </thead>
-            <tbody width="100%" cellspacing="10">
-                <?php
+	<div class="data">
+		<table width="100%">
+			<thead width="100%">
+				<th>NO</th>
+				<th>THUMBNAIL</th>
+				<th>JUDUL <br> BUKU</th>
+				<th>KODE <br> BUKU</th>
+				<th>STOCK <br> BUKU</th>
+				<th>KATEGORI</th>
+				<th>PENULIS</th>
+				<th>PENERBIT</th>
+				<th>ACTION</th>
+			</thead>
+			<tbody width="100%" cellspacing="10">
+				<?php
                 $id = 1;
                 foreach ($books as $book):
                     ?>
-                <tr cellspacing="10">
-                    <td>
-                        <?= $id ?>
-                    </td>
-                    <td>
-                        <img src="Temp/<?= $book['image'] ?>" alt=" Thumbnail" height="70">
-                    </td>
-                    <td class="limit">
-                        <?= $book['judul_buku'] ?>
-                    </td>
-                    <td>
-                        <p>
-                            <?= $book['kode_buku'] ?>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <?= getStock($book['judul_buku']) ?>
-                        </p>
-                    </td>
-                    <td>
-                        <?= $book['kategori'] ?>
-                    </td>
-                    <td class="limit">
-                        <?= $book['penulis'] ?>
-                    </td>
-                    <td class="limit">
-                        <?= $book['penerbit'] ?>
-                    </td>
-                    <td>
-                        <!-- delete -->
-                        <button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>', ()=>{
+				<tr cellspacing="10">
+					<td>
+						<?= $id ?>
+					</td>
+					<td>
+						<img src="Temp/<?= $book['image'] ?>" alt=" Thumbnail" height="70">
+						<div class="rating">
+							<button class="rate" onclick="
+											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
+												$('#ulasan').removeAttr('hidden');
+												$('.popup').fadeIn(500);
+											})
+											">
+								<?php
+											$query = "SELECT AVG(ulasan.rating) as rating FROM buku LEFT JOIN ulasan ON ulasan.buku_id = buku.id WHERE ulasan.buku_id = {$book['id']}";
+											$rating = mysqli_fetch_assoc(mysqli_query($db, $query))['rating'];
+											if ($rating >= 1) {
+												for ($i = 1; $i <= 5; $i++): ?>
+								<?php if ($i <= $rating) { ?>
+								<i class="fa fa-star checked"></i>
+								<?php } else { ?>
+								<i class="fa fa-star"></i>
+								<?php } ?>
+								<?php endfor; ?>
+							</button>
+							<?php } elseif ($rating < 1) { ?>
+							<button class="rate" onclick="
+											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
+												$('.popup').removeAttr('hidden');
+											})
+											">No Rating</button>
+							<?php } ?>
+						</div>
+					</td>
+					<td class="limit">
+						<?= $book['judul_buku'] ?>
+					</td>
+					<td>
+						<p>
+							<?= $book['kode_buku'] ?>
+						</p>
+					</td>
+					<td>
+						<p>
+							<?= getStock($book['judul_buku']) ?>
+						</p>
+					</td>
+					<td>
+						<?= $book['kategori'] ?>
+					</td>
+					<td class="limit">
+						<?= $book['penulis'] ?>
+					</td>
+					<td class="limit">
+						<?= $book['penerbit'] ?>
+					</td>
+					<td>
+						<!-- delete -->
+						<button class="edit" onclick="$('.popup').load('database/update.php?id=<?= $book['id'] ?>', ()=>{
                                     $('.popup').removeAttr('hidden');
                                 })">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                        <button class="delete" onclick="
+							<i class="fa-solid fa-pen-to-square"></i>
+						</button>
+						<button class="delete" onclick="
                                     Peringatan.konfirmasi('Apakah anda yakin ingin menghapus buku <?= $book['judul_buku'] ?>?', function(isTrue){
                                         if(isTrue){
                                             $.post('component/Master-Buku.php', { 
@@ -84,56 +111,56 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
                                         }
                                     });
                                 "><i class="fa-solid fa-delete-left"></i>
-                        </button><br>
-                        <!-- detail -->
-                        <button onclick="
+						</button><br>
+						<!-- detail -->
+						<button onclick="
                                 $('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>');
                                 $('.popup').removeAttr('hidden');
                                 "><i class="fa-solid fa-chart-simple"></i>Detail
-                        </button>
-                    </td>
-                </tr>
-                <?php
+						</button>
+					</td>
+				</tr>
+				<?php
                     $id++;
                 endforeach;
                 ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="description">
-        <p>Showing
-            <?= $id -= 1; ?> of
-            <?= $page->dataPerhalaman() ?> entries
-        </p>
+			</tbody>
+		</table>
+	</div>
+	<div class="description">
+		<p>Showing
+			<?= $id -= 1; ?> of
+			<?= $page->dataPerhalaman() ?> entries
+		</p>
 
-        <!-- Pagenation -->
+		<!-- Pagenation -->
 
-        <div class="pagination">
-            <?php if ($page->halamanAktif() > 1): ?>
-            <button class="left" onclick="
+		<div class="pagination">
+			<?php if ($page->halamanAktif() > 1): ?>
+			<button class="left" onclick="
                 $('.isi-data').load(
                     'component/result/index.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $keyword ?>'
                 )">
-                <i class=" fa-solid fa-angle-left"></i>
-                Prev
-            </button>
-            <?php endif ?>
-            <?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-            <?php if ($i == $page->halamanAktif()): ?>
-            <p class="amount-of-data">
-                <?= $i ?>
-            </p>
-            <?php endif ?>
-            <?php endfor ?>
-            <?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-            <button onclick="
+				<i class=" fa-solid fa-angle-left"></i>
+				Prev
+			</button>
+			<?php endif ?>
+			<?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
+			<?php if ($i == $page->halamanAktif()): ?>
+			<p class="amount-of-data">
+				<?= $i ?>
+			</p>
+			<?php endif ?>
+			<?php endfor ?>
+			<?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
+			<button onclick="
                 $('.isi-data').load(
                         'component/result/index.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $keyword ?>'
                     )">
-                Next
-                <i class="fa-solid fa-angle-right"></i>
-            </button>
-            <?php endif ?>
-        </div>
-    </div>
+				Next
+				<i class="fa-solid fa-angle-right"></i>
+			</button>
+			<?php endif ?>
+		</div>
+	</div>
 </div>

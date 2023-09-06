@@ -81,15 +81,84 @@ function register($data)
 
 	// menambah kan ke dalam database
 	mysqli_query($db, "INSERT INTO loginuser VALUE(
-        '', '$username', '$email', '$pass', '$gambar', '$deskripsi', '$bergabung'
+        '', '$username', '$email', '$pass'
+        )");
+
+	$user_id = mysqli_insert_id($db);
+
+	mysqli_query($db, "INSERT INTO data_user VALUE(
+        $user_id, '$gambar','$deskripsi', '$bergabung'
         )");
 
 	return mysqli_affected_rows($db);
 }
 
+function updateData($data)
+{
+	global $db;
+
+	$id = strtolower(stripslashes($data["id"]));
+
+	$username = strtolower(stripslashes($data["username"]));
+	$pass_lama = mysqli_real_escape_string($db, $data["pass_lama"]);
+	$pass = mysqli_real_escape_string($db, $data["pass"]);
+	$email = mysqli_real_escape_string($db, $data["email"]);
+	$deskripsi = mysqli_real_escape_string($db, $data["deskripsi"]);
+
+
+	$mail = mysqli_query($db, "SELECT username FROM loginuser WHERE username = '$email'");
+	$nama = mysqli_query($db, "SELECT username FROM loginuser WHERE id = $id");
+	// cari data username dari tabel user dimana username = variabel username (TRUE)
+
+	if ($username !== mysqli_fetch_assoc($nama)) {
+		if (mysqli_fetch_assoc($nama)) {
+			$err = "username sudah ada!";
+			$_SESSION['error'] = $err;
+			return false;
+		}
+	}
+
+	if ($email !== mysqli_fetch_assoc($mail)) {
+		if (mysqli_fetch_assoc($mail)) {
+			$err = "email sudah digunakan!";
+			$_SESSION['error'] = $err;
+			return false;
+		}
+	}
+
+	if (strlen($deskripsi) >= 700) {
+		$err = "Terlalu banyak kata!";
+		$_SESSION['error'] = $err;
+		return false;
+	}
+
+	if (!$pass_lama == '') {
+		$password = mysqli_fetch_assoc(mysqli_query($db, "SELECT pass FROM loginuser WHERE id = $id"))['pass'];
+		if (password_verify($pass_lama, $password)) {
+			$pass = password_hash($pass, PASSWORD_DEFAULT);
+			$query = "UPDATE loginuser SET `pass` = '$pass' WHERE id = $id";
+			mysqli_query($db, $query);
+		} else {
+			$err = "password tidak sama!";
+			$_SESSION['error'] = $err;
+			return false;
+		}
+	} else {
+		$query = "UPDATE loginuser SET `username` = '$username', `email` = '$email' WHERE id = $id";
+	}
+
+	$query = "UPDATE loginuser SET `username` = '$username', `email` = '$email' WHERE id = $id";
+	mysqli_query($db, $query);
+
+	$query = "UPDATE data_user SET `deskripsi` = '$deskripsi' WHERE user_id = $id";
+	mysqli_query($db, $query);
+
+	return mysqli_affected_rows($db);
+}
 function upload()
 {
 	if ($_FILES["gambar"]["error"] == UPLOAD_ERR_OK) {
+		var_dump($_FILES);
 		$fileName = $_FILES["gambar"]["name"];
 		$fileSize = $_FILES["gambar"]["size"];
 		// $fileError = $_FILES["gambar"]["error"];

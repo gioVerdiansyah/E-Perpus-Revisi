@@ -19,7 +19,7 @@ $query = "SELECT
 	peminjam.*,
 	buku.judul_buku,
 	loginuser.username,
-	loginuser.gambar
+	data_user.gambar
 FROM
     peminjam
 INNER JOIN
@@ -30,6 +30,10 @@ INNER JOIN
     loginuser
 ON
     peminjam.user_id = loginuser.id
+INNER JOIN
+    data_user
+ON
+    loginuser.id = data_user.user_id
 WHERE
 	status IN ('1', '2')
 ORDER BY
@@ -47,18 +51,18 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 
 ?>
 <style>
-.side-bar {
-	height: 100% !important;
-	box-shadow: none !important;
-}
+	.side-bar {
+		height: 100% !important;
+		box-shadow: none !important;
+	}
 
-main {
-	height: max-content !important;
-}
+	main {
+		height: max-content !important;
+	}
 
-.isi-data .data table tbody tr td.center {
-	text-align: center !important;
-}
+	.isi-data .data table tbody tr td.center {
+		text-align: center !important;
+	}
 </style>
 <link rel="stylesheet" href="CSS/style-content.css">
 <div class="title">
@@ -117,62 +121,62 @@ main {
 						$id = 1;
 						foreach ($borrower as $borrowers):
 							?>
-						<tr cellspacing="10">
-							<td>
-								<p>
-									<?= $id ?>
-								</p>
-							</td>
-							<td>
-								<p>
-									<?= $borrowers['username'] ?>
-								</p>
-							</td>
-							<td>
-								<img src="../.temp/<?= $borrowers['gambar'] ?>" alt="photo profile peminjam"
-									height="70">
-							</td>
-							<td class="limit">
-								<p>
-									<?= $borrowers['judul_buku'] ?>
-									<strong title="Ini adalah jumlah stock buku">
-										(
-										<?= getStock($borrowers['judul_buku']) ?>)
-									</strong>
-								</p>
-							</td>
-							<td class="limit center">
-								<p>
-									<?= $borrowers['jumlah_pinjam'] ?>
-								</p>
-							</td>
-							<td>
-								<p>
-									<?= getDay($borrowers["tanggal_pinjam"], true) ?> <br>
-									<?= $borrowers['tanggal_pinjam'] ?>
-								</p>
-							</td>
-							<td>
-								<p>
-									<?= getDay($borrowers["tanggal_pengembalian"], false) ?> <br>
-									<?= $borrowers['tanggal_pengembalian'] ?>
-								</p>
-							</td>
-							<td>
-								<?php if ($borrowers["status"] === "1") { ?>
-								<p class="persetujuan g">
-									<i class="fa-solid fa-check"></i> Disetujui
-								</p>
-								<?php } elseif ($borrowers["status"] === "2") { ?>
-								<p class="persetujuan r h" onclick="
+							<tr cellspacing="10">
+								<td>
+									<p>
+										<?= $id ?>
+									</p>
+								</td>
+								<td>
+									<p>
+										<?= $borrowers['username'] ?>
+									</p>
+								</td>
+								<td>
+									<img src="../.temp/<?= $borrowers['gambar'] ?>" alt="photo profile peminjam"
+										height="70">
+								</td>
+								<td class="limit">
+									<p>
+										<?= $borrowers['judul_buku'] ?>
+										<strong title="Ini adalah jumlah stock buku">
+											(
+											<?= getStock($borrowers['judul_buku']) ?>)
+										</strong>
+									</p>
+								</td>
+								<td class="limit center">
+									<p>
+										<?= $borrowers['jumlah_pinjam'] ?>
+									</p>
+								</td>
+								<td>
+									<p>
+										<?= getDay($borrowers["tanggal_pinjam"], true) ?> <br>
+										<?= $borrowers['tanggal_pinjam'] ?>
+									</p>
+								</td>
+								<td>
+									<p>
+										<?= getDay($borrowers["tanggal_pengembalian"], false) ?> <br>
+										<?= $borrowers['tanggal_pengembalian'] ?>
+									</p>
+								</td>
+								<td>
+									<?php if ($borrowers["status"] === "1") { ?>
+										<p class="persetujuan g">
+											<i class="fa-solid fa-check"></i> Disetujui
+										</p>
+									<?php } elseif ($borrowers["status"] === "2") { ?>
+										<p class="persetujuan r h" onclick="
 										$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $borrowers['id'] ?> #ditolak-admin', ()=>{$('.popup').removeAttr('hidden')});
 										">
-									<i class="fa-regular fa-circle-xmark"></i> Ditolak!
-								</p>
-								<?php } ?>
-							</td>
-							<td>
-								<button class="delete" onclick="
+											<i class="fa-regular fa-circle-xmark"></i> Ditolak!
+										</p>
+									<?php } ?>
+								</td>
+								<td>
+									<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapusnya?', (isTrue)=>{
 										if(isTrue){
 											$.post('component/Data-Laporan.php',{
@@ -182,11 +186,11 @@ main {
 										}
 									})
 								">
-									<i class="fa-solid fa-delete-left"></i>
-								</button>
-							</td>
-						</tr>
-						<?php $id++; endforeach ?>
+										<i class="fa-solid fa-delete-left"></i>
+									</button>
+								</td>
+							</tr>
+							<?php $id++; endforeach ?>
 					</tbody>
 				</table>
 			</div>
@@ -197,12 +201,12 @@ main {
 				<div class="pagination">
 					<p class="amount-of-data">1</p>
 					<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-					<button
-						onclick="
+						<button
+							onclick="
 					$('#isi-data').load('component/result/laporan.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
-						Next
-						<i class="fa-solid fa-angle-right"></i>
-					</button>
+							Next
+							<i class="fa-solid fa-angle-right"></i>
+						</button>
 					<?php endif ?>
 				</div>
 			</div>

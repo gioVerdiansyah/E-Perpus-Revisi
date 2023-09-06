@@ -22,6 +22,10 @@ body {
   justify-content: center;
 }
 
+.popup #pop-up {
+  height: 100vh;
+}
+
 .popup,
 .popup.fade-out {
   opacity: 0;
@@ -312,6 +316,39 @@ body {
   flex-direction: row-reverse;
   justify-content: space-evenly;
 }
+
+.update-komentar {
+  position: absolute;
+  width: 100vw;
+  height: 110%;
+  background-color: var(--bg-0-3);
+  transform: translate(-20%, -25%);
+}
+
+#input-ulasan {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#input-ulasan .title {
+  width: 95%;
+}
+#input-ulasan .title button {
+  position: absolute !important;
+}
+#input-ulasan form ul li.isi-ulasan {
+  display: flex;
+  flex-direction: column;
+}
+#input-ulasan form {
+  padding: 30px;
+}
 .popup
   #ulasan
   .content
@@ -321,17 +358,21 @@ body {
   div.input-ulasan
   li
   div
-  input[type="radio"] {
+  input[type="radio"],
+#input-ulasan form ul li div input[type="radio"] {
   display: none;
 }
-.popup #ulasan .content .data form ul div.input-ulasan li div label {
+.popup #ulasan .content .data form ul div.input-ulasan li div label,
+#input-ulasan form ul li div label {
   font-size: 20px;
   cursor: pointer;
 }
-.popup #ulasan .content .data form ul div.input-ulasan li div label i.fa-star {
+.popup #ulasan .content .data form ul div.input-ulasan li div label i.fa-star,
+#input-ulasan form ul li div label i.fa-start {
   color: #ccc;
 }
-.popup #ulasan .content .data form ul div.input-ulasan li.isi-ulasan button {
+.popup #ulasan .content .data form ul div.input-ulasan li.isi-ulasan button,
+#input-ulasan form ul li.isi-ulasan button {
   width: max-content;
   align-self: flex-end;
   background-color: var(--lightgreen);
@@ -351,7 +392,8 @@ body {
   ul
   div.input-ulasan
   li.isi-ulasan
-  button:hover {
+  button:hover,
+#input-ulasan form ul li.isi-ulasan button:hover {
   color: white;
   background-color: var(--lightgreen-h);
 }
@@ -379,7 +421,8 @@ body {
   div
   input[type="radio"]
   + label
-  i.fa-star.checked {
+  i.fa-star.checked,
+#input-ulasan form ul li div input[type="radio"]:checked + label i.fa-star {
   color: #f7b731;
 }
 
@@ -395,7 +438,53 @@ body {
 .popup #ulasan .content .data .card .profile {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+}
+
+.popup #ulasan .content .data .card .profile div {
+  display: flex;
+  flex-direction: row;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li {
+  background-color: #bfbdbd;
+  transition: all 0.3s;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li:nth-child(2) {
+  border-bottom: 1px solid black;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li:first-child {
+  border-bottom: 1px solid black;
+  border-radius: 5px 5px 0 0;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li:last-child {
+  border-radius: 0 0 5px 5px;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li:hover {
+  background-color: #6d6c6c;
+}
+.popup #ulasan .content .data .card .profile .opsi ul li button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.popup #ulasan .content .data .card .profile .opsi button.options {
+  padding: 10px;
+  background-color: #cccccc00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.popup #ulasan .content .data .card .profile .opsi button.options span {
+  width: 3px;
+  height: 3px;
+  background-color: green;
+  margin: 3px 0;
+}
+.popup #ulasan .content .data .card .profile div div {
+  flex-direction: column;
 }
 
 .popup #ulasan .content .data .card .profile img {
@@ -454,9 +543,16 @@ body {
 }
 
 /* profile */
+
+.popup #profile {
+  height: 100vh;
+}
+
 .popup #profile .content .data form .image {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .popup #profile .content .data form .image img {
   width: 120px;
@@ -470,13 +566,21 @@ body {
   justify-content: flex-start;
 }
 
+.popup #profile .content .data form .email {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
 .popup #profile .content .data form .nama label {
   margin-right: 10px;
   transform: translateY(8px);
 }
 
-.popup #profile .content .data form input[name="username"] {
+.popup #profile .content .data form input[name="username"],
+.popup #profile .content .data form .email input {
   font-size: larger;
+  width: 80%;
 }
 
 .popup #profile .content .data form {
@@ -484,11 +588,25 @@ body {
   padding-bottom: 20px;
 }
 
-.popup #profile .content .data form .row {
+.popup #profile .content .data form .row,
+.popup #profile .content .data .row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 25px;
+  margin: 25px 0;
+}
+.popup #profile .content .data .row.kirim {
+  margin-left: -30px;
+}
+.popup #profile .content .data .row {
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.popup #profile .content .data .row p:last-child {
+  color: red;
+  align-self: flex-end;
+  width: 23%;
 }
 .popup #profile .content .data form .col,
 .popup #profile .content .data form input .col {
@@ -503,6 +621,10 @@ body {
   background-color: none;
   outline-color: #00000000;
 }
+.popup #profile .content .data form input[type="file"] {
+  border: none !important;
+  width: 87px;
+}
 
 .popup #profile .content .data form .col.textarea {
   width: 80%;
@@ -513,7 +635,8 @@ body {
   border-right: 1px solid var(--purple);
   border-left: 1px solid var(--purple);
 }
-.popup #profile .content .data form .kirim button {
+.popup #profile .content .data form .kirim button,
+.popup #profile .content .data .row button.delete {
   cursor: pointer;
   background-color: var(--lightgreen);
   color: white;
@@ -524,6 +647,16 @@ body {
   transform: translateY(3px);
   transition: all 0.3s;
 }
+
+.popup #profile .content .data .row button.delete {
+  background-color: var(--red);
+  transition: all 0.3s;
+}
+
+.popup #profile .content .data .row button.delete:hover {
+  background-color: var(--red-h);
+}
+
 .popup #profile .content .data form .kirim button:hover {
   background-color: var(--lightgreen-h);
 }
@@ -531,7 +664,7 @@ body {
 .popup #profile .content .data form .kirim p {
   position: absolute;
   bottom: 5px;
-  left: 10px;
+  right: 10px;
 }
 
 .popup #profile .content {

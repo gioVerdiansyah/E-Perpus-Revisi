@@ -23,11 +23,24 @@ if ($key === hash("sha512", $row["username"])) {
 	$username = $row["username"];
 }
 
+// Menangani POST UPDATE peminjaman
+if (isset($_POST['pinjam_update'])) {
+	$pjm_id = intval($_POST['pjm_id']);
+	$jumlah_pinjam = intval($_POST['jumlah_pinjam']);
+	$tanggal_pengembalian = $_POST['tanggal_pengembalian'];
+	date_default_timezone_set('Asia/Jakarta');
+	$tanggal = date("H:i d/m/Y");
+
+	mysqli_query($db, "UPDATE peminjam SET `jumlah_pinjam` = $jumlah_pinjam, `tanggal_pinjam` = '$tanggal', `tanggal_pengembalian` = '$tanggal_pengembalian' WHERE id = $pjm_id");
+}
+
 $query = "SELECT 
 	peminjam.*,
+	peminjam.id AS pjm_id,
 	buku.*,
+	buku.id AS bukid,
 	loginuser.username,
-	loginuser.gambar
+	data_user.gambar
 FROM
 	peminjam
 INNER JOIN
@@ -38,14 +51,15 @@ INNER JOIN
 	buku
 ON
 	peminjam.buku_id = buku.id
+INNER JOIN 
+    data_user
+ON
+    loginuser.id = data_user.user_id
 ";
 
 $result = mysqli_query($db, $query);
 
-$status;
-while ($row = mysqli_fetch_assoc($result)) {
-	$status = $row['status'];
-}
+$status = mysqli_fetch_assoc($result)['status'];
 // Menangani POST method DELETE data 
 if (isset($_POST['id'])) {
 	$id = $_POST['id'];
@@ -91,7 +105,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 			<p>entries</p>
 		</div>
 		<?php
-		if (isset($status) && $status === '1'):
+		if ($status == 1):
 			?>
 			<div class="unduh-stroke">
 				<p>Unduh semua buku yang disetujui:</p>
@@ -121,7 +135,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 					<th>TGL PINJAM</th>
 					<th>TGL <br> PENGEMBALIAN</th>
 					<th>STATUS</th>
-					<th>HAPUS/CANCEL</th>
+					<th>EDIT/HAPUS</th>
 				</thead>
 				<tbody>
 					<?php
@@ -179,6 +193,14 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 								<?php } ?>
 							</td>
 							<td>
+								<!-- edit -->
+								<button onclick="
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?> #peminjaman.update');
+								$('.popup').removeAttr('hidden');
+								" class="edit">
+									Edit
+								</button>
+
 								<?php if ($peminjam["status"] == 1) { ?>
 									<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){

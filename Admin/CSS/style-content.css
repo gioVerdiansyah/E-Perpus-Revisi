@@ -439,6 +439,86 @@ main .content-wrapper .content .download button {
   flex-direction: row;
 }
 
+/* rating */
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  .rating
+  p {
+  font-size: small;
+  text-align: center;
+}
+
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  .rating
+  button.rate {
+  background-color: rgba(0, 0, 0, 0);
+  color: black;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+}
+
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  .rating
+  button.rate:hover {
+  text-decoration: underline;
+}
+
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  .rating
+  .rate
+  .fa-star {
+  font-size: xx-small;
+  color: #ccc;
+}
+
+.content-wrapper
+  .content
+  .card-wrapper
+  .isi-data
+  .data
+  table
+  tbody
+  tr
+  td
+  .rating
+  .rate
+  .checked {
+  font-size: xx-small;
+  color: orange;
+}
+
 #isi-data .data ul li {
   padding: 10px 20px;
 }

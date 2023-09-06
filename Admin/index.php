@@ -72,9 +72,6 @@ if ($key === hash("sha512", $row["username"])) {
 					<li id="anggota">
 						<h3>Anggota</h3>
 					</li>
-					<li id="ulasan">
-						<h3>Ulasan</h3>
-					</li>
 				</ul>
 			</li>
 			<li id="persetujuan">
@@ -136,25 +133,25 @@ if ($key === hash("sha512", $row["username"])) {
 <script src="JS/script.js"></script>
 <script src="JS/alert.js"></script>
 <?php if (isset($_SESSION['tambah-buku']) || isset($_SESSION['ubah-buku'])) { ?>
-	<script>
-		$('.content').load('component/Master-Buku.php');
-		$('*').removeClass('active');
-		$('#buku h3').addClass('active');
-		$('#list-master-data').addClass('list-master-data-onclick');
-		$('.side-bar ul li.dropdown .master-data .dropdown-icon').addClass('dropdown-icon-onclick');
-		$('.side-bar ul .dropdown .master-data').addClass('addBg');
-		<?php if (isset($_SESSION['ubah-buku'])) { ?>
-			Peringatan.sukses("Berhasil mengubah buku!", 3000);
-		<?php } else { ?>
-			Peringatan.sukses("Berhasil menambah buku!", 3000);
-		<?php } ?>
-	</script>
-	<?php unset($_SESSION['tambah-buku']);
+<script>
+$('.content').load('component/Master-Buku.php');
+$('*').removeClass('active');
+$('#buku h3').addClass('active');
+$('#list-master-data').addClass('list-master-data-onclick');
+$('.side-bar ul li.dropdown .master-data .dropdown-icon').addClass('dropdown-icon-onclick');
+$('.side-bar ul .dropdown .master-data').addClass('addBg');
+<?php if (isset($_SESSION['ubah-buku'])) { ?>
+Peringatan.sukses("Berhasil mengubah buku!", 3000);
+<?php } else { ?>
+Peringatan.sukses("Berhasil menambah buku!", 3000);
+<?php } ?>
+</script>
+<?php unset($_SESSION['tambah-buku']);
 	unset($_SESSION['ubah-buku']);
 } else { ?>
-	<script>
-		$(".content").load('component/Home-Admin.php');
-	</script>
+<script>
+$(".content").load('component/Home-Admin.php');
+</script>
 <?php } ?>
 
 </html>

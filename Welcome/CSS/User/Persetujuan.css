@@ -40,7 +40,8 @@
   display: flex;
   justify-content: center;
 }
-.data-wrapper .isi-data .data table tbody tr td button.delete {
+.data-wrapper .isi-data .data table tbody tr td button.delete,
+.data-wrapper .isi-data table tbody tr td button.edit {
   cursor: pointer;
   background-color: var(--red);
   color: white;
@@ -50,6 +51,15 @@
   border-radius: 5px;
   transform: translateY(3px);
   transition: all 0.3s;
+}
+
+.data-wrapper .isi-data table tbody tr td button.edit {
+  margin-right: 10px;
+  background-color: var(--orange);
+  transition: all 0.3s;
+}
+.data-wrapper .isi-data table tbody tr td button.edit:hover {
+  background-color: rgb(206, 137, 9);
 }
 .data-wrapper .isi-data table tbody tr td button.delete:hover {
   background-color: var(--red-h);

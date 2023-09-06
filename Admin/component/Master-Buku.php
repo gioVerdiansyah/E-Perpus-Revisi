@@ -12,9 +12,38 @@ if (isset($id)) {
 	mysqli_query($db, "DELETE FROM buku WHERE id = $id");
 }
 
+$id = $_COOKIE["USRADMNLGNISEQLTHROE"];
+
+// cek username berdasarkan id
+$result = mysqli_query($db, "SELECT * FROM loginadmin WHERE id='$id'");
+$row = mysqli_fetch_assoc($result); //ambil
+
 $pagenation = new Pagenation(10, "buku", 1);
 
-$books = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
+$query = "SELECT
+buku.*,
+IFNULL(ulasan.avg_rating, 0) AS avg_rating
+FROM
+buku
+LEFT JOIN (
+SELECT
+	buku_id,
+	AVG(rating) AS avg_rating
+FROM
+	ulasan
+GROUP BY
+	buku_id
+) AS ulasan
+ON
+buku.id = ulasan.buku_id
+ORDER BY
+buku.id ASC
+LIMIT
+{$pagenation->dataPerhalaman()}
+";
+
+// $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenation->dataPerhalaman()}");
+$books = mysqli_query($db, $query);
 ?>
 
 <style>
@@ -89,6 +118,34 @@ $books = mysqli_query($db, "SELECT * FROM buku ORDER BY id DESC LIMIT {$pagenati
 								</td>
 								<td>
 									<img src="Temp/<?= $book['image'] ?>" alt="Thumbnail" height="70">
+									<!-- rating -->
+									<div class="rating">
+										<button class="rate" onclick="
+											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
+												$('#ulasan').removeAttr('hidden');
+												$('.popup').fadeIn(500);
+											})
+											">
+											<?php
+											$query = "SELECT AVG(ulasan.rating) as rating FROM buku LEFT JOIN ulasan ON ulasan.buku_id = buku.id WHERE ulasan.buku_id = {$book['id']}";
+											$rating = mysqli_fetch_assoc(mysqli_query($db, $query))['rating'];
+											if ($rating >= 1) {
+												for ($i = 1; $i <= 5; $i++): ?>
+													<?php if ($i <= $rating) { ?>
+														<i class="fa fa-star checked"></i>
+													<?php } else { ?>
+														<i class="fa fa-star"></i>
+													<?php } ?>
+												<?php endfor; ?>
+											</button>
+										<?php } elseif ($rating < 1) { ?>
+											<button class="rate" onclick="
+											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1&&usr=1 #ulasan',() => {
+												$('.popup').removeAttr('hidden');
+											})
+											">No Rating</button>
+										<?php } ?>
+									</div>
 								</td>
 								<td class="limit">
 									<p>

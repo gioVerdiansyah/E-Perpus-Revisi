@@ -9,6 +9,7 @@ $(document).ready(function () {
 			}
 		});
 
+
 let onclick = false;
 
     if (window.matchMedia("(max-width: 768px)").matches) {
@@ -64,6 +65,7 @@ let onclick = false;
 
     $("nav ul li:last-child").mouseenter(function() {
         $("nav ul li:last-child .logout").stop().slideDown();
+		$("nav ul li:last-child .logout").css("display", "flex");
       });
       
       $("nav ul li:last-child").mouseleave(function() {
@@ -77,6 +79,17 @@ let onclick = false;
         $("main").load(path);
         $("*").removeClass("on");
         $(ini).addClass("on");
+
+		// remove style css height
+		$('body').css('height', 'auto');
+
+		// check width
+		if ($('body').height() < window.innerHeight) {
+			$('body').css('height', '100%');
+		}
+		if($('body').height() > window.innerHeight){
+			$('body').css('height', '100vh');
+		}
     }
 
     $("#home").click(function (e) { 

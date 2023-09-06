@@ -12,11 +12,12 @@ $query = "SELECT
 peminjam.*,
 buku.judul_buku,
 loginuser.username,
-loginuser.gambar
+data_user.gambar
 FROM
 peminjam
 LEFT JOIN buku ON peminjam.buku_id = buku.id
 LEFT JOIN loginuser ON peminjam.user_id = loginuser.id
+LEFT JOIN data_user ON loginuser.id = data_user.user_id
 WHERE
 peminjam.status IN ('1', '2')
 ORDER BY

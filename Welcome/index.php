@@ -1,7 +1,7 @@
 <?php
 session_name("SSILGNPERPUSMEJAYAN");
 session_start();
-require "../Admin/database/functions.php";
+require "../function.php";
 if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
 	header("Location: ../index.php");
 	exit;
@@ -12,7 +12,11 @@ $id = $_COOKIE["UsrLgnMJYNiSeQlThRuE"];
 $key = $_COOKIE["UIDprpsMJYNisThroe"];
 
 // cek username berdasarkan id
-$result = mysqli_query($db, "SELECT * FROM loginuser WHERE id='$id'");
+$result = mysqli_query($db, "SELECT loginuser.*, data_user.*
+FROM loginuser
+LEFT JOIN data_user ON data_user.user_id = loginuser.id
+WHERE loginuser.id = '$id'
+");
 $row = mysqli_fetch_assoc($result); //ambil
 $username = '';
 
@@ -22,6 +26,23 @@ if ($key === hash("sha512", $row["username"])) {
 } else {
 	header("Location: ../logout-user.php");
 }
+
+if (isset($_POST['hapus_akun'])) {
+	echo $_POST['id'];
+}
+
+// menangani POST ulasan
+if (isset($_POST['ulasan'])) {
+	$id = intval($_POST['uls_id']);
+	$ulasan = mysqli_real_escape_string($db, $_POST['isi_ulasan']);
+	$ulasan = htmlspecialchars($ulasan);
+	$rating = mysqli_real_escape_string($db, $_POST['rate']);
+	$rating = htmlspecialchars($rating);
+
+	// update
+	mysqli_query($db, "UPDATE ulasan SET `isi_ulasan` = '$ulasan', `rating` = '$rating' WHERE id = $id ");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +70,31 @@ if ($key === hash("sha512", $row["username"])) {
 <body>
 	<div class="popup" hidden></div>
 
+	<?php
+	if (isset($_POST["id"])) {
+		if (updateData($_POST) === 1) {
+			echo "
+		<script>
+			Peringatan.sukses('Update profile berhasil!');
+		</script>
+		";
+			header("Location: ../logout-user.php");
+		} else {
+			?>
+			<style>
+				#pop-up {
+					height: 100vh !important;
+				}
+			</style>
+			<script>
+				Peringatan.ditolak('Gagal meupdate profile karena <?= $_SESSION["error"] ?>', 4000);
+			</script>
+
+			<?php
+		}
+	}
+	?>
+
 	<nav>
 		<ul>
 			<li>
@@ -71,12 +117,20 @@ if ($key === hash("sha512", $row["username"])) {
 					<?php $sql = mysqli_query($db, "SELECT id,judul_buku,jumlah_buku FROM buku");
 					$books = mysqli_fetch_assoc($sql); ?>
 					<button onclick="
-						$('.popup').load('component/result/fraction_group.php?usr=<?= $username ?>&&bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #profile', ()=>{
+						$('.popup').load('component/result/fraction_group.php?usr=<?= $row['id'] ?>&&bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #profile', ()=>{
 							$('#profile').fadeIn(500);
 							$('.popup').removeAttr('hidden');
 						})
 					"><i class="fi fi-rr-sign-out-alt"></i>
 						Profile</button>
+
+					<button onclick="
+						Peringatan.konfirmasi('Apakah anda yakin ingin logout?', (isTrue)=>{
+							if(isTrue){
+								window.location.href = '../logout-user.php';
+							}
+						})
+					">Logout</button>
 			</li>
 			</div>
 			</li>

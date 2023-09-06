@@ -5,8 +5,8 @@ session_start();
 require "../../../Admin/database/functions.php";
 
 if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
-    header("Location: ../../../index.php");
-    exit;
+	header("Location: ../../../index.php");
+	exit;
 }
 
 // denkripsi data username
@@ -16,15 +16,32 @@ $iv = substr($decodedData, -16);
 $encryptedDataUsr = substr($decodedData, 0, -16);
 $decryptedData = openssl_decrypt($encryptedDataUsr, 'AES-256-CBC', '#XXXMr.Verdi_407xxx#', OPENSSL_RAW_DATA, $iv);
 
-$data = mysqli_query($db, "SELECT * FROM peminjam WHERE username = '$decryptedData' AND status = '1' ORDER BY id DESC");
+$query = "SELECT
+peminjam.*,
+buku.*,
+loginuser.username,
+data_user.gambar
+FROM
+peminjam
+LEFT JOIN buku ON peminjam.buku_id = buku.id
+LEFT JOIN loginuser ON peminjam.user_id = loginuser.id
+LEFT JOIN data_user ON loginuser.id = data_user.user_id
+WHERE
+username = '$decryptedData' AND
+peminjam.status = '1'
+ORDER BY
+peminjam.id DESC
+";
+
+$data = mysqli_query($db, $query);
 
 $peminjaman = '';
 $pengembalian = '';
 
 
 foreach ($data as $datas) {
-    $peminjaman .= $datas['tanggal_pinjam'];
-    $pengembalian .= $datas['tanggal_pengembalian'];
+	$peminjaman .= $datas['tanggal_pinjam'];
+	$pengembalian .= $datas['tanggal_pengembalian'];
 }
 
 $html = '<link rel="stylesheet" href="../../CSS/cetak.css">
@@ -58,7 +75,7 @@ $html = '<link rel="stylesheet" href="../../CSS/cetak.css">
                 ';
 $id = 1;
 foreach ($data as $datas) {
-    $html .= '
+	$html .= '
                 <tr>
                     <td style="border: 1px solid grey;padding: 3px">
                         <p>
@@ -72,7 +89,7 @@ foreach ($data as $datas) {
                     </td>
                     <td style="width:30%;border: 1px solid grey;padding: 3px; overflow-wrap: anywhere;">
                         <p>
-                           ' . $datas['bukunya'] . '
+                           ' . $datas['judul_buku'] . '
                         </p>
                     </td>
                     <td style="border: 1px solid grey;padding: 3px">
@@ -104,13 +121,13 @@ $html .= '</tbody>
       <ul style="list-style-type: numeric;padding-left:50px; margin:0">
       ';
 if (!$decryptedData) {
-    $html .= '
+	$html .= '
         <li style="margin:0;padding:0">
             <p style="margin:0 0 10px 0;padding:0">Jika data tidak muncul diharap me-refresh dan tekan tombol download struk lagi</p>
         </li>
         ';
 } else {
-    $html .= '
+	$html .= '
         <li style="margin:0;padding:0">
           <p style="margin:0 0 10px 0;padding:0">Cek apakah tanggal yang <b>"Harus di kembalikan pada"</b> melebihi tanggal pada saat pengembalian buku</p>
         </li>
