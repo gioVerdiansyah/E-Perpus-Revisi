@@ -1,10 +1,17 @@
 <?php
 session_name("SSILGNPERPUSMEJAYAN");
 session_start();
+require "../../Admin/database/functions.php";
 if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) && !isset($_COOKIE["UIDprpsMJYNisThroe"])) {
 	header("Location: ../../index.php");
 	exit;
 }
+if (isset($_GET['id'])) {
+	$id = $_GET['id'];
+	mysqli_query($db, "DELETE FROM loginuser WHERE id = $id");
+	header("Location: ../logout-user.php");
+}
+
 ?>
 
 <link rel="stylesheet" href="CSS/User/Home.css">

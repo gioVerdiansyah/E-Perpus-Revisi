@@ -22,10 +22,6 @@ body {
   justify-content: center;
 }
 
-.popup #pop-up {
-  height: 100vh;
-}
-
 .popup,
 .popup.fade-out {
   opacity: 0;
@@ -210,7 +206,18 @@ body {
   width: 40%;
 }
 .popup #pop-up .content .data table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   padding: 10px 5px;
+}
+.popup #pop-up .content .data table tbody.thubmnail-book tr td {
+  display: flex;
+  justify-content: center;
+}
+.popup #pop-up .content .data table tbody tr td.image-book img {
+  width: 40%;
 }
 .popup #pop-up .content .data table tbody tr td {
   padding: 5px 0;
@@ -543,10 +550,6 @@ body {
 }
 
 /* profile */
-
-.popup #profile {
-  height: 100vh;
-}
 
 .popup #profile .content .data form .image {
   display: flex;

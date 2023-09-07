@@ -78,6 +78,13 @@ nav ul li div.logout {
   right: 10px;
   transform: translateY(-5px);
 }
+nav ul li div.logout button {
+  padding: 5px 0;
+}
+nav ul li div.logout button:hover {
+  background-color: rgb(182, 182, 182);
+}
+
 nav ul li div.logout a {
   color: black;
   text-decoration: none;

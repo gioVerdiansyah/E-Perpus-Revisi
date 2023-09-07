@@ -55,11 +55,16 @@ INNER JOIN
     data_user
 ON
     loginuser.id = data_user.user_id
+WHERE
+	peminjam.user_id = $id
+ORDER BY
+	peminjam.id ASC
 ";
 
 $result = mysqli_query($db, $query);
 
-$status = mysqli_fetch_assoc($result)['status'];
+$status = mysqli_fetch_assoc(mysqli_query($db, "SELECT peminjam.status FROM peminjam WHERE `status` = '1' AND peminjam.user_id = $id"));
+
 // Menangani POST method DELETE data 
 if (isset($_POST['id'])) {
 	$id = $_POST['id'];
@@ -105,7 +110,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 			<p>entries</p>
 		</div>
 		<?php
-		if ($status == 1):
+		if (isset($status)):
 			?>
 			<div class="unduh-stroke">
 				<p>Unduh semua buku yang disetujui:</p>
@@ -182,7 +187,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 									</p>
 								<?php } elseif ($peminjam["status"] == "2") { ?>
 									<p class="persetujuan r h" onclick="
-										$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?> #ditolak', ()=>{$('.popup').removeAttr('hidden')});
+										$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?>&&uls=5 #ditolak', ()=>{$('.popup').removeAttr('hidden')});
 										">
 										<i class="fa-regular fa-circle-xmark"></i> Ditolak!
 									</p>
@@ -194,18 +199,19 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 							</td>
 							<td>
 								<!-- edit -->
-								<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?> #peminjaman.update');
+								<?php if ($peminjam['status'] == '0'): ?>
+									<button onclick="
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&usl=5&&pjm_id=<?= $peminjam['pjm_id'] ?>&&usr=1 #peminjaman.update');
 								$('.popup').removeAttr('hidden');
 								" class="edit">
-									Edit
-								</button>
-
+										Edit
+									</button>
+								<?php endif; ?>
 								<?php if ($peminjam["status"] == 1) { ?>
 									<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pjm_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di HAPUS')
 											$('#isi-data').load('component/Peminjaman.php #isi-data')
 										}
@@ -216,7 +222,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 									<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang ditolak?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pjm_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di HAPUS')
 											$('#isi-data').load('component/Peminjaman.php #isi-data')
 										}
@@ -227,7 +233,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 									<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin membatalkan meminjam buku <?= $peminjam['judul_buku'] ?>?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pjm_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di CANCEL')
 											$('#isi-data').load('component/Peminjaman.php #isi-data')
 										}

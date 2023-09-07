@@ -17,6 +17,7 @@ $pagenation = new Pagenation(10, "peminjam", 1);
 
 $query = "SELECT 
 	peminjam.*,
+	peminjam.id AS pjm_id,
 	buku.judul_buku,
 	loginuser.username,
 	data_user.gambar
@@ -169,7 +170,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 										</p>
 									<?php } elseif ($borrowers["status"] === "2") { ?>
 										<p class="persetujuan r h" onclick="
-										$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $borrowers['id'] ?> #ditolak-admin', ()=>{$('.popup').removeAttr('hidden')});
+										$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $borrowers['id'] ?>&&pjm_id=<?= $borrowers['pjm_id'] ?>&&usr=5&&uls=1 #ditolak-admin', ()=>{$('.popup').removeAttr('hidden')});
 										">
 											<i class="fa-regular fa-circle-xmark"></i> Ditolak!
 										</p>

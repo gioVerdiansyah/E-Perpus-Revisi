@@ -119,7 +119,7 @@ $result = mysqli_query($db, $query);
 								<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pj,_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di HAPUS')
 											$('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key= <?= $keyword ?>&&usr=<?= $username ?>')
 										}
@@ -130,7 +130,7 @@ $result = mysqli_query($db, $query);
 								<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin membatalkan meminjam buku <?= $peminjam['judul_buku'] ?>?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pjm_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di CANCEL')
 											$('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key= <?= $keyword ?>&&usr=<?= $username ?>')
 										}

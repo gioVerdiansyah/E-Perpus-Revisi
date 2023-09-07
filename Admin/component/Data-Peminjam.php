@@ -43,6 +43,7 @@ $borrower = mysqli_query(
 	$db,
 	"SELECT
 	peminjam.*,
+	peminjam.id AS pjm_id,
 	buku.judul_buku,
 	loginuser.username,
 	data_user.gambar

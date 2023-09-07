@@ -3,6 +3,7 @@ if ($_SERVER['REQUEST_URI'] == "/perpus_sekolah/Admin/database/functions.php") {
 	header("Location: ../index.php");
 	exit();
 }
+
 $db = mysqli_connect(
 	"localhost",
 	"root",
@@ -49,7 +50,7 @@ function insert($data)
 }
 function upload()
 {
-	if ($_FILES["gambar"]["error"] == UPLOAD_ERR_OK) {
+	if ($_FILES["image"]["error"] == UPLOAD_ERR_OK) {
 		$fileName = $_FILES["image"]["name"];
 		$fileSize = $_FILES["image"]["size"];
 		$fileError = $_FILES["image"]["error"];
@@ -105,7 +106,6 @@ function updt($data)
 	$jumlah_buku = htmlspecialchars($data["jumlah_buku"]);
 	$oldImage = htmlspecialchars($data["oldImage"]);
 
-
 	if ($_FILES["image"]["error"] === 4) {
 		$image = $oldImage;
 	} else {
@@ -113,7 +113,7 @@ function updt($data)
 	}
 
 	global $db;
-	$query = "UPDATE buku SET judul_buku = '$judul_buku', kode_buku = '$kode_buku' , kategori = '$kategori', penulis = '$penulis', penerbit = '$penerbit', tahun_terbit = '$tahun_terbit', isbn = '$isbn', jumlah_halaman = '$jumlah_halaman', jumlah_buku = '$jumlah_buku', sinopsis = '$sinopsis' WHERE id = $id";
+	$query = "UPDATE buku SET judul_buku = '$judul_buku', kode_buku = '$kode_buku' , kategori = '$kategori', penulis = '$penulis', penerbit = '$penerbit', `image` = '$image', tahun_terbit = '$tahun_terbit', isbn = '$isbn', jumlah_halaman = '$jumlah_halaman', jumlah_buku = '$jumlah_buku', sinopsis = '$sinopsis' WHERE id = $id";
 	mysqli_query($db, $query);
 
 	return mysqli_affected_rows($db);

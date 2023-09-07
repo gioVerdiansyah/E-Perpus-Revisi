@@ -61,45 +61,45 @@ if (isset($_POST["submit"])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../Welcome/CSS/index.css" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link rel="stylesheet" href="../Welcome/CSS/index.css" />
 </head>
 
 <body>
-    <div class="image"></div>
-    <main>
-        <h1>Welcome Admin Ku <span id="hello">&#128075</span></h1>
-        <form action="" method="post">
-            <ul>
-                <li>
-                    <label for="username">Username :</label>
-                    <input type="text" name="username" id="username" placeholder="Masukkan Username" required autofocus>
-                </li>
-                <li>
-                    <label for="password">Password :</label>
-                    <input type="password" name="pass" id="password" required>
-                </li>
-                <li>
-                    <!-- COOKIE -->
-                    <input type="checkbox" checked name="remember" id="remember">
-                    <label for="remember">Remember Me!</label>
-                </li>
+	<div class="image"></div>
+	<main>
+		<h1>Welcome Admin Ku <span id="hello">&#128075</span></h1>
+		<form action="" method="post">
+			<ul>
+				<li>
+					<label for="username">Username :</label>
+					<input type="text" name="username" id="username" placeholder="Masukkan Username" required autofocus>
+				</li>
+				<li>
+					<label for="password">Password :</label>
+					<input type="password" name="pass" id="password" required>
+				</li>
+				<li>
+					<!-- COOKIE -->
+					<input type="checkbox" checked name="remember" id="remember">
+					<label for="remember">Remember Me!</label>
+				</li>
 
-                <!-- pesan kesalahan error -->
-                <?php if (isset($err)): ?>
-                    <p style="color: red;margin:0;">Username atau Password salah!</p>
-                <?php endif ?>
+				<!-- pesan kesalahan error -->
+				<?php if (isset($err)): ?>
+				<p style="color: red;margin:0;">Username atau Password salah!</p>
+				<?php endif ?>
 
-                <li style="margin: 5px 0;">
-                    <button type="submit" name="submit">Login!</button>
-                    <a href="Temp/register.php">registrasi</a>
-                </li>
-            </ul>
-        </form>
-    </main>
+				<li style="margin: 5px 0;">
+					<button type="submit" name="submit">Login!</button>
+					<a href="Temp/register.php">registrasi</a>
+				</li>
+			</ul>
+		</form>
+	</main>
 </body>
 
 </html>

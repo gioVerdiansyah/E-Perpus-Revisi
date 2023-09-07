@@ -35,14 +35,14 @@ if ($ops == "loginuser") {
 			<thead width="100%">
 				<th>NO</th>
 				<?php if ($ops === 'loginuser') { ?>
-					<th>PP ANGGOTA</th>
+				<th>PP ANGGOTA</th>
 				<?php } else { ?>
-					<th>PP ADMIN</th>
+				<th>PP ADMIN</th>
 				<?php } ?>
 				<?php if ($ops === 'loginuser') { ?>
-					<th>NICKNAME USER</th>
+				<th>NICKNAME USER</th>
 				<?php } else { ?>
-					<th>NICKNAME ADMIN</th>
+				<th>NICKNAME ADMIN</th>
 				<?php } ?>
 				<th>ACTION</th>
 			</thead>
@@ -51,24 +51,24 @@ if ($ops == "loginuser") {
 				$id = 1;
 				foreach ($member as $members):
 					?>
-					<tr>
-						<td>
-							<?= $id ?>
-						</td>
-						<td>
-							<?php if ($_GET['ops'] === 'loginuser') { ?>
-								<img src="../.temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
-							<?php } else { ?>
-								<img src="Temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
-							<?php } ?>
-						</td>
-						<td class="limit">
-							<p>
-								<?= $members['username'] ?>
-							</p>
-						</td>
-						<td>
-							<button class="delete" onclick="
+				<tr>
+					<td>
+						<?= $id ?>
+					</td>
+					<td>
+						<?php if ($_GET['ops'] === 'loginuser') { ?>
+						<img src="../.temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
+						<?php } else { ?>
+						<img src="Temp/<?= $members['gambar'] ?>" alt="Thumbnail" height="70">
+						<?php } ?>
+					</td>
+					<td class="limit">
+						<p>
+							<?= $members['username'] ?>
+						</p>
+					</td>
+					<td>
+						<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus akun: <?= $members['username'] ?>?', function(isTrue){
 										if(isTrue){
 											$.post('component/Master-Anggota.php', { 
@@ -81,10 +81,10 @@ if ($ops == "loginuser") {
 										}
 									});
 								"><i class="fa-solid fa-delete-left"></i>
-							</button>
-						</td>
-					</tr>
-					<?php
+						</button>
+					</td>
+				</tr>
+				<?php
 					$id++;
 				endforeach;
 				?>
@@ -101,29 +101,29 @@ if ($ops == "loginuser") {
 
 		<div class="pagination">
 			<?php if ($page->halamanAktif() > 1): ?>
-				<button class="left" onclick="
+			<button class="left" onclick="
 				$('.isi-data').load(
 					'component/result/anggota.php?ops=<?= $ops ?>&&lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() - 1 ?>&&key=<?= $key ?>'
 				)">
-					<i class=" fa-solid fa-angle-left"></i>
-					Prev
-				</button>
+				<i class=" fa-solid fa-angle-left"></i>
+				Prev
+			</button>
 			<?php endif ?>
 			<?php for ($i = 1; $i <= $page->halamanAktif(); $i++): ?>
-				<?php if ($i == $page->halamanAktif()): ?>
-					<p class="amount-of-data">
-						<?= $i ?>
-					</p>
-				<?php endif ?>
+			<?php if ($i == $page->halamanAktif()): ?>
+			<p class="amount-of-data">
+				<?= $i ?>
+			</p>
+			<?php endif ?>
 			<?php endfor ?>
 			<?php if ($page->halamanAktif() < $page->jumlahHalaman()): ?>
-				<button onclick="
+			<button onclick="
 				$('.isi-data').load(
 						'component/result/anggota.php?ops=<?= $ops ?>&&lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() + 1 ?>&&key=<?= $key ?>'
 					)">
-					Next
-					<i class="fa-solid fa-angle-right"></i>
-				</button>
+				Next
+				<i class="fa-solid fa-angle-right"></i>
+			</button>
 			<?php endif ?>
 		</div>
 	</div>

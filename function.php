@@ -36,7 +36,7 @@ function register($data)
 
 	// cek username sudah ada atau belum?
 	$nama = mysqli_query($db, "SELECT username FROM loginuser WHERE username = '$username'");
-	$mail = mysqli_query($db, "SELECT username FROM loginuser WHERE username = '$email'");
+	$mail = mysqli_query($db, "SELECT username FROM loginuser WHERE email = '$email'");
 	// cari data username dari tabel user dimana username = variabel username (TRUE)
 
 	if (mysqli_fetch_assoc($nama)) {
@@ -93,24 +93,56 @@ function register($data)
 	return mysqli_affected_rows($db);
 }
 
+function upload()
+{
+	if ($_FILES["gambar"]["error"] == UPLOAD_ERR_OK) {
+		$fileName = $_FILES["gambar"]["name"];
+		$fileSize = $_FILES["gambar"]["size"];
+		// $fileError = $_FILES["gambar"]["error"];
+		$fileTemp = $_FILES["gambar"]["tmp_name"];
+
+		$extensionValid = ["jpg", "jpeg", "png"];
+		$extensionFile = explode('.', $fileName);
+		$extensionFile = strtolower(end($extensionFile));
+
+		if (!in_array($extensionFile, $extensionValid)) {
+			$err = "masukkan ekstensi gambar: \"jpg\",\"jpeg\",\"png\"!";
+			$_SESSION['error'] = $err;
+			return false;
+		}
+
+		if ($fileSize > 10000000) {
+			$err = "gambar tidak boleh lebih 10MB";
+			$_SESSION['error'] = $err;
+			return false;
+		}
+
+		$fileGenerateName = uniqid() . "." . $extensionFile;
+
+		move_uploaded_file($fileTemp, "C:/xampp/htdocs/perpus_sekolah/.temp/" . $fileGenerateName);
+		return $fileGenerateName;
+	}
+	return 'default.jpg';
+}
 function updateData($data)
 {
 	global $db;
 
-	$id = strtolower(stripslashes($data["id"]));
+	$id = intval($data["id"]);
 
 	$username = strtolower(stripslashes($data["username"]));
 	$pass_lama = mysqli_real_escape_string($db, $data["pass_lama"]);
 	$pass = mysqli_real_escape_string($db, $data["pass"]);
 	$email = mysqli_real_escape_string($db, $data["email"]);
 	$deskripsi = mysqli_real_escape_string($db, $data["deskripsi"]);
+	$oldImage = mysqli_real_escape_string($db, $data["oldImage"]);
 
 
-	$mail = mysqli_query($db, "SELECT username FROM loginuser WHERE username = '$email'");
+	$mail = mysqli_query($db, "SELECT email FROM loginuser WHERE id = $id");
 	$nama = mysqli_query($db, "SELECT username FROM loginuser WHERE id = $id");
 	// cari data username dari tabel user dimana username = variabel username (TRUE)
 
-	if ($username !== mysqli_fetch_assoc($nama)) {
+	if ($username === mysqli_fetch_assoc($nama)) {
 		if (mysqli_fetch_assoc($nama)) {
 			$err = "username sudah ada!";
 			$_SESSION['error'] = $err;
@@ -118,7 +150,7 @@ function updateData($data)
 		}
 	}
 
-	if ($email !== mysqli_fetch_assoc($mail)) {
+	if ($email === mysqli_fetch_assoc($mail)) {
 		if (mysqli_fetch_assoc($mail)) {
 			$err = "email sudah digunakan!";
 			$_SESSION['error'] = $err;
@@ -132,7 +164,9 @@ function updateData($data)
 		return false;
 	}
 
-	if (!$pass_lama == '') {
+	$query = '';
+
+	if (!empty(trim($pass_lama)) && !empty(trim($pass))) {
 		$password = mysqli_fetch_assoc(mysqli_query($db, "SELECT pass FROM loginuser WHERE id = $id"))['pass'];
 		if (password_verify($pass_lama, $password)) {
 			$pass = password_hash($pass, PASSWORD_DEFAULT);
@@ -150,44 +184,19 @@ function updateData($data)
 	$query = "UPDATE loginuser SET `username` = '$username', `email` = '$email' WHERE id = $id";
 	mysqli_query($db, $query);
 
-	$query = "UPDATE data_user SET `deskripsi` = '$deskripsi' WHERE user_id = $id";
+	$image = '';
+
+	if ($_FILES["gambar"]["error"] === 4) {
+		$image .= $oldImage;
+	} else {
+		$image .= upload();
+		if (!$image) {
+			$image = 'default.jpg';
+		}
+	}
+
+	$query = "UPDATE data_user SET `gambar` = '$image', `deskripsi` = '$deskripsi' WHERE user_id = $id";
 	mysqli_query($db, $query);
 
 	return mysqli_affected_rows($db);
-}
-function upload()
-{
-	if ($_FILES["gambar"]["error"] == UPLOAD_ERR_OK) {
-		var_dump($_FILES);
-		$fileName = $_FILES["gambar"]["name"];
-		$fileSize = $_FILES["gambar"]["size"];
-		// $fileError = $_FILES["gambar"]["error"];
-		$fileTemp = $_FILES["gambar"]["tmp_name"];
-
-		$extensionValid = ["jpg", "jpeg", "png"];
-		$extensionFile = explode('.', $fileName);
-		$extensionFile = strtolower(end($extensionFile));
-
-		if (!in_array($extensionFile, $extensionValid)) {
-			echo "
-        <script>
-            alert('masukkan ekstensi gambar: \"jpg\",\"jpeg\",\"png\"!');
-        </script>";
-			return false;
-		}
-
-		if ($fileSize > 10000000) {
-			echo "
-        <script>
-            alert('gambar tidak boleh lebih 10MB');
-        </script>";
-			return false;
-		}
-
-		$fileGenerateName = uniqid() . "." . $extensionFile;
-
-		move_uploaded_file($fileTemp, ".temp/" . $fileGenerateName);
-		return $fileGenerateName;
-	}
-	return 'default.jpg';
 }

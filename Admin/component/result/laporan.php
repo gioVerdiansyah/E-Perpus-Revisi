@@ -13,6 +13,7 @@ $keyword = $_GET["key"];
 
 $query = "SELECT
 	peminjam.*,
+	peminjam.id AS pjm_id,
 	buku.judul_buku,
 	loginuser.username,
 	data_user.gambar
@@ -98,7 +99,9 @@ $pinjam = mysqli_query($db, $query);
 									<i class="fa-solid fa-check"></i> Disetujui
 								</p>
 							<?php } elseif ($peminjam["status"] === "2") { ?>
-								<p class="persetujuan r">
+								<p class="persetujuan r h" onclick="
+										$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $peminjam['id'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?>&&usr=5&&uls=1 #ditolak-admin', ()=>{$('.popup').removeAttr('hidden')});
+										">
 									<i class="fa-regular fa-circle-xmark"></i> Ditolak!
 								</p>
 							<?php } ?>
@@ -108,7 +111,7 @@ $pinjam = mysqli_query($db, $query);
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapusnya?', (isTrue)=>{
 										if(isTrue){
 											$.post('component/Data-Laporan.php',{
-												id: <?= $peminjam['id'] ?>
+												id: <?= $peminjam['pjm_id'] ?>
 											});
 											$('#isi-data').load('component/result/laporan.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key=' + $('#search').val());
 										}

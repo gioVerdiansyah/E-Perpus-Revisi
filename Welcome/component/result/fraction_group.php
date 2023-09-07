@@ -4,6 +4,8 @@ $id = $_GET['bukid'];
 
 $fillIn = query("SELECT * FROM buku WHERE id = $id")[0];
 
+$id = $_GET['pjm_id'];
+
 $alasanPenolakan = mysqli_query($db, "SELECT * FROM peminjam WHERE id = $id");
 $alasan = mysqli_fetch_assoc($alasanPenolakan);
 ?>
@@ -22,60 +24,68 @@ $alasan = mysqli_fetch_assoc($alasanPenolakan);
 		</div>
 		<div class="data">
 			<table>
-				<tr>
-					<td>Judul Buku</td>
-					<td>: <strong>
-							<?= $fillIn["judul_buku"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Kode Buku</td>
-					<td>: <strong>
-							<?= $fillIn["kode_buku"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Kategori</td>
-					<td>: <strong>
-							<?= $fillIn["kategori"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Penulis</td>
-					<td>: <strong>
-							<?= $fillIn["penulis"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Penerbit</td>
-					<td>: <strong>
-							<?= $fillIn["penerbit"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>tahun Terbit</td>
-					<td>: <strong>
-							<?= $fillIn["tahun_terbit"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>ISBN</td>
-					<td>: <strong>
-							<?= $fillIn["isbn"] ?>
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Jumlah Halaman</td>
-					<td>: <strong>
-							<?= $fillIn["jumlah_halaman"] ?> halaman
-						</strong></td>
-				</tr>
-				<tr>
-					<td>Jumlah Buku</td>
-					<td>: <strong>
-							<?= $fillIn["jumlah_buku"] ?> buku
-						</strong></td>
-				</tr>
+				<tbody>
+					<tr>
+						<td>Judul Buku</td>
+						<td>: <strong>
+								<?= $fillIn["judul_buku"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Kode Buku</td>
+						<td>: <strong>
+								<?= $fillIn["kode_buku"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Kategori</td>
+						<td>: <strong>
+								<?= $fillIn["kategori"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Penulis</td>
+						<td>: <strong>
+								<?= $fillIn["penulis"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Penerbit</td>
+						<td>: <strong>
+								<?= $fillIn["penerbit"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>tahun Terbit</td>
+						<td>: <strong>
+								<?= $fillIn["tahun_terbit"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>ISBN</td>
+						<td>: <strong>
+								<?= $fillIn["isbn"] ?>
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Jumlah Halaman</td>
+						<td>: <strong>
+								<?= $fillIn["jumlah_halaman"] ?> halaman
+							</strong></td>
+					</tr>
+					<tr>
+						<td>Jumlah Buku</td>
+						<td>: <strong>
+								<?= $fillIn["jumlah_buku"] ?> buku
+							</strong></td>
+					</tr>
+				</tbody>
+				<tbody class="thubmnail-book">
+					<tr>
+						<td class="image-book"><img src="../Admin/Temp/<?= $fillIn['image'] ?>"
+								alt="Thumbnail buku <?= $fillIn['judul_buku'] ?>"></td>
+					</tr>
+				</tbody>
 			</table>
 			<p class="sinopsis">Sinopsis: </p>
 			<p>
@@ -90,7 +100,7 @@ $id = $_GET['usr'];
 $kuery = "SELECT loginuser.*, data_user.*
 FROM loginuser
 LEFT JOIN data_user ON data_user.user_id = loginuser.id
-WHERE loginuser.id = '$id'
+WHERE loginuser.id = $id
 ";
 $sql = mysqli_query($db, $kuery);
 $profile = mysqli_fetch_assoc($sql);
@@ -119,8 +129,18 @@ $profile = mysqli_fetch_assoc($sql);
 			<div class="profile">
 				<form method="post" id="myForm" action="" enctype="multipart/form-data">
 					<div class="image">
+						<input type="hidden" name="oldImage" value="<?= $profile['gambar'] ?>">
 						<img src="../.temp/<?= $profile['gambar'] ?>" id="gambarTampilan"
 							alt="Photo profile user <?= $profile['username'] ?>">
+						<input type="file" name="gambar" id="image" onchange="
+					let img = document.querySelector('#gambarTampilan');
+					let input = document.querySelector('#image');
+					let reader = new FileReader();
+					reader.onload = function(e) {
+						img.src = e.target.result;
+					}
+					reader.readAsDataURL(input.files[0]);
+					">
 					</div>
 					<input type="hidden" name="id" value="<?= $profile['id'] ?>">
 					<div class="nama">
@@ -160,7 +180,7 @@ $profile = mysqli_fetch_assoc($sql);
 					<button type="button" onclick="
 							Peringatan.konfirmasi('Apakah anda yakin ingin menghapus akun anda?', (istrue)=> {
 								if(istrue){
-								$.post('./index.php', {
+								$.get('component/Home.php', {
 									hapus_akun: true,
 									id: '<?= $profile['id'] ?>'
 								})
@@ -195,17 +215,21 @@ $profile = mysqli_fetch_assoc($sql);
 		<div class="data">
 			<form method="post" onsubmit="
 				event.preventDefault();
-				$(document).ready(function() {
+				$(document).ready(function() {						
+					if($('#jumlah_pinjam').val() > <?= $_GET['jml'] ?>){
+						Peringatan.ditolak('Meminjam buku tidak boleh lebih dari stock buku!!!', 2500);
+					}else{
 						$.post('component/Buku.php', {
-								send: true,
-								buku_id: <?= $_GET['bukid'] ?>,
-								jumlah_pinjam: $('#jumlah_pinjam').val(),
-								tanggal_pengembalian: $('#tanggal_pengembalian').val()
-							});
-							$('#peminjaman').remove();
-							$('body').removeAttr('height')
+						send: true,
+						buku_id: <?= $_GET['bukid'] ?>,
+						jumlah_pinjam: $('#jumlah_pinjam').val(),
+						tanggal_pengembalian: $('#tanggal_pengembalian').val()
+					});
+					$('#peminjaman').remove();
+					$('body').removeAttr('height')
+						Peringatan.sukses('Permintaan meminjam buku <?= $_GET['bukunya'] ?> berhasil dikirim', 2500);
+					}
 						});
-							Peringatan.sukses('Permintaan meminjam buku <?= $_GET['bukunya'] ?> berhasil dikirim', 2500);
 						">
 				<ul>
 					<div>

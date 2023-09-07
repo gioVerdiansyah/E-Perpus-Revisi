@@ -190,7 +190,7 @@ $books = mysqli_query($db, $query);
 								"><i class="fa-solid fa-delete-left"></i>
 									</button><br>
 									<button onclick="
-								$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?> #pop-up', ()=>{
+								$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&usr=1&&pjm_id=5&&uls=1 #pop-up', ()=>{
 									$('#pop-up').fadeIn(500);
 								});
 								$('.popup').removeAttr('hidden');

@@ -55,10 +55,15 @@ $tanggal = date("H:i d/m/Y");
 // Menangani data POST dari meminjam buku
 if (isset($_POST['send'])) {
 	$jumlah_pinjam = $_POST['jumlah_pinjam'];
+	$status = 0;
+	if ($jumlah_pinjam > mysqli_fetch_assoc($buku)['jumlah_buku']) {
+		$jumlah_pinjam = 0;
+		$status = 2;
+	}
 	$tanggal_pengembalian = $_POST['tanggal_pengembalian'];
 	$buku_id = $_POST['buku_id'];
 
-	mysqli_query($db, "INSERT INTO peminjam VALUE('', '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal', '$tanggal_pengembalian', '0', 'Tidak ada alasan')");
+	mysqli_query($db, "INSERT INTO peminjam VALUE('', '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal', '$tanggal_pengembalian', '$status', 'Tidak ada alasan')");
 }
 
 // Menangani data POST ulasan
@@ -136,92 +141,92 @@ if (isset($_POST['delete_ulasan'])) {
 					$num = 1;
 					foreach ($buku as $books):
 						?>
-					<tr>
-						<td>
-							<p class="except">
-								<?= $num ?>
-							</p>
-						</td>
-						<td>
-							<p class="except">
-								<img src="../Admin/Temp/<?= $books["image"] ?>"
-									alt="image of book: <?= $books['judul_buku'] ?>" height="70" />
-							</p>
-							<!-- rating -->
-							<div class="rating">
-								<button class="rate" onclick="
+						<tr>
+							<td>
+								<p class="except">
+									<?= $num ?>
+								</p>
+							</td>
+							<td>
+								<p class="except">
+									<img src="../Admin/Temp/<?= $books["image"] ?>"
+										alt="image of book: <?= $books['judul_buku'] ?>" height="70" />
+								</p>
+								<!-- rating -->
+								<div class="rating">
+									<button class="rate" onclick="
 											$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&usr=<?= $row['id'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
 												$('#ulasan').removeAttr('hidden');
 												$('.popup').fadeIn(500);
 											})
 											">
-									<?php
+										<?php
 										$query = "SELECT AVG(ulasan.rating) as rating FROM buku LEFT JOIN ulasan ON ulasan.buku_id = buku.id WHERE ulasan.buku_id = {$books['id']}";
 										$rating = mysqli_fetch_assoc(mysqli_query($db, $query))['rating'];
 										if ($rating >= 1) {
 											for ($i = 1; $i <= 5; $i++): ?>
-									<?php if ($i <= $rating) { ?>
-									<i class="fa fa-star checked"></i>
-									<?php } else { ?>
-									<i class="fa fa-star"></i>
-									<?php } ?>
-									<?php endfor; ?>
-								</button>
-								<?php } elseif ($rating < 1) { ?>
-								<button class="rate" onclick="
-											$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&usr=<?= $row['id'] ?> #ulasan',() => {
+												<?php if ($i <= $rating) { ?>
+													<i class="fa fa-star checked"></i>
+												<?php } else { ?>
+													<i class="fa fa-star"></i>
+												<?php } ?>
+											<?php endfor; ?>
+										</button>
+									<?php } elseif ($rating < 1) { ?>
+										<button class="rate" onclick="
+											$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&usr=<?= $row['id'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
 												$('.popup').removeAttr('hidden');
 											})
 											">No Rating</button>
-								<?php } ?>
-							</div>
-						</td>
-						<td>
-							<p>
-								<?= $books["judul_buku"] ?>
-							</p>
-						</td>
-						<td>
-							<p class="except">
-								<?= $books["kode_buku"] ?>
-							</p>
-						</td>
-						<td>
-							<p>
-								<?= $books["kategori"] ?>
-							</p>
-						</td>
-						<td>
-							<p>
-								<?= $books["penulis"] ?>
-							</p>
-						</td>
-						<td>
-							<p>
-								<?= $books["penerbit"] ?>
-							</p>
-						</td>
-						<td id="detail">
-							<!-- pinjam -->
-							<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #peminjaman.insert');
+									<?php } ?>
+								</div>
+							</td>
+							<td>
+								<p>
+									<?= $books["judul_buku"] ?>
+								</p>
+							</td>
+							<td>
+								<p class="except">
+									<?= $books["kode_buku"] ?>
+								</p>
+							</td>
+							<td>
+								<p>
+									<?= $books["kategori"] ?>
+								</p>
+							</td>
+							<td>
+								<p>
+									<?= $books["penulis"] ?>
+								</p>
+							</td>
+							<td>
+								<p>
+									<?= $books["penerbit"] ?>
+								</p>
+							</td>
+							<td id="detail">
+								<!-- pinjam -->
+								<button onclick="
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&uls=5&&pjm_id=1&&usr=1 #peminjaman.insert');
 								$('.popup').removeAttr('hidden');
 								" id="baca-buku">
-								Pinjam Buku
-							</button>
+									Pinjam Buku
+								</button>
 
-							<!-- detail -->
-							<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up',()=>{
+								<!-- detail -->
+								<button onclick="
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #pop-up',()=>{
 									$('#pop-up').fadeIn(500);
 									$('.popup').removeAttr('hidden');
 								});
 								" id="detail">
-								<i class="fa-solid fa-chart-simple"></i>Detail
-							</button>
-						</td>
-					</tr>
-					<?php $num++; endforeach;
+									<i class="fa-solid fa-chart-simple"></i>Detail
+								</button>
+							</td>
+						</tr>
+						<?php $num++; endforeach;
 					?>
 				</tbody>
 			</table>
@@ -234,13 +239,13 @@ if (isset($_POST['delete_ulasan'])) {
 			<div class="pagination">
 				<p class="amount-of-data">1</p>
 				<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
-				<button onclick="
+					<button onclick="
 					$('.isi-data').load(
 						'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
 					)">
-					Next
-					<i class="fa-solid fa-angle-right"></i>
-				</button>
+						Next
+						<i class="fa-solid fa-angle-right"></i>
+					</button>
 				<?php endif ?>
 			</div>
 		</div>

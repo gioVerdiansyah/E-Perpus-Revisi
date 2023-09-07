@@ -27,10 +27,6 @@ if ($key === hash("sha512", $row["username"])) {
 	header("Location: ../logout-user.php");
 }
 
-if (isset($_POST['hapus_akun'])) {
-	echo $_POST['id'];
-}
-
 // menangani POST ulasan
 if (isset($_POST['ulasan'])) {
 	$id = intval($_POST['uls_id']);
@@ -73,25 +69,28 @@ if (isset($_POST['ulasan'])) {
 	<?php
 	if (isset($_POST["id"])) {
 		if (updateData($_POST) === 1) {
-			echo "
-		<script>
-			Peringatan.sukses('Update profile berhasil!');
-		</script>
-		";
+			?>
+	<script>
+	Peringatan.sukses('Update profile berhasil!');
+	</script>
+	<?php
 			header("Location: ../logout-user.php");
 		} else {
-			?>
-			<style>
-				#pop-up {
-					height: 100vh !important;
-				}
-			</style>
-			<script>
-				Peringatan.ditolak('Gagal meupdate profile karena <?= $_SESSION["error"] ?>', 4000);
-			</script>
-
-			<?php
+			if (isset($_SESSION['error'])) {
+				?>
+	<style>
+	#pop-up {
+		height: 100vh !important;
+	}
+	</style>
+	<script>
+	Peringatan.ditolak(
+		'Gagal meupdate profile karena <?= $_SESSION["error"] ?>', 4000);
+	</script>
+	<?php
+			}
 		}
+		unset($_SESSION['error']);
 	}
 	?>
 
@@ -117,9 +116,16 @@ if (isset($_POST['ulasan'])) {
 					<?php $sql = mysqli_query($db, "SELECT id,judul_buku,jumlah_buku FROM buku");
 					$books = mysqli_fetch_assoc($sql); ?>
 					<button onclick="
-						$('.popup').load('component/result/fraction_group.php?usr=<?= $row['id'] ?>&&bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?> #profile', ()=>{
+						$('.popup').load('component/result/fraction_group.php?usr=<?= $row['id'] ?>&&bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #profile', ()=>{
 							$('#profile').fadeIn(500);
 							$('.popup').removeAttr('hidden');
+							
+						if ($('body').height() > window.innerHeight) {
+							$('#profile').css('height', '100%');
+						}
+						if($('body').height() < window.innerHeight){
+							$('#profile').css('height', '100vh');
+						}
 						})
 					"><i class="fi fi-rr-sign-out-alt"></i>
 						Profile</button>

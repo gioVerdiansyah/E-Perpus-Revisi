@@ -97,7 +97,7 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
 						<td id="detail">
 							<!-- pinjam -->
 							<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kode_buku=<?= $books['kode_buku'] ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #peminjaman');
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kode_buku=<?= $books['kode_buku'] ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&uls=5&&pjm_id=1&&usr=1 #peminjaman.insert');
 								$('.popup').removeAttr('hidden');
 								" id="baca-buku">
 								Pinjam Buku
@@ -105,10 +105,10 @@ judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyw
 
 							<!-- detail -->
 							<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&kode_buku=<?= $books['kode_buku'] ?>&&kategori=<?= urlencode($books['kategori']) ?>&&jml=<?= $books['jumlah_buku'] ?> #pop-up', ()=>{
+								$('.popup').load('component/result/fraction_group.php?bukid=<?= $books['id'] ?>&&bukunya=<?= urlencode($books['judul_buku']) ?>&&jml=<?= $books['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #pop-up',()=>{
 									$('#pop-up').fadeIn(500);
-								$('.popup').removeAttr('hidden');
-								});
+									$('.popup').removeAttr('hidden');
+								});s
 								">
 								<i class="fa-solid fa-chart-simple"></i>Detail
 							</button>

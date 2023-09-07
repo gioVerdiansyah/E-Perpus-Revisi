@@ -1,4 +1,4 @@
-@import url('../../Assets/assets.css');
+@import url("../../Assets/assets.css");
 
 body {
   display: flex;
@@ -8,7 +8,7 @@ body {
 form {
   position: relative;
   width: 65%;
-  height: 90%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,25 +53,25 @@ form ul .second li {
 form ul .second li input {
   width: 100%;
 }
-form ul li.center{
+form ul li.center {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 15px 0 5px 0;
 }
-form ul li.center input{
+form ul li.center input {
   width: 30%;
   margin-left: 5px;
 }
 form ul li,
 form ul .first li,
-form ul .second li{
+form ul .second li {
   margin: 10px 0;
 }
 form ul li input,
 form ul li textarea,
 form ul .first li input,
-form ul .second li input{
+form ul .second li input {
   border: 1px solid grey;
   border-radius: 3px;
   outline-color: var(--purple);
@@ -96,9 +96,8 @@ form ul li:last-child button:first-child:hover {
   background-color: var(--red-h);
 }
 
-
 /* ! Style for CRUD */
-.popup .content-popup{
+.popup .content-popup {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -125,12 +124,13 @@ form ul li:last-child button:first-child:hover {
 
 .popup .content-popup .title h1 {
   font-size: large;
-}.popup .content-popup .title h1.tambah,
-.popup .content-popup form .title button.tambah i{
+}
+.popup .content-popup .title h1.tambah,
+.popup .content-popup form .title button.tambah i {
   color: var(--lightgreen);
 }
 .popup .content-popup .title h1.edit,
-.popup .content-popup form .title button.edit i{
+.popup .content-popup form .title button.edit i {
   color: var(--orange);
 }
 
@@ -149,6 +149,6 @@ form ul li:last-child button:first-child:hover {
   transition: all 0.3s;
 }
 
-.popup .content-popup form .title button i{
+.popup .content-popup form .title button i {
   color: var(--red);
 }
