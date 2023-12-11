@@ -258,8 +258,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 				<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
 					<button onclick="
 					$('.isi-data').load(
-						'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'
-					)">
+						'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'">
 						Next
 						<i class="fa-solid fa-angle-right"></i>
 					</button>

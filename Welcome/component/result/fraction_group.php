@@ -239,8 +239,7 @@ $profile = mysqli_fetch_assoc($sql);
 							<input type="text" class="input disabled" placeholder="Stock buku sudah habis!" disabled>
 							<?php } else { ?>
 							<input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
-								id="jumlah_pinjam" required placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="
-						const maxLength = 2;
+								id="jumlah_pinjam" required placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="const maxLength = 2;
 
 						if (this.value.length > maxLength) {
 						  this.value = this.value.slice(0, maxLength);
@@ -320,8 +319,7 @@ $profile = mysqli_fetch_assoc($sql);
 							<?php } else { ?>
 							<input type="number" min="1" max="<?= $_GET['jml'] ?>" step="1" name="jumlah_pinjam"
 								id="jumlah_pinjam" value="<?= $pinjam_update['jumlah_pinjam'] ?>" required
-								placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="
-						const maxLength = 2;
+								placeholder="total buku adalah <?= $_GET['jml'] ?>" oninput="const maxLength = 2;
 
 						if (this.value.length > maxLength) {
 						  this.value = this.value.slice(0, maxLength);
@@ -426,13 +424,14 @@ $profile = mysqli_fetch_assoc($sql);
 			<div class="update-komentar" hidden></div>
 			<ul>
 				<?php
+				$bukid = $_GET['bukid'];
 				$ulasan = mysqli_query($db, "SELECT ulasan.*, AVG(ulasan.rating) AS rating, buku.judul_buku, buku.image, buku.penulis, loginuser.username, data_user.gambar
 				FROM ulasan
 				INNER JOIN buku ON ulasan.buku_id = buku.id
 				INNER JOIN loginuser ON ulasan.user_id = loginuser.id
 				INNER JOIN data_user ON loginuser.id = data_user.user_id
-				WHERE ulasan.buku_id = {$_GET['bukid']}
-				");
+				WHERE ulasan.buku_id = $bukid
+				GROUP BY ulasan.id, buku.judul_buku, buku.image, buku.penulis, loginuser.username, data_user.gambar ");
 				$row = mysqli_fetch_assoc($ulasan);
 				?>
 				<?php

@@ -81,7 +81,7 @@ function register($data)
 
 	// menambah kan ke dalam database
 	mysqli_query($db, "INSERT INTO loginuser VALUE(
-        '', '$username', '$email', '$pass'
+        NULL, '$username', '$email', '$pass'
         )");
 
 	$user_id = mysqli_insert_id($db);
