@@ -27,8 +27,8 @@ if (isset($_SESSION["login-user"])) {
 
 if (isset($_POST["submit"])) {
 	// tampung
-	$username = $_POST["username"];
-	$pass = $_POST["pass"];
+	$username = mysqli_real_escape_string($db,$_POST["username"]);
+	$pass = mysqli_real_escape_string($db,$_POST["pass"]);
 
 	$result = mysqli_query($db, "SELECT * FROM loginuser WHERE username = '$username' OR email = '$username'");
 

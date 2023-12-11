@@ -123,9 +123,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 			<label for="search">Search by:</label>
 			<input type="search" name="search" id="search" onkeyup="
 			$('#isi-data').load(
-					'component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $(this).val() + '&&usr=<?= $username ?>'
-				)
-			" placeholder="judul buku/kode buku/kategori" />
+					`component/result/pinjam.php?lim=` + $('#selection').val() + `&&page=<?= $pagenation->halamanAktif() ?>&&key=` + $(this).val() + `&&usr=<?= $username ?>`)" placeholder="judul buku/kode buku/kategori" />
 		</div>
 	</div>
 	<!-- isi data -->
@@ -258,8 +256,7 @@ $encodedDataUsername = urlencode(base64_encode($encryptedData . $iv));
 				<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
 					<button onclick="
 					$('.isi-data').load(
-						'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'
-					)">
+						'component/result/pinjam.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val() + '&&usr=<?= $username ?>')'">
 						Next
 						<i class="fa-solid fa-angle-right"></i>
 					</button>

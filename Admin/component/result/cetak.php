@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '../../../../vendor/autoload.php';
 require '../../database/functions.php';
 session_name("SSILGNADMINPERPUSMEJAYAN");
 session_start();

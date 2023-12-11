@@ -102,7 +102,7 @@ if ($key === hash("sha512", $row["username"])) {
 						<h3 class="type">Admin</h3>
 					</div>
 					<!-- photo profile user -->
-					<img src="Temp/<?= $row['gambar'] ?>" alt="photo profile">
+					<img src="../.temp/<?= $row['gambar'] ?>" alt="photo profile">
 					<div class="dropdown-profile">
 						<ul>
 							<li>

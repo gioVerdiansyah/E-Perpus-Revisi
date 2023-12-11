@@ -43,7 +43,7 @@ function insert($data)
 	}
 
 	global $db;
-	$query = "INSERT INTO buku VALUES ('', '$judul_buku','$kode_buku','$kategori','$penulis','$penerbit','$image','$tahun_terbit','$isbn','$jumlah_halaman', '$jumlah_buku', '$sinopsis')";
+	$query = "INSERT INTO buku VALUES (NULL, '$judul_buku','$kode_buku','$kategori','$penulis','$penerbit','$image','$tahun_terbit','$isbn','$jumlah_halaman', '$jumlah_buku', '$sinopsis')";
 	mysqli_query($db, $query);
 
 	return mysqli_affected_rows($db);

@@ -25,7 +25,7 @@ function register($data)
 {
 	global $db;
 
-	$username = strtolower(stripslashes($data["username"]));
+	$username = mysqli_real_escape_string($db,strtolower(stripslashes($data["username"])));
 	// strtolower() ini fungsi untuk mengubah huruf besar menjadi huruf kecil, stripslashes() ini fungsi untuk menghilangkan karaker unik dalam username
 	$pass = mysqli_real_escape_string($db, $data["pass"]);
 	// ini fungsi untuk memungkinkan si user untuk memasukkan password ada tanda kutipnya dan akan dimasukkan ke dalam DB secara aman
@@ -81,7 +81,7 @@ function register($data)
 
 	// menambah kan ke dalam database
 	mysqli_query($db, "INSERT INTO loginuser VALUE(
-        '', '$username', '$email', '$pass'
+        NULL, '$username', '$email', '$pass'
         )");
 
 	$user_id = mysqli_insert_id($db);
@@ -119,7 +119,7 @@ function upload()
 
 		$fileGenerateName = uniqid() . "." . $extensionFile;
 
-		move_uploaded_file($fileTemp, "C:/xampp/htdocs/perpus_sekolah/.temp/" . $fileGenerateName);
+		move_uploaded_file($fileTemp, __DIR__."/.temp/" . $fileGenerateName);
 		return $fileGenerateName;
 	}
 	return 'default.jpg';

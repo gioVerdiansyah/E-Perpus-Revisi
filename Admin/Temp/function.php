@@ -22,7 +22,7 @@ function register($data)
 {
 	global $db;
 
-	$username = strtolower(stripslashes($data["username"]));
+	$username = mysqli_real_escape_string($db,strtolower(stripslashes($data["username"])));
 	// strtolower() ini fungsi untuk mengubah huruf besar menjadi huruf kecil, stripslashes() ini fungsi untuk menghilangkan karaker unik dalam username
 	$pass = mysqli_real_escape_string($db, $data["pass"]);
 	// ini fungsi untuk memungkinkan si user untuk memasukkan password ada tanda kutipnya dan akan dimasukkan ke dalam DB secara aman
@@ -62,7 +62,7 @@ function register($data)
 
 	// menambah kan ke dalam database
 	mysqli_query($db, "INSERT INTO loginadmin VALUE(
-        '', '$username', '$pass', '$gambar'
+        NULL, '$username', '$pass', '$gambar'
         )");
 
 	return mysqli_affected_rows($db);

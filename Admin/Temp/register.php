@@ -69,7 +69,7 @@ if (isset($_POST["submit"])) {
                 </li>
             </ul>
         </form>
-        <p>Sudah terdaftar menjadi Anggota? <a href="index.php">masuk</a></p>
+        <p>Sudah terdaftar menjadi Anggota? <a href="http://localhost/e-perpus/Admin">masuk</a></p>
     </main>
 </body>
 

@@ -194,9 +194,9 @@ WHERE
 								</td>
 								<td>
 									<button class="o" onclick="
-											Peringatan.menyetujui('Apakah anda ingin menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['judul_buku'] ?>?', function(isTrue){
+											Peringatan.menyetujui(`Apakah anda ingin menyetujui <?= htmlspecialchars($borrowers['username'], ENT_QUOTES, 'UTF-8') ?> meminjam buku <?= $borrowers['judul_buku'] ?>?`, function(isTrue){
 												if(isTrue){
-													Peringatan.sukses('Anda telah menyetujui <?= $borrowers['username'] ?> meminjam buku <?= $borrowers['judul_buku'] ?>');
+													Peringatan.sukses(`Anda telah menyetujui <?= htmlspecialchars($borrowers['username'], ENT_QUOTES, 'UTF-8') ?> meminjam buku <?= $borrowers['judul_buku'] ?>`);
 
 													$.post('component/Data-Peminjam.php', {
 														idP: <?= $borrowers['id'] ?>,
@@ -205,9 +205,9 @@ WHERE
 													});
 													$('#isi-data').load('component/result/pinjam.php?lim=' + $('#selection').val() + '&&page=<?= $pagenation->halamanAktif() ?>&&key=' + $('#search').val());
 												}else{
-													Peringatan.penolakan('Alasan Anda menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['judul_buku'] ?>?', function(isTrue, data){
+													Peringatan.penolakan(`Alasan Anda menolak <?= htmlspecialchars($borrowers['username'], ENT_QUOTES, 'UTF-8') ?> untuk meminjam buku <?= $borrowers['judul_buku'] ?>?`, function(isTrue, data){
 														if(isTrue){
-															Peringatan.sukses('Anda telah menolak <?= $borrowers['username'] ?> untuk meminjam buku <?= $borrowers['judul_buku'] ?>');
+															Peringatan.sukses(`Anda telah menolak <?= htmlspecialchars($borrowers['username'], ENT_QUOTES, 'UTF-8') ?> untuk meminjam buku <?= $borrowers['judul_buku'] ?>`);
 															$.post('component/Data-Peminjam.php',{
 																idPenolakan: <?= $borrowers['id'] ?>,
 																isiAlasan: `${data}`

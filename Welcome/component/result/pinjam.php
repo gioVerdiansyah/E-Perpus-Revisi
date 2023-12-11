@@ -10,8 +10,8 @@ if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) 
 
 $page = new Pagenation($_GET['lim'], "peminjam", $_GET['page']);
 
-$keyword = $_GET["key"];
-$username = $_GET["usr"];
+$keyword = mysqli_real_escape_string($db,$_GET["key"]);
+$username = mysqli_real_escape_string($db,$_GET["usr"]);
 
 $query = "SELECT 
 peminjam.*,
@@ -109,17 +109,19 @@ $result = mysqli_query($db, $query);
 							<?php } ?>
 						</td>
 						<td>
-							<button onclick="
-								$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&pjm_id=<?= $peminjam['pjm_id'] ?> #peminjaman.update');
-								$('.popup').removeAttr('hidden');
-								" id="baca-buku">
-								Edit
-							</button>
+							<?php if ($peminjam['status'] == '0'): ?>
+									<button onclick="
+										$('.popup').load('component/result/fraction_group.php?bukid=<?= $peminjam['bukid'] ?>&&bukunya=<?= urlencode($peminjam['judul_buku']) ?>&&jml=<?= $peminjam['jumlah_buku'] ?>&&usl=5&&pjm_id=<?= $peminjam['pjm_id'] ?>&&usr=1 #peminjaman.update');
+										$('.popup').removeAttr('hidden');
+										" class="edit">
+										Edit
+									</button>
+								<?php endif; ?>
 							<?php if ($peminjam["status"]) { ?>
 								<button class="delete" onclick="
 									Peringatan.konfirmasi('Apakah anda yakin ingin menghapus data yang sudah disetujui?', function(isTrue){
 										if(isTrue){
-											$.post('component/Peminjaman.php', {id: <?= $peminjam['pj,_id'] ?>})
+											$.post('component/Peminjaman.php', {id: <?= $peminjam['pjm_id'] ?>})
 											Peringatan.sukses('Data peminjaman berhasil di HAPUS')
 											$('#isi-data').load('component/result/pinjam.php?lim=<?= $page->dataPerhalaman() ?>&&page=<?= $page->halamanAktif() ?>&&key= <?= $keyword ?>&&usr=<?= $username ?>')
 										}

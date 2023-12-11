@@ -214,8 +214,7 @@ $books = mysqli_query($db, $query);
 					<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
 						<button onclick="
 					$('.isi-data').load(
-						'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
-					)">
+						'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val()))">
 							Next
 							<i class="fa-solid fa-angle-right"></i>
 						</button>

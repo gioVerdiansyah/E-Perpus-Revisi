@@ -10,7 +10,7 @@ if (!isset($_SESSION["login-user"]) && !isset($_COOKIE["UsrLgnMJYNiSeQlThRuE"]) 
 
 $page = new Pagenation($_GET['lim'], "buku", $_GET['page']);
 
-$keyword = $_GET["key"];
+$keyword = mysqli_real_escape_string($db,$_GET["key"]);
 
 $book = mysqli_query($db, "SELECT * FROM buku WHERE
 judul_buku LIKE '%$keyword%' OR kode_buku LIKE '$keyword' OR penulis LIKE '$keyword%' OR penerbit LIKE '$keyword%' ORDER BY id ASC LIMIT {$page->awalData()},{$page->dataPerhalaman()}");

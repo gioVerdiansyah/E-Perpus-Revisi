@@ -63,7 +63,7 @@ if (isset($_POST['send'])) {
 	$tanggal_pengembalian = $_POST['tanggal_pengembalian'];
 	$buku_id = $_POST['buku_id'];
 
-	mysqli_query($db, "INSERT INTO peminjam VALUE('', '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal', '$tanggal_pengembalian', '$status', 'Tidak ada alasan')");
+	mysqli_query($db, "INSERT INTO peminjam VALUE(NULL, '$user_id','$buku_id', '$jumlah_pinjam' ,'$tanggal', '$tanggal_pengembalian', '$status', 'Tidak ada alasan')");
 }
 
 // Menangani data POST ulasan
@@ -74,7 +74,7 @@ if (isset($_POST['ulasan'])) {
 	$buku_id = intval($_POST['buku_id']);
 	$user_id = intval($_POST['user_id']);
 
-	mysqli_query($db, "INSERT INTO ulasan VALUE('', '$isi_ulasan', $rating, $user_id, $buku_id, '$tanggal')");
+	mysqli_query($db, "INSERT INTO ulasan VALUE(NULL, '$isi_ulasan', $rating, $user_id, $buku_id, '$tanggal')");
 }
 
 // Menangani data POST ulasan DELETE
@@ -241,8 +241,7 @@ if (isset($_POST['delete_ulasan'])) {
 				<?php if ($pagenation->halamanAktif() < $pagenation->jumlahHalaman()): ?>
 					<button onclick="
 					$('.isi-data').load(
-						'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())'
-					)">
+						'component/result/index.php?lim=<?= $pagenation->dataPerhalaman() ?>&&page=<?= $pagenation->halamanAktif() + 1 ?>&&key=' + $('#search').val())">
 						Next
 						<i class="fa-solid fa-angle-right"></i>
 					</button>
