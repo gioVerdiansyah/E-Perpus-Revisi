@@ -121,7 +121,7 @@ $books = mysqli_query($db, $query);
 									<!-- rating -->
 									<div class="rating">
 										<button class="rate" onclick="
-											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1 #ulasan',() => {
+											$('.popup').load('../Welcome/component/result/fraction_group.php?bukid=<?= $book['id'] ?>&&bukunya=<?= urlencode($book['judul_buku']) ?>&&jml=<?= $book['jumlah_buku'] ?>&&uls=5&&pjm_id=1&&usr=1 #ulasan',() => {
 												$('#ulasan').removeAttr('hidden');
 												$('.popup').fadeIn(500);
 											})

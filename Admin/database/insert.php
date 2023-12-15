@@ -101,4 +101,17 @@ if (isset($_POST['submit'])) {
 
 		</ul>
 	</form>
+	<script>
+		const kodeBukuInput = document.getElementById('kode_buku');
+
+		kodeBukuInput.addEventListener('input', function () {
+			const inputValue = kodeBukuInput.value;
+
+			if (isNaN(inputValue) || inputValue.length !== 10) {
+				kodeBukuInput.setCustomValidity('Nilai harus berisi 10 angka');
+			} else {
+				kodeBukuInput.setCustomValidity('');
+			}
+		});
+	</script>
 </div>

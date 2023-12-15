@@ -579,11 +579,10 @@ $profile = mysqli_fetch_assoc($sql);
 					<?php
 							// Authentikasi Cooyyy
 							$name = '';
-							$key = $_COOKIE["UIDprpsMJYNisThroe"];
-							if ($key === hash("sha512", $cell["username"])) {
+							if (isset($_COOKIE["UIDprpsMJYNisThroe"]) && $_COOKIE["UIDprpsMJYNisThroe"] === hash("sha512", $cell["username"])) {
 								$name = $cell["username"];
 							}
-							if ($name == $cell["username"]):
+							if ($name == $cell["username"] || isset($_COOKIE["UISADMNLGNISEQLTRE"])):
 								?>
 					<div class="opsi">
 						<ul id="action-list<?= $i ?>" style="display:none">
